@@ -1,0 +1,451 @@
+import { useState, useEffect } from 'react';
+import logo from '../assets/img.png';
+import { Menu, X, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+export default function Navbar({ onNavigate, currentPage }) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleLinkClick = (page, detailId = null) => {
+    onNavigate(page, detailId);
+    setMobileMenuOpen(false);
+    setActiveDropdown(null);
+  };
+
+  const services = [
+    { name: 'IT Infrastructure Led Services', id: 'it-infrastructure' },
+    { name: 'IT Applications', id: 'it-applications' },
+    { name: 'Business Process Management', id: 'business-process' },
+    { name: 'Digital Enterprise Applications', id: 'digital-enterprise' }
+  ];
+
+  const solutions = [
+    { name: 'Networking Solutions', id: 'networking-solutions' },
+    { name: 'Security Solutions', id: 'security-solutions' },
+    { name: 'Wireless Network Solutions', id: 'wireless-solutions' },
+    { name: 'Mobility Solutions', id: 'mobility-solutions' },
+    { name: 'Surveillance Security Solutions', id: 'surveillance-solutions' },
+    { name: 'Building Management System', id: 'bms-solutions' },
+    { name: 'Public Announcement System', id: 'pa-solutions' },
+    { name: 'Server and Storage Solutions', id: 'server-storage-solutions' },
+    { name: 'Cloud Infrastructure Solutions', id: 'cloud-solutions' }
+  ];
+
+  const industries = [
+    { name: 'Education and R&D Institutions', id: 'education-rd' },
+    { name: 'Government Enterprises', id: 'government' },
+    { name: 'Public Sector Units', id: 'public-sector' },
+    { name: 'Corporates', id: 'corporates' }
+  ];
+
+  const products = [
+    { name: 'OneTrack Ticket Management', id: 'onetrack' }
+  ];
+
+  const toggleDropdown = (dropdown) => {
+    if (activeDropdown === dropdown) {
+      setActiveDropdown(null);
+    } else {
+      setActiveDropdown(dropdown);
+    }
+  };
+
+  // Framer Motion Variants for Mobile Menu Stagger
+  const mobileMenuVariants = {
+    hidden: { height: 0, opacity: 0 },
+    visible: {
+      height: 'auto',
+      opacity: 1,
+      transition: {
+        height: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
+        opacity: { duration: 0.25 },
+        staggerChildren: 0.05,
+        delayChildren: 0.05
+      }
+    },
+    exit: {
+      height: 0,
+      opacity: 0,
+      transition: {
+        height: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
+        opacity: { duration: 0.2 }
+      }
+    }
+  };
+
+  const mobileItemVariants = {
+    hidden: { opacity: 0, y: 12 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: 'spring', stiffness: 350, damping: 26 }
+    }
+  };
+
+  return (
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-slate-100 py-3' : 'bg-white border-b border-slate-100 py-4'}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+          {/* Logo only (no text) with click/hover animation */}
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center cursor-pointer" 
+            onClick={() => handleLinkClick('home')}
+          >
+            <img src={logo} alt="GlobX Logo" className="h-10 w-auto object-contain" />
+          </motion.div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-1">
+            {/* Home */}
+            <motion.button 
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => handleLinkClick('home')} 
+              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${currentPage === 'home' ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}
+            >
+              Home
+            </motion.button>
+
+            {/* About */}
+            <motion.button 
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => handleLinkClick('about')} 
+              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${currentPage === 'about' ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}
+            >
+              About Us
+            </motion.button>
+
+            {/* Services Dropdown */}
+            <div className="relative group">
+              <motion.button 
+                whileHover={{ y: -1 }}
+                className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-slate-700 hover:text-brand-primary hover:bg-slate-50 transition-colors cursor-pointer"
+              >
+                Services <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary transition-colors" />
+              </motion.button>
+              <div className="absolute left-0 mt-1 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 p-2">
+                {services.map((item) => (
+                  <motion.button
+                    whileHover={{ x: 4, backgroundColor: 'rgba(0, 82, 204, 0.04)' }}
+                    whileTap={{ scale: 0.98 }}
+                    key={item.id}
+                    onClick={() => handleLinkClick(item.id === 'it-infrastructure' ? 'it-infrastructure' : 'service-detail', item.id)}
+                    className="w-full text-left px-3 py-2 text-sm rounded-lg text-slate-700 hover:text-brand-primary transition-all font-medium flex items-center justify-between cursor-pointer"
+                  >
+                    {item.name}
+                  </motion.button>
+                ))}
+              </div>
+            </div>
+
+            {/* Solutions Dropdown */}
+            <div className="relative group">
+              <motion.button 
+                whileHover={{ y: -1 }}
+                className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-slate-700 hover:text-brand-primary hover:bg-slate-50 transition-colors cursor-pointer"
+              >
+                Solutions <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary transition-colors" />
+              </motion.button>
+              <div className="absolute left-1/2 -translate-x-1/2 mt-1 w-80 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 p-2 grid grid-cols-1 gap-1">
+                {solutions.map((item) => (
+                  <motion.button
+                    whileHover={{ x: 4, backgroundColor: 'rgba(0, 82, 204, 0.04)' }}
+                    whileTap={{ scale: 0.98 }}
+                    key={item.id}
+                    onClick={() => handleLinkClick(item.id === 'networking-solutions' ? 'networking-solutions' : 'solution-detail', item.id)}
+                    className="w-full text-left px-3 py-2 text-xs rounded-lg text-slate-700 hover:text-brand-primary transition-all font-medium cursor-pointer"
+                  >
+                    {item.name}
+                  </motion.button>
+                ))}
+              </div>
+            </div>
+
+            {/* Industries Dropdown */}
+            <div className="relative group">
+              <motion.button 
+                whileHover={{ y: -1 }}
+                className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-slate-700 hover:text-brand-primary hover:bg-slate-50 transition-colors cursor-pointer"
+              >
+                Industries <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary transition-colors" />
+              </motion.button>
+              <div className="absolute right-0 mt-1 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 p-2">
+                {industries.map((item) => (
+                  <motion.button
+                    whileHover={{ x: 4, backgroundColor: 'rgba(0, 82, 204, 0.04)' }}
+                    whileTap={{ scale: 0.98 }}
+                    key={item.id}
+                    onClick={() => handleLinkClick(item.id === 'education-rd' ? 'education-rd' : 'industry-detail', item.id)}
+                    className="w-full text-left px-3 py-2 text-sm rounded-lg text-slate-700 hover:text-brand-primary transition-all font-medium cursor-pointer"
+                  >
+                    {item.name}
+                  </motion.button>
+                ))}
+              </div>
+            </div>
+
+            {/* Products Dropdown */}
+            <div className="relative group">
+              <motion.button 
+                whileHover={{ y: -1 }}
+                className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-slate-700 hover:text-brand-primary hover:bg-slate-50 transition-colors cursor-pointer"
+              >
+                Products <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary transition-colors" />
+              </motion.button>
+              <div className="absolute right-0 mt-1 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 p-2">
+                {products.map((item) => (
+                  <motion.button
+                    whileHover={{ x: 4, backgroundColor: 'rgba(0, 82, 204, 0.04)' }}
+                    whileTap={{ scale: 0.98 }}
+                    key={item.id}
+                    onClick={() => handleLinkClick('onetrack')}
+                    className="w-full text-left px-3 py-2 text-sm rounded-lg text-slate-700 hover:text-brand-primary transition-all font-medium cursor-pointer"
+                  >
+                    {item.name}
+                  </motion.button>
+                ))}
+              </div>
+            </div>
+
+            {/* Contact */}
+            <motion.button 
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => handleLinkClick('contact')} 
+              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${currentPage === 'contact' ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}
+            >
+              Contact
+            </motion.button>
+          </nav>
+
+          {/* Action Button */}
+          <div className="hidden lg:flex items-center gap-4">
+            <motion.button 
+              whileHover={{ scale: 1.04, y: -1, boxShadow: '0 6px 20px rgba(0, 82, 204, 0.25)' }}
+              whileTap={{ scale: 0.96 }}
+              onClick={() => handleLinkClick('contact')} 
+              className="bg-brand-primary hover:bg-brand-secondary text-white px-5 py-2 rounded-lg text-sm font-semibold shadow-sm transition-all cursor-pointer"
+            >
+              Get a Quote
+            </motion.button>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="flex items-center lg:hidden">
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-slate-500 hover:text-brand-primary hover:bg-slate-50 transition-colors cursor-pointer"
+            >
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </motion.button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu with AnimatePresence & Micro-Animations */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            variants={mobileMenuVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="lg:hidden overflow-hidden bg-white border-b border-slate-100 shadow-inner"
+          >
+            <div className="px-4 pt-2 pb-6 space-y-1 bg-white">
+              <motion.button
+                variants={mobileItemVariants}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => handleLinkClick('home')}
+                className="block w-full text-left px-4 py-2.5 rounded-lg text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-brand-primary cursor-pointer"
+              >
+                Home
+              </motion.button>
+              
+              <motion.button
+                variants={mobileItemVariants}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => handleLinkClick('about')}
+                className="block w-full text-left px-4 py-2.5 rounded-lg text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-brand-primary cursor-pointer"
+              >
+                About Us
+              </motion.button>
+
+              {/* Services Mobile */}
+              <motion.div variants={mobileItemVariants} className="space-y-1">
+                <button
+                  onClick={() => toggleDropdown('services')}
+                  className="flex justify-between items-center w-full px-4 py-2.5 rounded-lg text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-brand-primary cursor-pointer"
+                >
+                  <span>Services</span>
+                  <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${activeDropdown === 'services' ? 'rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence>
+                  {activeDropdown === 'services' && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      className="pl-6 space-y-1 bg-slate-50/50 rounded-lg py-1 overflow-hidden"
+                    >
+                      {services.map((item) => (
+                        <motion.button
+                          whileTap={{ scale: 0.98 }}
+                          key={item.id}
+                          onClick={() => handleLinkClick(item.id === 'it-infrastructure' ? 'it-infrastructure' : 'service-detail', item.id)}
+                          className="block w-full text-left px-4 py-2 text-sm text-slate-600 hover:text-brand-primary font-medium cursor-pointer"
+                        >
+                          {item.name}
+                        </motion.button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+
+              {/* Solutions Mobile */}
+              <motion.div variants={mobileItemVariants} className="space-y-1">
+                <button
+                  onClick={() => toggleDropdown('solutions')}
+                  className="flex justify-between items-center w-full px-4 py-2.5 rounded-lg text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-brand-primary cursor-pointer"
+                >
+                  <span>Solutions</span>
+                  <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${activeDropdown === 'solutions' ? 'rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence>
+                  {activeDropdown === 'solutions' && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      className="pl-6 space-y-1 bg-slate-50/50 rounded-lg py-1 overflow-hidden"
+                    >
+                      <div className="max-h-60 overflow-y-auto space-y-1 py-1">
+                        {solutions.map((item) => (
+                          <motion.button
+                            whileTap={{ scale: 0.98 }}
+                            key={item.id}
+                            onClick={() => handleLinkClick(item.id === 'networking-solutions' ? 'networking-solutions' : 'solution-detail', item.id)}
+                            className="block w-full text-left px-4 py-2 text-sm text-slate-600 hover:text-brand-primary font-medium cursor-pointer"
+                          >
+                            {item.name}
+                          </motion.button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+
+              {/* Industries Mobile */}
+              <motion.div variants={mobileItemVariants} className="space-y-1">
+                <button
+                  onClick={() => toggleDropdown('industries')}
+                  className="flex justify-between items-center w-full px-4 py-2.5 rounded-lg text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-brand-primary cursor-pointer"
+                >
+                  <span>Industries</span>
+                  <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${activeDropdown === 'industries' ? 'rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence>
+                  {activeDropdown === 'industries' && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      className="pl-6 space-y-1 bg-slate-50/50 rounded-lg py-1 overflow-hidden"
+                    >
+                      {industries.map((item) => (
+                        <motion.button
+                          whileTap={{ scale: 0.98 }}
+                          key={item.id}
+                          onClick={() => handleLinkClick(item.id === 'education-rd' ? 'education-rd' : 'industry-detail', item.id)}
+                          className="block w-full text-left px-4 py-2 text-sm text-slate-600 hover:text-brand-primary font-medium cursor-pointer"
+                        >
+                          {item.name}
+                        </motion.button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+
+              {/* Products Mobile */}
+              <motion.div variants={mobileItemVariants} className="space-y-1">
+                <button
+                  onClick={() => toggleDropdown('products')}
+                  className="flex justify-between items-center w-full px-4 py-2.5 rounded-lg text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-brand-primary cursor-pointer"
+                >
+                  <span>Products</span>
+                  <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${activeDropdown === 'products' ? 'rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence>
+                  {activeDropdown === 'products' && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      className="pl-6 space-y-1 bg-slate-50/50 rounded-lg py-1 overflow-hidden"
+                    >
+                      {products.map((item) => (
+                        <motion.button
+                          whileTap={{ scale: 0.98 }}
+                          key={item.id}
+                          onClick={() => handleLinkClick('onetrack')}
+                          className="block w-full text-left px-4 py-2 text-sm text-slate-600 hover:text-brand-primary font-medium cursor-pointer"
+                        >
+                          {item.name}
+                        </motion.button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+
+              <motion.button
+                variants={mobileItemVariants}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => handleLinkClick('contact')}
+                className="block w-full text-left px-4 py-2.5 rounded-lg text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-brand-primary cursor-pointer"
+              >
+                Contact
+              </motion.button>
+
+              <motion.div variants={mobileItemVariants} className="pt-4 px-4">
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => handleLinkClick('contact')}
+                  className="w-full bg-brand-primary hover:bg-brand-secondary text-white text-center py-3 rounded-xl font-semibold shadow-sm transition-all cursor-pointer"
+                >
+                  Get in Touch
+                </motion.button>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+}
