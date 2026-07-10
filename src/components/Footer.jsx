@@ -4,7 +4,6 @@ import { Mail, Phone, MapPin, Clock, ChevronRight } from 'lucide-react';
 export default function Footer({ onNavigate }) {
   const handleLinkClick = (page, detailId = null) => {
     onNavigate(page, detailId);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const solutions = [
@@ -118,15 +117,13 @@ export default function Footer({ onNavigate }) {
                 </button>
               </li>
               <li>
-                <a 
-                  href="https://globx.iceipts.com/jobs" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                <button 
+                  onClick={() => handleLinkClick('careers')}
                   className="flex items-center gap-1.5 hover:text-white transition-all text-slate-400 group text-left cursor-pointer"
                 >
                   <ChevronRight className="w-3.5 h-3.5 text-blue-500 group-hover:translate-x-0.5 transition-transform" />
                   <span>Careers (Join Us)</span>
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -147,7 +144,7 @@ export default function Footer({ onNavigate }) {
               </li>
               <li className="flex gap-3 items-center">
                 <Mail className="w-5 h-5 text-blue-500 shrink-0" />
-                <a href="mailto:info@globx.co.in" className="hover:text-white transition-colors">info@globx.co.in</a>
+                <a href="mailto:business@globx.co.in" className="hover:text-white transition-colors">business@globx.co.in</a>
               </li>
               <li className="flex gap-3 items-start pt-1 border-t border-slate-800">
                 <Clock className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
@@ -174,7 +171,7 @@ export default function Footer({ onNavigate }) {
             <button onClick={() => handleLinkClick('home')} className="hover:text-slate-300 cursor-pointer">Home</button>
             <button onClick={() => handleLinkClick('about')} className="hover:text-slate-300 cursor-pointer">About Us</button>
             <button onClick={() => handleLinkClick('contact')} className="hover:text-slate-300 cursor-pointer">Contact Us</button>
-            <a href="https://globx.iceipts.com/jobs" target="_blank" rel="noopener noreferrer" className="hover:text-slate-300">Careers</a>
+            <button onClick={() => handleLinkClick('careers')} className="hover:text-slate-300 cursor-pointer">Careers</button>
           </div>
         </div>
       </div>

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, Building2 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import FloatingLines from '../components/FloatingLines';
 
 export default function Contact() {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -20,7 +22,7 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulate generation of a unique OneTrack support ticket
+    // Simulate generation of a unique OneDesk support ticket
     const randomTicket = 'GX-' + Math.floor(100000 + Math.random() * 900000);
     setTicketId(randomTicket);
     setFormSubmitted(true);
@@ -31,7 +33,18 @@ export default function Contact() {
       
       {/* 1. Header Banner */}
       <section className="bg-gradient-to-r from-[#091E42] to-[#0d2a5c] text-white py-16 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-45">
+          <FloatingLines 
+            enabledWaves={['top', 'middle', 'bottom']}
+            lineCount={[12, 18, 24]}
+            lineDistance={[7, 5, 3]}
+            bendRadius={6.0}
+            bendStrength={-0.6}
+            interactive={true}
+            parallax={true}
+            linesGradient={['#4073b3', '#0f1c57', '#f54575']}
+          />
+        </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
           <span className="text-xs uppercase font-extrabold tracking-wider text-blue-400">Get In Touch</span>
           <h1 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-white">
@@ -83,7 +96,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <span className="font-semibold text-brand-dark block text-xs uppercase tracking-wider text-slate-400">Support Mail</span>
-                  <a href="mailto:info@globx.co.in" className="hover:text-blue-600 transition-colors text-sm">info@globx.co.in</a>
+                  <a href="mailto:business@globx.co.in" className="hover:text-blue-600 transition-colors text-sm">business@globx.co.in</a>
                 </div>
               </li>
               <li className="flex gap-4 items-start">
@@ -102,11 +115,15 @@ export default function Contact() {
             </ul>
 
             {/* Interactive Embedded Google Map */}
-            <div className="relative border border-slate-200 rounded-2xl overflow-hidden bg-slate-100 shadow-inner h-72 group">
+            <motion.div 
+              whileHover={{ y: -4, borderColor: 'rgba(59, 130, 246, 0.4)', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className="relative border border-slate-200/80 rounded-2xl overflow-hidden bg-slate-100 shadow-inner h-72 group cursor-default"
+            >
               <iframe
                 title="GlobX Headquarters Location Map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59872.1085718906!2d85.80711909251602!3d20.29998625848554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a190bd65aa2ad1d%3A0xe69acb08745a4b10!2sOdyssa%20Business%20Centre!5e0!3m2!1sen!2sin!4v1782884757514!5m2!1sen!2sin"
-                className="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-300"
+                className="w-full h-full border-0 transition-all duration-300"
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="strict-origin-when-cross-origin"
@@ -121,7 +138,7 @@ export default function Contact() {
                   <MapPin className="w-3.5 h-3.5" /> Open in Google Maps
                 </a>
               </div>
-            </div>
+            </motion.div>
 
           </div>
 
@@ -205,7 +222,7 @@ export default function Contact() {
                     <option value="networking-solutions">Networking & Structured Cabling</option>
                     <option value="security-solutions">Security & IP Surveillance</option>
                     <option value="education-rd">Education & R&D LMS/Labs</option>
-                    <option value="onetrack">OneTrack Product Demo</option>
+                    <option value="onedesk">OneDesk Product Demo</option>
                     <option value="other">Other System Integration Request</option>
                   </select>
                 </div>
@@ -245,7 +262,7 @@ export default function Contact() {
                 </div>
 
                 <div className="bg-slate-50 rounded-2xl p-5 border border-slate-100 max-w-sm w-full">
-                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">OneTrack Support Ticket ID</span>
+                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">OneDesk Support Ticket ID</span>
                   <span className="text-xl font-mono font-bold text-slate-800 tracking-wider mt-1 block">{ticketId}</span>
                 </div>
 
