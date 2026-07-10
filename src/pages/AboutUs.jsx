@@ -14,6 +14,7 @@ import {
 import teamCollaboration from '../assets/team_collaboration.png';
 import serverRacks from '../assets/server_racks.png';
 import fiberNetwork from '../assets/fiber_network.png';
+import FloatingLines from '../components/FloatingLines';
 
 export default function AboutUs() {
   const stats = [
@@ -26,7 +27,7 @@ export default function AboutUs() {
   const milestones = [
     {
       year: "2011",
-      title: "The Genesis (G L Solutions)",
+      title: "The Genesis (GL Solutions)",
       desc: "Founded as a regional IT system integration shop, serving local government departments and corporates in Odisha with hardware, peripherals, and initial LAN setups."
     },
     {
@@ -42,7 +43,7 @@ export default function AboutUs() {
     {
       year: "2024",
       title: "Next-Gen Software & AI",
-      desc: "Launched our proprietary OneTrack Ticket Management system and started integrating AI and telemetry-based monitoring into our core infrastructure services."
+      desc: "Launched our proprietary OneDesk Ticket Management system and started integrating AI and telemetry-based monitoring into our core infrastructure services."
     }
   ];
 
@@ -79,10 +80,19 @@ export default function AboutUs() {
       
       {/* 1. HERO SECTION */}
       <section className="relative bg-gradient-to-br from-[#091E42] via-[#0d2a5c] to-slate-900 text-white pt-16 pb-24 sm:pt-20 sm:pb-32 overflow-hidden">
-        {/* Background Decorative Patterns */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-primary rounded-full blur-[120px] opacity-25"></div>
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-brand-accent rounded-full blur-[120px] opacity-20"></div>
+        {/* Animated Network Background (ReactBits Floating Lines Style) */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-45">
+          <FloatingLines 
+            enabledWaves={['top', 'middle', 'bottom']}
+            lineCount={[12, 18, 24]}
+            lineDistance={[7, 5, 3]}
+            bendRadius={6.0}
+            bendStrength={-0.6}
+            interactive={true}
+            parallax={true}
+            linesGradient={['#4073b3', '#0f1c57', '#f54575']}
+          />
+        </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -110,10 +120,15 @@ export default function AboutUs() {
               {/* Stats Row */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-4 border-t border-slate-800">
                 {stats.map((stat, index) => (
-                  <div key={index} className="space-y-1">
+                  <motion.div 
+                    key={index} 
+                    className="space-y-1 cursor-default p-2 rounded-xl"
+                    whileHover={{ scale: 1.05, y: -2, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+                  >
                     <span className="text-3xl font-extrabold text-white block">{stat.value}</span>
                     <span className="text-[11px] text-slate-400 font-bold uppercase tracking-wider block">{stat.label}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
@@ -134,15 +149,6 @@ export default function AboutUs() {
                 />
                 
                 {/* Floating Telemetry Box */}
-                <div className="absolute bottom-6 left-6 right-6 z-20 bg-slate-900/90 backdrop-blur-md border border-slate-700/50 p-4 rounded-xl shadow-xl flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center text-white shrink-0">
-                    <Zap className="w-5 h-5 animate-pulse" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-white">Bhubaneswar HQ</h4>
-                    <p className="text-xs text-slate-400 font-light mt-0.5">Active Network Operations & Engineering Hub</p>
-                  </div>
-                </div>
               </div>
             </motion.div>
 
@@ -193,7 +199,8 @@ export default function AboutUs() {
               {milestones.map((milestone, idx) => (
                 <motion.div 
                   initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   key={idx} 
                   className="relative group"
@@ -201,11 +208,15 @@ export default function AboutUs() {
                   {/* Bullet */}
                   <div className="absolute -left-[33px] top-1.5 w-4 h-4 rounded-full bg-white border-4 border-brand-primary group-hover:scale-125 transition-transform duration-300"></div>
                   
-                  <div className="bg-slate-50/50 hover:bg-slate-50 border border-slate-100 rounded-2xl p-6 transition-all duration-300 hover:shadow-md">
+                  <motion.div 
+                    whileHover={{ y: -4, x: 2, backgroundColor: 'rgb(248, 250, 252)', borderColor: 'rgba(191, 219, 254, 1)', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                    className="bg-slate-50/50 border border-slate-100 rounded-2xl p-6 cursor-default"
+                  >
                     <span className="text-xs font-bold text-brand-primary bg-blue-50 px-2.5 py-1 rounded-md">{milestone.year}</span>
-                    <h3 className="text-lg font-bold text-brand-dark font-display mt-3">{milestone.title}</h3>
+                    <h3 className="text-lg font-bold text-brand-dark font-display mt-3 group-hover:text-blue-600 transition-colors duration-300">{milestone.title}</h3>
                     <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light mt-2">{milestone.desc}</p>
-                  </div>
+                  </motion.div>
                 </motion.div>
               ))}
             </div>
@@ -230,16 +241,18 @@ export default function AboutUs() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {values.map((value, idx) => (
               <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                whileHover={{ y: -6, borderColor: 'rgba(147, 197, 253, 0.8)', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20, delay: idx * 0.1 }}
                 key={idx} 
-                className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300 space-y-4 group"
+                className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm space-y-4 group cursor-default"
               >
                 <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   {value.icon}
                 </div>
-                <h3 className="text-lg font-bold text-brand-dark font-display">{value.title}</h3>
+                <h3 className="text-lg font-bold text-brand-dark font-display group-hover:text-blue-600 transition-colors duration-300">{value.title}</h3>
                 <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">{value.description}</p>
               </motion.div>
             ))}
@@ -256,7 +269,8 @@ export default function AboutUs() {
             {/* Image Left */}
             <motion.div 
               initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.6 }}
               className="lg:col-span-5 relative"
             >
@@ -307,9 +321,9 @@ export default function AboutUs() {
       </section>
 
       {/* 5. ENTERPRISE CAPABILITIES (WITH BG CORPORATE IMAGE) */}
-      <section className="relative py-24 sm:py-32 bg-slate-900 text-white overflow-hidden">
+      <section className="relative py-24 sm:py-32 bg-slate-900 text-white overflow-hidden rounded-t-3xl">
         {/* Background Image with Dark Overlay */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute rounded-t-3xl inset-0 z-0">
           <img 
             src={fiberNetwork} 
             alt="Optical Fiber Network Backbone" 
@@ -350,7 +364,11 @@ export default function AboutUs() {
             </div>
 
             {/* Quick Contact / Stats Card */}
-            <div className="lg:col-span-4 bg-white/10 backdrop-blur-md border border-white/10 p-8 rounded-3xl space-y-6">
+            <motion.div 
+              whileHover={{ y: -4, borderColor: 'rgba(255, 255, 255, 0.25)', backgroundColor: 'rgba(255, 255, 255, 0.12)' }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className="lg:col-span-4 bg-white/10 backdrop-blur-md border border-white/10 p-8 rounded-3xl space-y-6 cursor-default"
+            >
               <h3 className="text-xl font-bold font-display text-white border-b border-white/10 pb-4">GlobX Office Details</h3>
               
               <div className="space-y-4 text-sm font-light">
@@ -380,7 +398,7 @@ export default function AboutUs() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>

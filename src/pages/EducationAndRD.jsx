@@ -1,4 +1,6 @@
 import { GraduationCap, Video, BookOpen, Database, BarChart, Key, BookOpenCheck } from 'lucide-react';
+import { motion } from 'framer-motion';
+import FloatingLines from '../components/FloatingLines';
 
 export default function EducationAndRD() {
   const academicTech = [
@@ -41,11 +43,25 @@ export default function EducationAndRD() {
     <div className="w-full bg-slate-50 font-sans">
       
       {/* 1. Header Banner */}
-      <section className="bg-gradient-to-r from-[#091E42] to-[#0b2958] text-white py-16 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      <section className="bg-gradient-to-r from-[#091E42] to-[#0a2754] text-white py-20 relative overflow-hidden">
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-45">
+          <FloatingLines 
+            enabledWaves={['top', 'middle', 'bottom']}
+            lineCount={[12, 18, 24]}
+            lineDistance={[7, 5, 3]}
+            bendRadius={6.0}
+            bendStrength={-0.6}
+            interactive={true}
+            parallax={true}
+            linesGradient={['#4073b3', '#0f1c57', '#f54575']}
+          />
+        </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
-          <span className="text-xs uppercase font-extrabold tracking-wider text-blue-400">Industry Verticals</span>
-          <h1 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-white">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-400/20 text-xs font-semibold text-blue-300 uppercase tracking-wider">
+            <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+            Industry Verticals
+          </span>
+          <h1 className="text-4.5xl sm:text-5xl font-extrabold font-display tracking-tight text-white leading-tight">
             Education & R&D Institutes
           </h1>
           <p className="text-slate-300 text-base sm:text-lg max-w-3xl font-light leading-relaxed">
@@ -80,13 +96,18 @@ export default function EducationAndRD() {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {academicTech.map((tech, idx) => (
-                <div key={idx} className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all space-y-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
+                <motion.div 
+                  key={idx} 
+                  whileHover={{ y: -6, borderColor: 'rgba(147, 197, 253, 0.8)', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="group bg-white p-8 rounded-2xl border border-slate-100 shadow-sm space-y-4 cursor-default"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     {tech.icon}
                   </div>
-                  <h4 className="text-lg font-bold text-brand-dark font-display">{tech.title}</h4>
+                  <h4 className="text-lg font-bold text-brand-dark font-display group-hover:text-blue-600 transition-colors duration-300">{tech.title}</h4>
                   <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">{tech.description}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -100,13 +121,18 @@ export default function EducationAndRD() {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {researchTech.map((tech, idx) => (
-                <div key={idx} className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all space-y-4">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center">
+                <motion.div 
+                  key={idx} 
+                  whileHover={{ y: -6, borderColor: 'rgba(167, 243, 208, 0.8)', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className="group bg-white p-8 rounded-2xl border border-slate-100 shadow-sm space-y-4 cursor-default"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     {tech.icon}
                   </div>
-                  <h4 className="text-lg font-bold text-brand-dark font-display">{tech.title}</h4>
+                  <h4 className="text-lg font-bold text-brand-dark font-display group-hover:text-emerald-600 transition-colors duration-300">{tech.title}</h4>
                   <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">{tech.description}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>

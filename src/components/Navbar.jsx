@@ -2,23 +2,18 @@ import { useState, useEffect } from 'react';
 import logo from '../assets/img.png';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLenis } from 'lenis/react';
 
 export default function Navbar({ onNavigate, currentPage }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Use Lenis scroll callback — only update state when threshold crosses
+  useLenis(({ scroll }) => {
+    const isScrolled = scroll > 10;
+    setScrolled(prev => prev !== isScrolled ? isScrolled : prev);
+  });
 
   const handleLinkClick = (page, detailId = null) => {
     onNavigate(page, detailId);
@@ -53,7 +48,7 @@ export default function Navbar({ onNavigate, currentPage }) {
   ];
 
   const products = [
-    { name: 'OneTrack Ticket Management', id: 'onetrack' }
+    { name: 'OneDesk Ticket Management', id: 'onedesk' }
   ];
 
   const toggleDropdown = (dropdown) => {
@@ -64,35 +59,37 @@ export default function Navbar({ onNavigate, currentPage }) {
     }
   };
 
-  // Framer Motion Variants for Mobile Menu Stagger
+  // Tightened spring — eliminates overshoot/bounce on hovers
+  const springConfig = { type: 'spring', stiffness: 400, damping: 30 };
+
   const mobileMenuVariants = {
     hidden: { height: 0, opacity: 0 },
     visible: {
       height: 'auto',
       opacity: 1,
       transition: {
-        height: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
-        opacity: { duration: 0.25 },
-        staggerChildren: 0.05,
-        delayChildren: 0.05
+        height: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
+        opacity: { duration: 0.2 },
+        staggerChildren: 0.04,
+        delayChildren: 0.04
       }
     },
     exit: {
       height: 0,
       opacity: 0,
       transition: {
-        height: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
-        opacity: { duration: 0.2 }
+        height: { duration: 0.25, ease: [0.16, 1, 0.3, 1] },
+        opacity: { duration: 0.15 }
       }
     }
   };
 
   const mobileItemVariants = {
-    hidden: { opacity: 0, y: 12 },
+    hidden: { opacity: 0, y: 8 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: 'spring', stiffness: 350, damping: 26 }
+      transition: springConfig
     }
   };
 
@@ -100,147 +97,131 @@ export default function Navbar({ onNavigate, currentPage }) {
     <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-slate-100 py-3' : 'bg-white border-b border-slate-100 py-4'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo only (no text) with click/hover animation */}
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center cursor-pointer" 
+          {/* Logo */}
+          <motion.div
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
+            transition={springConfig}
+            className="flex items-center cursor-pointer"
             onClick={() => handleLinkClick('home')}
           >
             <img src={logo} alt="GlobX Logo" className="h-10 w-auto object-contain" />
           </motion.div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation — pure CSS hover for zero-latency interactions */}
           <nav className="hidden lg:flex items-center gap-1">
             {/* Home */}
-            <motion.button 
-              whileHover={{ scale: 1.03, y: -1 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={() => handleLinkClick('home')} 
-              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${currentPage === 'home' ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}
+            <button
+              onClick={() => handleLinkClick('home')}
+              className={`px-3 py-2 text-sm font-medium rounded-md cursor-pointer active:scale-[0.97] nav-link ${currentPage === 'home' ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}
             >
               Home
-            </motion.button>
+            </button>
 
             {/* About */}
-            <motion.button 
-              whileHover={{ scale: 1.03, y: -1 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={() => handleLinkClick('about')} 
-              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${currentPage === 'about' ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}
+            <button
+              onClick={() => handleLinkClick('about')}
+              className={`px-3 py-2 text-sm font-medium rounded-md cursor-pointer active:scale-[0.97] nav-link ${currentPage === 'about' ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}
             >
               About Us
-            </motion.button>
+            </button>
 
             {/* Services Dropdown */}
             <div className="relative group">
-              <motion.button 
-                whileHover={{ y: -1 }}
-                className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-slate-700 hover:text-brand-primary hover:bg-slate-50 transition-colors cursor-pointer"
-              >
-                Services <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary transition-colors" />
-              </motion.button>
-              <div className="absolute left-0 mt-1 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 p-2">
+              <button className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-slate-700 hover:text-brand-primary hover:bg-slate-50 cursor-pointer nav-link">
+                Services <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary transition-colors duration-150" />
+              </button>
+              <div className="absolute left-0 top-full mt-1.5 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 ease-out z-50 p-2">
                 {services.map((item) => (
-                  <motion.button
-                    whileHover={{ x: 4, backgroundColor: 'rgba(0, 82, 204, 0.04)' }}
-                    whileTap={{ scale: 0.98 }}
+                  <button
                     key={item.id}
                     onClick={() => handleLinkClick(item.id === 'it-infrastructure' ? 'it-infrastructure' : 'service-detail', item.id)}
-                    className="w-full text-left px-3 py-2 text-sm rounded-lg text-slate-700 hover:text-brand-primary transition-all font-medium flex items-center justify-between cursor-pointer"
+                    className="w-full text-left px-3 py-2 text-sm rounded-lg text-slate-700 hover:text-brand-primary hover:bg-blue-50/70 transition-all duration-100 font-medium cursor-pointer"
                   >
                     {item.name}
-                  </motion.button>
+                  </button>
                 ))}
               </div>
             </div>
 
             {/* Solutions Dropdown */}
             <div className="relative group">
-              <motion.button 
-                whileHover={{ y: -1 }}
-                className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-slate-700 hover:text-brand-primary hover:bg-slate-50 transition-colors cursor-pointer"
-              >
-                Solutions <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary transition-colors" />
-              </motion.button>
-              <div className="absolute left-1/2 -translate-x-1/2 mt-1 w-80 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 p-2 grid grid-cols-1 gap-1">
+              <button className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-slate-700 hover:text-brand-primary hover:bg-slate-50 cursor-pointer nav-link">
+                Solutions <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary transition-colors duration-150" />
+              </button>
+              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1.5 w-80 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 ease-out z-50 p-2 grid grid-cols-1 gap-0.5">
                 {solutions.map((item) => (
-                  <motion.button
-                    whileHover={{ x: 4, backgroundColor: 'rgba(0, 82, 204, 0.04)' }}
-                    whileTap={{ scale: 0.98 }}
+                  <button
                     key={item.id}
                     onClick={() => handleLinkClick(item.id === 'networking-solutions' ? 'networking-solutions' : 'solution-detail', item.id)}
-                    className="w-full text-left px-3 py-2 text-xs rounded-lg text-slate-700 hover:text-brand-primary transition-all font-medium cursor-pointer"
+                    className="w-full text-left px-3 py-2 text-xs rounded-lg text-slate-700 hover:text-brand-primary hover:bg-blue-50/70 transition-all duration-100 font-medium cursor-pointer"
                   >
                     {item.name}
-                  </motion.button>
+                  </button>
                 ))}
               </div>
             </div>
 
             {/* Industries Dropdown */}
             <div className="relative group">
-              <motion.button 
-                whileHover={{ y: -1 }}
-                className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-slate-700 hover:text-brand-primary hover:bg-slate-50 transition-colors cursor-pointer"
-              >
-                Industries <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary transition-colors" />
-              </motion.button>
-              <div className="absolute right-0 mt-1 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 p-2">
+              <button className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-slate-700 hover:text-brand-primary hover:bg-slate-50 cursor-pointer nav-link">
+                Industries <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary transition-colors duration-150" />
+              </button>
+              <div className="absolute right-0 top-full mt-1.5 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 ease-out z-50 p-2">
                 {industries.map((item) => (
-                  <motion.button
-                    whileHover={{ x: 4, backgroundColor: 'rgba(0, 82, 204, 0.04)' }}
-                    whileTap={{ scale: 0.98 }}
+                  <button
                     key={item.id}
-                    onClick={() => handleLinkClick(item.id === 'education-rd' ? 'education-rd' : 'industry-detail', item.id)}
-                    className="w-full text-left px-3 py-2 text-sm rounded-lg text-slate-700 hover:text-brand-primary transition-all font-medium cursor-pointer"
+                    onClick={() => handleLinkClick(item.id === 'education-rd' ? 'education-rd' : 'industry-detail', item.id === 'education-rd' ? null : item.id)}
+                    className="w-full text-left px-3 py-2 text-sm rounded-lg text-slate-700 hover:text-brand-primary hover:bg-blue-50/70 transition-all duration-100 font-medium cursor-pointer"
                   >
                     {item.name}
-                  </motion.button>
+                  </button>
                 ))}
               </div>
             </div>
 
             {/* Products Dropdown */}
             <div className="relative group">
-              <motion.button 
-                whileHover={{ y: -1 }}
-                className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-slate-700 hover:text-brand-primary hover:bg-slate-50 transition-colors cursor-pointer"
-              >
-                Products <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary transition-colors" />
-              </motion.button>
-              <div className="absolute right-0 mt-1 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50 p-2">
+              <button className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-slate-700 hover:text-brand-primary hover:bg-slate-50 cursor-pointer nav-link">
+                Products <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary transition-colors duration-150" />
+              </button>
+              <div className="absolute right-0 top-full mt-1.5 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 ease-out z-50 p-2">
                 {products.map((item) => (
-                  <motion.button
-                    whileHover={{ x: 4, backgroundColor: 'rgba(0, 82, 204, 0.04)' }}
-                    whileTap={{ scale: 0.98 }}
+                  <button
                     key={item.id}
-                    onClick={() => handleLinkClick('onetrack')}
-                    className="w-full text-left px-3 py-2 text-sm rounded-lg text-slate-700 hover:text-brand-primary transition-all font-medium cursor-pointer"
+                    onClick={() => handleLinkClick('onedesk')}
+                    className="w-full text-left px-3 py-2 text-sm rounded-lg text-slate-700 hover:text-brand-primary hover:bg-blue-50/70 transition-all duration-100 font-medium cursor-pointer"
                   >
                     {item.name}
-                  </motion.button>
+                  </button>
                 ))}
               </div>
             </div>
 
+            {/* Careers */}
+            <button
+              onClick={() => handleLinkClick('careers')}
+              className={`px-3 py-2 text-sm font-medium rounded-md cursor-pointer active:scale-[0.97] nav-link ${currentPage === 'careers' ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}
+            >
+              Careers
+            </button>
+
             {/* Contact */}
-            <motion.button 
-              whileHover={{ scale: 1.03, y: -1 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={() => handleLinkClick('contact')} 
-              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${currentPage === 'contact' ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}
+            <button
+              onClick={() => handleLinkClick('contact')}
+              className={`px-3 py-2 text-sm font-medium rounded-md cursor-pointer active:scale-[0.97] nav-link ${currentPage === 'contact' ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}
             >
               Contact
-            </motion.button>
+            </button>
           </nav>
 
           {/* Action Button */}
           <div className="hidden lg:flex items-center gap-4">
-            <motion.button 
-              whileHover={{ scale: 1.04, y: -1, boxShadow: '0 6px 20px rgba(0, 82, 204, 0.25)' }}
+            <motion.button
+              whileHover={{ scale: 1.03, y: -1, boxShadow: '0 6px 20px rgba(0, 82, 204, 0.25)' }}
               whileTap={{ scale: 0.96 }}
-              onClick={() => handleLinkClick('contact')} 
+              transition={springConfig}
+              onClick={() => handleLinkClick('contact')}
               className="bg-brand-primary hover:bg-brand-secondary text-white px-5 py-2 rounded-lg text-sm font-semibold shadow-sm transition-all cursor-pointer"
             >
               Get a Quote
@@ -251,6 +232,7 @@ export default function Navbar({ onNavigate, currentPage }) {
           <div className="flex items-center lg:hidden">
             <motion.button
               whileTap={{ scale: 0.9 }}
+              transition={springConfig}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-slate-500 hover:text-brand-primary hover:bg-slate-50 transition-colors cursor-pointer"
             >
@@ -260,7 +242,7 @@ export default function Navbar({ onNavigate, currentPage }) {
         </div>
       </div>
 
-      {/* Mobile Menu with AnimatePresence & Micro-Animations */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -279,7 +261,7 @@ export default function Navbar({ onNavigate, currentPage }) {
               >
                 Home
               </motion.button>
-              
+
               <motion.button
                 variants={mobileItemVariants}
                 whileTap={{ scale: 0.97 }}
@@ -304,7 +286,7 @@ export default function Navbar({ onNavigate, currentPage }) {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      transition={{ duration: 0.22, ease: 'easeInOut' }}
                       className="pl-6 space-y-1 bg-slate-50/50 rounded-lg py-1 overflow-hidden"
                     >
                       {services.map((item) => (
@@ -337,7 +319,7 @@ export default function Navbar({ onNavigate, currentPage }) {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      transition={{ duration: 0.22, ease: 'easeInOut' }}
                       className="pl-6 space-y-1 bg-slate-50/50 rounded-lg py-1 overflow-hidden"
                     >
                       <div className="max-h-60 overflow-y-auto space-y-1 py-1">
@@ -372,14 +354,14 @@ export default function Navbar({ onNavigate, currentPage }) {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      transition={{ duration: 0.22, ease: 'easeInOut' }}
                       className="pl-6 space-y-1 bg-slate-50/50 rounded-lg py-1 overflow-hidden"
                     >
                       {industries.map((item) => (
                         <motion.button
                           whileTap={{ scale: 0.98 }}
                           key={item.id}
-                          onClick={() => handleLinkClick(item.id === 'education-rd' ? 'education-rd' : 'industry-detail', item.id)}
+                          onClick={() => handleLinkClick(item.id === 'education-rd' ? 'education-rd' : 'industry-detail', item.id === 'education-rd' ? null : item.id)}
                           className="block w-full text-left px-4 py-2 text-sm text-slate-600 hover:text-brand-primary font-medium cursor-pointer"
                         >
                           {item.name}
@@ -405,14 +387,14 @@ export default function Navbar({ onNavigate, currentPage }) {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      transition={{ duration: 0.22, ease: 'easeInOut' }}
                       className="pl-6 space-y-1 bg-slate-50/50 rounded-lg py-1 overflow-hidden"
                     >
                       {products.map((item) => (
                         <motion.button
                           whileTap={{ scale: 0.98 }}
                           key={item.id}
-                          onClick={() => handleLinkClick('onetrack')}
+                          onClick={() => handleLinkClick('onedesk')}
                           className="block w-full text-left px-4 py-2 text-sm text-slate-600 hover:text-brand-primary font-medium cursor-pointer"
                         >
                           {item.name}
@@ -422,6 +404,15 @@ export default function Navbar({ onNavigate, currentPage }) {
                   )}
                 </AnimatePresence>
               </motion.div>
+
+              <motion.button
+                variants={mobileItemVariants}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => handleLinkClick('careers')}
+                className="block w-full text-left px-4 py-2.5 rounded-lg text-base font-semibold text-slate-800 hover:bg-slate-50 hover:text-brand-primary cursor-pointer"
+              >
+                Careers
+              </motion.button>
 
               <motion.button
                 variants={mobileItemVariants}
@@ -436,6 +427,7 @@ export default function Navbar({ onNavigate, currentPage }) {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.95 }}
+                  transition={springConfig}
                   onClick={() => handleLinkClick('contact')}
                   className="w-full bg-brand-primary hover:bg-brand-secondary text-white text-center py-3 rounded-xl font-semibold shadow-sm transition-all cursor-pointer"
                 >

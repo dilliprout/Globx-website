@@ -197,16 +197,18 @@ export default function OneTrack() {
               }
             ].map((pillar, idx) => (
               <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: idx * 0.05 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                whileHover={{ y: -6, backgroundColor: 'rgb(248, 250, 252)', borderColor: 'rgba(147, 197, 253, 0.8)', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20, delay: idx * 0.1 }}
                 key={idx} 
-                className="p-8 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 hover:shadow-md transition-all duration-300 space-y-4 group"
+                className="p-8 rounded-2xl border border-slate-100 bg-slate-50/50 space-y-4 group cursor-default"
               >
                 <div className="w-10 h-10 rounded-xl bg-white border border-slate-100 shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   {pillar.icon}
                 </div>
-                <h3 className="text-lg font-bold text-brand-dark font-display">{pillar.title}</h3>
+                <h3 className="text-lg font-bold text-brand-dark font-display group-hover:text-blue-600 transition-colors duration-300">{pillar.title}</h3>
                 <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">{pillar.desc}</p>
               </motion.div>
             ))}
@@ -414,9 +416,11 @@ export default function OneTrack() {
             {/* Visual Box - SLA Metrics Display */}
             <motion.div 
               initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-5 bg-gradient-to-br from-[#091E42] to-slate-900 text-white rounded-3xl p-8 space-y-6 shadow-xl border border-slate-800"
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              whileHover={{ y: -4, borderColor: 'rgba(59, 130, 246, 0.4)', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)' }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className="lg:col-span-5 bg-gradient-to-br from-[#091E42] to-slate-900 text-white rounded-3xl p-8 space-y-6 shadow-xl border border-slate-800 cursor-default"
             >
               <h3 className="text-lg font-bold font-display tracking-tight border-b border-slate-800 pb-4">OneTrack SLA Compliance</h3>
               

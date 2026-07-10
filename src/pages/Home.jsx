@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useMotionValue, useTransform, animate, useInView, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Server, Shield, Network, Cpu, Terminal, Database, Sparkles } from 'lucide-react';
+import { ArrowRight, Server, Shield, Network, Cpu, Terminal, Database, Cloud, Lock, Zap, Monitor, HardDrive, Compass, Check, Mail, Award } from 'lucide-react';
 
 function Counter({ target, suffix = "", duration = 2 }) {
   const ref = useRef(null);
@@ -27,9 +27,128 @@ function Counter({ target, suffix = "", duration = 2 }) {
 
   return <motion.span ref={ref}>{rounded}</motion.span>;
 }
+
+// Enterprise Network Animated Background Component
+function EnterpriseNetworkBackground() {
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { margin: "200px" });
+
+  // Reduced counts: 8 lines, 10 nodes, 5 packets — less compositor layers
+  const lines = Array.from({ length: 8 }, (_, i) => ({
+    id: i,
+    x: (i * 12.5) % 100,
+    y: (i * 15) % 100,
+    delay: i * 0.8,
+    length: 15 + (i % 4) * 10,
+    angle: (i * 45) % 180,
+  }));
+
+  const nodes = Array.from({ length: 10 }, (_, i) => ({
+    id: i,
+    x: (i * 10) % 100,
+    y: (i * 9) % 100,
+    delay: i * 0.5,
+    size: 2 + (i % 3),
+    opacity: 0.15 + (i % 4) * 0.08,
+  }));
+
+  if (!isInView) {
+    return <div ref={containerRef} className="absolute inset-0 z-0 overflow-hidden pointer-events-none" />;
+  }
+
+  return (
+    <div ref={containerRef} className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      {/* Animated Lines — GPU promoted via will-change */}
+      {lines.map((line) => (
+        <motion.div
+          key={line.id}
+          className="absolute pointer-events-none"
+          style={{
+            left: `${line.x}%`,
+            top: `${line.y}%`,
+            width: `${line.length}%`,
+            height: '1px',
+            transformOrigin: 'left center',
+            background: 'linear-gradient(90deg, transparent, rgba(0, 82, 204, 0.12), transparent)',
+            willChange: 'transform, opacity',
+          }}
+          animate={{
+            rotate: [line.angle, line.angle + 360],
+            scaleX: [0.3, 1, 0.3],
+            opacity: [0, 0.35, 0],
+          }}
+          transition={{
+            duration: 18 + line.delay * 2,
+            delay: line.delay,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+        />
+      ))}
+
+      {/* Animated Nodes — scale-only for cheap repaint */}
+      {nodes.map((node) => (
+        <motion.div
+          key={node.id}
+          className="absolute pointer-events-none rounded-full"
+          style={{
+            left: `${node.x}%`,
+            top: `${node.y}%`,
+            width: `${node.size}px`,
+            height: `${node.size}px`,
+            background: node.size > 3
+              ? 'radial-gradient(circle, rgba(0, 184, 217, 0.35) 0%, rgba(0, 82, 204, 0.15) 70%)'
+              : 'rgba(0, 82, 204, 0.25)',
+            willChange: 'transform, opacity',
+          }}
+          animate={{
+            scale: [1, 1.4, 1],
+            opacity: [node.opacity * 0.5, node.opacity, node.opacity * 0.5],
+          }}
+          transition={{
+            duration: 10 + node.delay,
+            delay: node.delay,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
+
+      {/* Floating Data Packets — reduced to 5 */}
+      {Array.from({ length: 5 }, (_, i) => (
+        <motion.div
+          key={`packet-${i}`}
+          className="absolute pointer-events-none rounded-full bg-blue-500/25"
+          style={{
+            width: '3px',
+            height: '3px',
+            left: `${(i * 20) % 100}%`,
+            top: `${(i * 19) % 100}%`,
+            willChange: 'transform, opacity',
+          }}
+          animate={{
+            x: ['-50%', '150%'],
+            y: ['0%', '-25%'],
+            opacity: [0, 0.5, 0],
+          }}
+          transition={{
+            duration: 14 + i * 2,
+            delay: i * 2,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 import imgServerRacks from '../assets/server_racks.png';
 import imgTeamCollaboration from '../assets/team_collaboration.png';
 import imgFiberNetwork from '../assets/fiber_network.png';
+import securitySolutionsImg from '../assets/solutions/security-solutions.png';
+import onedeskDashboard from '../assets/onedesk_dashboard.png';
+import onetrackDashboard from '../assets/onetrack_dashboard.png';
 
 // Partners
 import logoAws from '../assets/partners/Amazon_Web_Services_Logo.svg';
@@ -58,11 +177,14 @@ import clientIop from '../assets/Esteemsed_clients/Institute Of Physics.jpg';
 import clientIitBhubaneswar from '../assets/Esteemsed_clients/IIT_Bhubaneswar.png';
 import clientOcac from '../assets/Esteemsed_clients/Ocac.png';
 
+// Certificates
+import certIso9001 from '../assets/certificates/iso_9001.jpg';
+import certIso20000 from '../assets/certificates/iso_20000.jpg';
+import certIso27001 from '../assets/certificates/Iso 27001.jpg';
 
-export default function Home({ onNavigate }) {
+
+function Home({ onNavigate }) {
   const [activeSlide, setActiveSlide] = useState(0);
-  const [sectionVisible, setSectionVisible] = useState(false);
-  const clientSectionRef = useRef(null);
 
   const slides = [
     {
@@ -91,28 +213,6 @@ export default function Home({ onNavigate }) {
     }, 6000);
     return () => clearInterval(slideTimer);
   }, [slides.length]);
-
-  // Intersection Observer for staggered client entry animation
-  useEffect(() => {
-    const currentRef = clientSectionRef.current;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setSectionVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, []);
 
   const partnerIds = [
     'ibm',
@@ -193,7 +293,7 @@ export default function Home({ onNavigate }) {
       <img 
         src={src} 
         alt={alt} 
-        className="max-h-11 max-w-full object-contain filter grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer"
+        className="max-h-11 max-w-full object-contain"
       />
     );
   };
@@ -202,118 +302,88 @@ export default function Home({ onNavigate }) {
     switch (name) {
       case "NALCO":
         return (
-          <div className="flex flex-col items-center gap-1.5">
-            <svg viewBox="0 0 40 40" className="w-10 h-10 text-emerald-600" fill="currentColor">
-              <path d="M20,2 L35,10 L35,30 L20,38 L5,30 L5,10 Z" fill="none" stroke="currentColor" strokeWidth="2.5" />
-              <path d="M12,15 L20,9 L28,15 L28,25 L20,31 L12,25 Z" fill="currentColor" opacity="0.8" />
-              <circle cx="20" cy="20" r="4" fill="white" />
-            </svg>
-            <span className="text-[11px] font-black text-slate-800 tracking-wider">NALCO</span>
-          </div>
+          <svg viewBox="0 0 40 40" className="w-20 h-20 text-emerald-600" fill="currentColor">
+            <path d="M20,2 L35,10 L35,30 L20,38 L5,30 L5,10 Z" fill="none" stroke="currentColor" strokeWidth="2.5" />
+            <path d="M12,15 L20,9 L28,15 L28,25 L20,31 L12,25 Z" fill="currentColor" opacity="0.8" />
+            <circle cx="20" cy="20" r="4" fill="white" />
+          </svg>
         );
       case "OCAC":
         return (
-          <div className="flex flex-col items-center gap-1.5">
-            <svg viewBox="0 0 40 40" className="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <rect x="8" y="8" width="24" height="24" rx="4" />
-              <circle cx="20" cy="20" r="5" fill="currentColor" />
-              <path d="M20,8 L20,15 M20,25 L20,32 M8,20 L15,20 M25,20 L32,20" strokeLinecap="round" />
-            </svg>
-            <span className="text-[11px] font-black text-slate-800 tracking-wider">OCAC</span>
-          </div>
+          <svg viewBox="0 0 40 40" className="w-20 h-20 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <rect x="8" y="8" width="24" height="24" rx="4" />
+            <circle cx="20" cy="20" r="5" fill="currentColor" />
+            <path d="M20,8 L20,15 M20,25 L20,32 M8,20 L15,20 M25,20 L32,20" strokeLinecap="round" />
+          </svg>
         );
       case "High Court of Odisha":
         return (
-          <div className="flex flex-col items-center gap-1">
-            <svg viewBox="0 0 40 40" className="w-9 h-9 text-amber-700 animate-pulse" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M6,34 L34,34 M10,34 L10,16 M30,34 L30,16 M20,34 L20,16" strokeLinecap="round" />
-              <path d="M8,16 L32,16 L20,8 Z" fill="currentColor" opacity="0.15" />
-              <path d="M15,12 L25,12" strokeWidth="3" />
-            </svg>
-            <span className="text-[10px] font-bold text-slate-800 tracking-tight text-center leading-tight mt-1">ODISHA HC</span>
-          </div>
+          <svg viewBox="0 0 40 40" className="w-20 h-20 text-amber-700 animate-pulse" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M6,34 L34,34 M10,34 L10,16 M30,34 L30,16 M20,34 L20,16" strokeLinecap="round" />
+            <path d="M8,16 L32,16 L20,8 Z" fill="currentColor" opacity="0.15" />
+            <path d="M15,12 L25,12" strokeWidth="3" />
+          </svg>
         );
       case "IndianOil":
         return (
-          <div className="flex flex-col items-center gap-1">
-            <svg viewBox="0 0 40 40" className="w-10 h-10 text-orange-600" fill="currentColor">
-              <circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" strokeWidth="3" />
-              <circle cx="20" cy="20" r="9" />
-              <rect x="13" y="18" width="14" height="4" fill="white" />
-            </svg>
-            <span className="text-[10px] font-black text-slate-800 tracking-wider mt-1">INDIANOIL</span>
-          </div>
+          <svg viewBox="0 0 40 40" className="w-20 h-20 text-orange-600" fill="currentColor">
+            <circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" strokeWidth="3" />
+            <circle cx="20" cy="20" r="9" />
+            <rect x="13" y="18" width="14" height="4" fill="white" />
+          </svg>
         );
       case "TPCODL":
         return (
-          <div className="flex flex-col items-center gap-1.5">
-            <svg viewBox="0 0 40 40" className="w-10 h-10 text-cyan-600" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <circle cx="20" cy="20" r="15" />
-              <path d="M22,10 L14,21 L20,21 L18,30 L26,19 L20,19 Z" fill="currentColor" stroke="none" />
-            </svg>
-            <span className="text-[11px] font-black text-slate-800 tracking-wider">TPCODL</span>
-          </div>
+          <svg viewBox="0 0 40 40" className="w-20 h-20 text-cyan-600" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <circle cx="20" cy="20" r="15" />
+            <path d="M22,10 L14,21 L20,21 L18,30 L26,19 L20,19 Z" fill="currentColor" stroke="none" />
+          </svg>
         );
       case "ORSAC":
         return (
-          <div className="flex flex-col items-center gap-1.5">
-            <svg viewBox="0 0 40 40" className="w-10 h-10 text-indigo-600" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="20" cy="20" r="16" strokeDasharray="4 2" />
-              <ellipse cx="20" cy="20" rx="14" ry="5" transform="rotate(-30 20 20)" />
-              <circle cx="20" cy="20" r="4" fill="currentColor" stroke="none" />
-            </svg>
-            <span className="text-[11px] font-black text-slate-800 tracking-wider">ORSAC</span>
-          </div>
+          <svg viewBox="0 0 40 40" className="w-20 h-20 text-indigo-600" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="20" cy="20" r="16" strokeDasharray="4 2" />
+            <ellipse cx="20" cy="20" rx="14" ry="5" transform="rotate(-30 20 20)" />
+            <circle cx="20" cy="20" r="4" fill="currentColor" stroke="none" />
+          </svg>
         );
       case "IIT Bhubaneswar":
         return (
-          <div className="flex flex-col items-center gap-1">
-            <svg viewBox="0 0 40 40" className="w-9 h-9 text-blue-800" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="20" cy="20" r="15" />
-              <path d="M20,10 L30,16 L20,22 L10,16 Z" fill="currentColor" opacity="0.2" />
-              <path d="M14,19 L14,26 C14,29 20,31 20,31 C20,31 26,29 26,26 L26,19" />
-              <path d="M30,16 L30,24" />
-            </svg>
-            <span className="text-[9px] font-bold text-slate-800 tracking-tight text-center leading-tight mt-1">IIT BBS</span>
-          </div>
+          <svg viewBox="0 0 40 40" className="w-20 h-20 text-blue-800" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="20" cy="20" r="15" />
+            <path d="M20,10 L30,16 L20,22 L10,16 Z" fill="currentColor" opacity="0.2" />
+            <path d="M14,19 L14,26 C14,29 20,31 20,31 C20,31 26,29 26,26 L26,19" />
+            <path d="M30,16 L30,24" />
+          </svg>
         );
       case "NISER":
         return (
-          <div className="flex flex-col items-center gap-1.5">
-            <svg viewBox="0 0 40 40" className="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <ellipse cx="20" cy="20" rx="16" ry="6" transform="rotate(30 20 20)" />
-              <ellipse cx="20" cy="20" rx="16" ry="6" transform="rotate(-30 20 20)" />
-              <ellipse cx="20" cy="20" rx="16" ry="6" transform="rotate(90 20 20)" />
-              <circle cx="20" cy="20" r="4.5" fill="currentColor" stroke="none" />
-            </svg>
-            <span className="text-[11px] font-black text-slate-800 tracking-wider">NISER</span>
-          </div>
+          <svg viewBox="0 0 40 40" className="w-20 h-20 text-purple-600" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <ellipse cx="20" cy="20" rx="16" ry="6" transform="rotate(30 20 20)" />
+            <ellipse cx="20" cy="20" rx="16" ry="6" transform="rotate(-30 20 20)" />
+            <ellipse cx="20" cy="20" rx="16" ry="6" transform="rotate(90 20 20)" />
+            <circle cx="20" cy="20" r="4.5" fill="currentColor" stroke="none" />
+          </svg>
         );
       case "NIT Rourkela":
         return (
-          <div className="flex flex-col items-center gap-1">
-            <svg viewBox="0 0 40 40" className="w-9 h-9 text-red-600" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="20" cy="20" r="10" strokeDasharray="3 3" />
-              <path d="M20,5 L20,35 M5,20 L35,20 M9.5,9.5 L30.5,30.5 M9.5,30.5 L30.5,9.5" />
-              <circle cx="20" cy="20" r="14" />
-            </svg>
-            <span className="text-[9px] font-bold text-slate-800 tracking-tight text-center leading-tight mt-1">NIT RKL</span>
-          </div>
+          <svg viewBox="0 0 40 40" className="w-20 h-20 text-red-600" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="20" cy="20" r="10" strokeDasharray="3 3" />
+            <path d="M20,5 L20,35 M5,20 L35,20 M9.5,9.5 L30.5,30.5 M9.5,30.5 L30.5,9.5" />
+            <circle cx="20" cy="20" r="14" />
+          </svg>
         );
       case "Utkal University":
         return (
-          <div className="flex flex-col items-center gap-1">
-            <svg viewBox="0 0 40 40" className="w-9 h-9 text-emerald-800" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M20,6 L32,12 L32,28 L20,34 L8,28 L8,12 Z" />
-              <path d="M20,12 L20,28" />
-              <path d="M14,18 L26,18 M14,22 L26,22" />
-            </svg>
-            <span className="text-[9px] font-bold text-slate-800 tracking-tight text-center leading-tight mt-1">UTKAL UNIV</span>
-          </div>
+          <svg viewBox="0 0 40 40" className="w-20 h-20 text-emerald-800" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M20,6 L32,12 L32,28 L20,34 L8,28 L8,12 Z" />
+            <path d="M20,12 L20,28" />
+            <path d="M14,18 L26,18 M14,22 L26,22" />
+          </svg>
         );
       default:
         return (
-          <div className="w-12 h-12 rounded-full bg-blue-50/80 border border-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs uppercase shadow-sm">
+          <div className="w-16 h-16 rounded-full bg-blue-50/80 border border-blue-100 flex items-center justify-center text-blue-600 font-bold text-sm uppercase shadow-sm">
             {name.substring(0, 3)}
           </div>
         );
@@ -400,23 +470,34 @@ export default function Home({ onNavigate }) {
           ═══════════════════════════════════════════════════════ */}
       <section className="relative min-h-[92vh] flex items-center bg-white overflow-hidden">
 
+        {/* ── Enterprise Animated Background - Network Lines/Nodes ── */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <EnterpriseNetworkBackground />
+
+          {/* Subtle grid pattern overlay */}
+          <div className="absolute inset-0 opacity-5" style={{
+            backgroundImage: 'linear-gradient(rgba(9,30,66,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(9,30,66,0.04) 1px, transparent 1px)',
+            backgroundSize: '60px 60px'
+          }} />
+        </div>
+
         {/* ── TOP-RIGHT ambient corner glow shade ── */}
         <div
           className="absolute top-0 right-0 w-[600px] h-[500px] pointer-events-none z-10"
-          style={{ background: 'radial-gradient(ellipse at top right, rgba(59,130,246,0.18) 0%, rgba(99,102,241,0.10) 40%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(ellipse at top right, rgba(59,130,246,0.12) 0%, rgba(99,102,241,0.08) 40%, transparent 70%)' }}
         />
 
         {/* ── BOTTOM sunset glow — animated pulse ── */}
         <motion.div
-          animate={{ opacity: [0.55, 0.9, 0.55], scale: [1, 1.08, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+          animate={{ opacity: [0.4, 0.7, 0.4], scale: [1, 1.05, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute bottom-0 left-0 right-0 h-56 pointer-events-none z-10"
-          style={{ background: 'linear-gradient(to top, rgba(251,191,36,0.10) 0%, rgba(249,115,22,0.07) 30%, rgba(59,130,246,0.06) 60%, transparent 100%)' }}
+          style={{ background: 'linear-gradient(to top, rgba(0, 82, 204, 0.08) 0%, rgba(0, 184, 217, 0.05) 30%, rgba(9,30,66,0.04) 60%, transparent 100%)' }}
         />
         {/* Static bottom glow base */}
         <div
           className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-40 pointer-events-none z-10 rounded-full"
-          style={{ background: 'radial-gradient(ellipse at bottom center, rgba(59,130,246,0.12) 0%, rgba(6,182,212,0.08) 40%, transparent 70%)', filter: 'blur(24px)' }}
+          style={{ background: 'radial-gradient(ellipse at bottom center, rgba(0, 82, 204, 0.1) 0%, rgba(6,182,212,0.06) 40%, transparent 70%)', filter: 'blur(32px)' }}
         />
 
         {/* ── Carousel background image — full screen, fading top to bottom ── */}
@@ -435,9 +516,9 @@ export default function Home({ onNavigate }) {
                 alt=""
                 className="w-full h-full object-cover"
                 style={{
-                  opacity: 0.42,
-                  maskImage: 'linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.3) 70%, transparent 100%)',
-                  WebkitMaskImage: 'linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.3) 70%, transparent 100%)',
+                  opacity: 0.35,
+                  maskImage: 'linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.25) 70%, transparent 100%)',
+                  WebkitMaskImage: 'linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 35%, rgba(0,0,0,0.25) 70%, transparent 100%)',
                 }}
               />
             </motion.div>
@@ -447,7 +528,7 @@ export default function Home({ onNavigate }) {
         </div>
 
         {/* Top/bottom soft fades */}
-        <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.9) 0%, transparent 25%, transparent 80%, rgba(255,255,255,0.7) 100%)' }} />
+        <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.9) 0%, transparent 25%, transparent 80%, rgba(255,255,255,0.6) 100%)' }} />
 
         {/* ── Main content ── */}
         <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
@@ -535,7 +616,7 @@ export default function Home({ onNavigate }) {
                   animate={{
                     width: idx === activeSlide ? 28 : 8,
                     background: idx === activeSlide
-                      ? '#4B5563'
+                      ? '#0052CC'
                       : '#D1D5DB'
                   }}
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
@@ -643,9 +724,23 @@ export default function Home({ onNavigate }) {
       </section>
 
       {/* 4. CORE COMPETENCIES GRID */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+      <section className="py-24 bg-white relative overflow-hidden">
+        {/* Subtle animated grid background */}
+        <div className="absolute inset-0 opacity-3 pointer-events-none" style={{
+          backgroundImage: 'linear-gradient(rgba(9,30,66,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(9,30,66,0.03) 1px, transparent 1px)',
+          backgroundSize: '80px 80px',
+          animation: 'gridMove 60s linear infinite'
+        }}>
+          <style jsx global>{`
+            @keyframes gridMove {
+              0% { transform: translate(0, 0); }
+              100% { transform: translate(80px, 80px); }
+            }
+          `}</style>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-brand-dark tracking-tight">
               Enterprise Solutions Tailored for Digital Transformation
@@ -656,120 +751,72 @@ export default function Home({ onNavigate }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
+
             {/* Card 1: IT Infrastructure */}
-            <div className="group bg-slate-50 border border-slate-100 rounded-3xl p-8 hover:bg-white hover:shadow-xl hover:border-blue-100 transition-all duration-300 flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 transition-transform">
-                  <Server className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-[#091E42] mb-3">IT Infrastructure Services</h3>
-                <p className="text-sm text-slate-500 leading-relaxed mb-6">
-                  End-to-end server orchestration, storage arrays, backup clusters, virtualization deployment, and workspace productivity consulting.
-                </p>
-              </div>
-              <button 
-                onClick={() => onNavigate('it-infrastructure')}
-                className="text-sm font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1.5 group-hover:translate-x-1 transition-all cursor-pointer font-sans"
-              >
-                Learn More <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+            <SolutionCard
+              icon={<Server className="w-16 h-16" />}
+              iconBg="bg-blue-500/5"
+              iconColor="text-blue-600"
+              title="IT Infrastructure Services"
+              description="End-to-end server orchestration, storage arrays, backup clusters, virtualization deployment, and workspace productivity consulting."
+              bgImage={imgServerRacks}
+              onClick={() => onNavigate('it-infrastructure')}
+            />
 
             {/* Card 2: Networking solutions */}
-            <div className="group bg-slate-50 border border-slate-100 rounded-3xl p-8 hover:bg-white hover:shadow-xl hover:border-blue-100 transition-all duration-300 flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-600 mb-6 group-hover:scale-110 transition-transform">
-                  <Network className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-[#091E42] mb-3">Networking Solutions</h3>
-                <p className="text-sm text-slate-500 leading-relaxed mb-6">
-                  Deploy secure localized optical networks, enterprise routing corridors, SD-WAN, and indoor/outdoor controller-based wireless.
-                </p>
-              </div>
-              <button 
-                onClick={() => onNavigate('networking-solutions')}
-                className="text-sm font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1.5 group-hover:translate-x-1 transition-all cursor-pointer font-sans"
-              >
-                Learn More <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+            <SolutionCard
+              icon={<Network className="w-16 h-16" />}
+              iconBg="bg-cyan-500/5"
+              iconColor="text-cyan-600"
+              title="Networking Solutions"
+              description="Deploy secure localized optical networks, enterprise routing corridors, SD-WAN, and indoor/outdoor controller-based wireless."
+              bgImage={imgFiberNetwork}
+              onClick={() => onNavigate('networking-solutions')}
+            />
 
             {/* Card 3: Security solutions */}
-            <div className="group bg-slate-50 border border-slate-100 rounded-3xl p-8 hover:bg-white hover:shadow-xl hover:border-blue-100 transition-all duration-300 flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-600 mb-6 group-hover:scale-110 transition-transform">
-                  <Shield className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-[#091E42] mb-3">Security & Surveillance</h3>
-                <p className="text-sm text-slate-500 leading-relaxed mb-6">
-                  Intrusion detection, next-gen UTM firewalls, access control systems, IP camera setups, and advanced AI-assisted video analytics.
-                </p>
-              </div>
-              <button 
-                onClick={() => onNavigate('solution-detail', 'security-solutions')}
-                className="text-sm font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1.5 group-hover:translate-x-1 transition-all cursor-pointer font-sans"
-              >
-                Learn More <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+            <SolutionCard
+              icon={<Shield className="w-16 h-16" />}
+              iconBg="bg-indigo-500/5"
+              iconColor="text-indigo-600"
+              title="Security & Surveillance"
+              description="Intrusion detection, next-gen UTM firewalls, access control systems, IP camera setups, and advanced AI-assisted video analytics."
+              bgImage={securitySolutionsImg}
+              onClick={() => onNavigate('solution-detail', 'security-solutions')}
+            />
 
             {/* Card 4: IT Applications */}
-            <div className="group bg-slate-50 border border-slate-100 rounded-3xl p-8 hover:bg-white hover:shadow-xl hover:border-blue-100 transition-all duration-300 flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-600 mb-6 group-hover:scale-110 transition-transform">
-                  <Cpu className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-[#091E42] mb-3">IT Applications & AI/ML</h3>
-                <p className="text-sm text-slate-500 leading-relaxed mb-6">
-                  Full stack React & Node apps, modernization of legacy databases, data lake pipelines, and deep machine learning integrations.
-                </p>
-              </div>
-              <button 
-                onClick={() => onNavigate('service-detail', 'it-applications')}
-                className="text-sm font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1.5 group-hover:translate-x-1 transition-all cursor-pointer font-sans"
-              >
-                Learn More <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+            <SolutionCard
+              icon={<Cpu className="w-16 h-16" />}
+              iconBg="bg-emerald-500/5"
+              iconColor="text-emerald-600"
+              title="IT Applications & AI/ML"
+              description="Full stack React & Node apps, modernization of legacy databases, data lake pipelines, and deep machine learning integrations."
+              bgImage={onedeskDashboard}
+              onClick={() => onNavigate('service-detail', 'it-applications')}
+            />
 
             {/* Card 5: Business Process Management */}
-            <div className="group bg-slate-50 border border-slate-100 rounded-3xl p-8 hover:bg-white hover:shadow-xl hover:border-blue-100 transition-all duration-300 flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-600 mb-6 group-hover:scale-110 transition-transform">
-                  <Terminal className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-[#091E42] mb-3">Workflow & BPM Automation</h3>
-                <p className="text-sm text-slate-500 leading-relaxed mb-6">
-                  Map and automate custom operational logic, eliminate manual document processing, and improve resource scheduling pipelines.
-                </p>
-              </div>
-              <button 
-                onClick={() => onNavigate('service-detail', 'business-process')}
-                className="text-sm font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1.5 group-hover:translate-x-1 transition-all cursor-pointer font-sans"
-              >
-                Learn More <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+            <SolutionCard
+              icon={<Terminal className="w-16 h-16" />}
+              iconBg="bg-amber-500/5"
+              iconColor="text-amber-600"
+              title="Workflow & BPM Automation"
+              description="Map and automate custom operational logic, eliminate manual document processing, and improve resource scheduling pipelines."
+              bgImage={imgTeamCollaboration}
+              onClick={() => onNavigate('service-detail', 'business-process')}
+            />
 
             {/* Card 6: ERP Software */}
-            <div className="group bg-slate-50 border border-slate-100 rounded-3xl p-8 hover:bg-white hover:shadow-xl hover:border-blue-100 transition-all duration-300 flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-2xl bg-rose-500/10 flex items-center justify-center text-rose-600 mb-6 group-hover:scale-110 transition-transform">
-                  <Database className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-bold text-[#091E42] mb-3">Digital Enterprise ERPs</h3>
-                <p className="text-sm text-slate-500 leading-relaxed mb-6">
-                  Design unified platforms covering inventory pools, accounting flows, HR dashboards, customer relationships, and support tools.
-                </p>
-              </div>
-              <button 
-                onClick={() => onNavigate('service-detail', 'digital-enterprise')}
-                className="text-sm font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1.5 group-hover:translate-x-1 transition-all cursor-pointer font-sans"
-              >
-                Learn More <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+            <SolutionCard
+              icon={<Database className="w-16 h-16" />}
+              iconBg="bg-rose-500/5"
+              iconColor="text-rose-600"
+              title="Digital Enterprise ERPs"
+              description="Design unified platforms covering inventory pools, accounting flows, HR dashboards, customer relationships, and support tools."
+              bgImage={onetrackDashboard}
+              onClick={() => onNavigate('service-detail', 'digital-enterprise')}
+            />
 
           </div>
         </div>
@@ -778,7 +825,6 @@ export default function Home({ onNavigate }) {
       {/* 5. ESTEEMED CLIENTS SECTION */}
       <section 
         id="esteemed-clients-section"
-        ref={clientSectionRef}
         className="py-24 bg-slate-50 border-t border-slate-100 overflow-hidden relative"
       >
         <div className="absolute top-1/2 -translate-y-1/2 right-0 w-96 h-96 rounded-full bg-blue-100/20 blur-[100px] pointer-events-none"></div>
@@ -792,22 +838,19 @@ export default function Home({ onNavigate }) {
             <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-[#091E42] tracking-tight">
               Our Esteemed Clients
             </h2>
-            <p className="text-slate-500 text-lg font-light leading-relaxed">
-              Serving elite educational institutions, large public sector units, utilities, and judiciary organizations across Odisha.
-            </p>
           </div>
 
           {/* Grid with stagger animations */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {esteemedClients.map((client, idx) => (
-              <div 
+              <motion.div 
                 key={idx}
-                style={{
-                  transitionDelay: `${idx * 80}ms`,
-                  transform: sectionVisible ? 'translateY(0)' : 'translateY(40px)',
-                  opacity: sectionVisible ? 1 : 0
-                }}
-                className="group relative bg-white border border-slate-200/60 rounded-2xl p-6 flex flex-col items-center justify-center h-44 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 ease-out overflow-hidden cursor-pointer"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ type: 'spring', stiffness: 100, damping: 15, delay: idx * 0.05 }}
+                whileHover={{ y: -8, boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)', borderColor: 'rgba(147, 197, 253, 0.8)' }}
+                className="group relative bg-white border border-slate-200/60 rounded-2xl flex items-center justify-center h-44 shadow-sm overflow-hidden cursor-pointer p-2"
               >
                  {/* Glaze reflection sheen sweep */}
                 <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl z-20">
@@ -815,65 +858,332 @@ export default function Home({ onNavigate }) {
                 </div>
 
                 {/* Card logo image or fallback badge */}
-                <div className="flex-1 flex items-center justify-center mb-4 transition-transform duration-300 transform group-hover:scale-105 w-full px-2">
+                <div className="w-full h-full flex items-center justify-center transition-transform duration-300 transform group-hover:scale-105">
                   {client.logo ? (
                     <img 
                       src={client.logo} 
                       alt={client.fullName} 
-                      className="max-h-20 max-w-[90%] object-contain transition-all duration-300"
+                      className="w-full h-full object-contain transition-all duration-300"
                     />
                   ) : (
                     renderClientLogo(client.name)
                   )}
                 </div>
-
-                {/* Subtitle sector badge */}
-                <div className="absolute bottom-3 text-[9px] font-semibold text-slate-400 tracking-wider uppercase group-hover:text-blue-600 transition-colors duration-300">
-                  {client.sector}
-                </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 6. CALL TO ACTION SECTION */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-blue-600 rounded-3xl p-8 sm:p-16 relative overflow-hidden shadow-xl text-center flex flex-col items-center justify-center space-y-6">
+      {/* 5.5 CERTIFICATIONS SECTION */}
+      <section className="relative overflow-hidden py-20 bg-gradient-to-r from-[#001E50] via-[#002D72] to-[#00173D] text-white border-t border-b border-blue-900/30">
+        {/* Background Dot pattern overlays matching the mockup */}
+        <div className="absolute left-0 top-0 bottom-0 w-64 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] [mask-image:linear-gradient(to_right,white_40%,transparent)] pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-80 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] [mask-image:linear-gradient(to_left,white_40%,transparent)] pointer-events-none" />
+
+        {/* Dynamic diagonal gradient slash lines as shown in the mockup */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+          <div className="absolute top-0 bottom-0 left-[30%] w-[10%] bg-gradient-to-b from-[#0a3a82]/40 via-[#0a3a82]/20 to-transparent transform -skew-x-[24deg]"></div>
+          <div className="absolute top-0 bottom-0 left-[42%] w-[14%] bg-gradient-to-b from-[#093574]/50 via-[#093574]/20 to-transparent transform -skew-x-[24deg]"></div>
+          <div className="absolute top-0 bottom-0 left-[60%] w-[12%] bg-gradient-to-b from-[#0d4ea8]/35 via-[#0d4ea8]/15 to-transparent transform -skew-x-[24deg]"></div>
+          <div className="absolute top-0 bottom-0 left-[75%] w-[8%] bg-gradient-to-b from-[#1366ce]/30 via-[#1366ce]/10 to-transparent transform -skew-x-[24deg]"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-12">
             
-            {/* Glow particles */}
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-700/60 to-cyan-600/40 pointer-events-none"></div>
-            <div className="absolute -top-24 -left-24 w-60 h-60 rounded-full bg-cyan-400/25 blur-3xl pointer-events-none"></div>
-            
-            <div className="relative z-10 max-w-2xl space-y-4">
-              <h2 className="text-2xl sm:text-4xl font-extrabold font-display text-white tracking-tight leading-tight">
-                Ready to Upgrade Your Corporate Infrastructure?
-              </h2>
-              <p className="text-blue-100 text-sm sm:text-base font-light">
-                Consult with our systems engineers today. Let's build a secure, scalable network topology engineered for maximum performance and SLA compliance.
-              </p>
+            {/* Title / Left Block */}
+            <div className="flex-1 text-center md:text-left space-y-3">
+              <motion.h2 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-4xl md:text-5xl font-black font-display tracking-tight text-white"
+              >
+                Certifications
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-blue-100/70 text-lg font-light max-w-xl"
+              >
+                Committed to delivering world-class IT services, quality management systems, and robust information security frameworks.
+              </motion.p>
             </div>
-            
-            <div className="relative z-10 pt-4 flex flex-col sm:flex-row gap-4">
-              <button
-                onClick={() => onNavigate('contact')}
-                className="bg-white text-blue-600 hover:bg-blue-50 font-bold px-8 py-4 rounded-xl shadow-lg transition-all cursor-pointer font-sans"
-              >
-                Inquire Now / Contact Us
-              </button>
-              <a
-                href="mailto:info@globx.co.in"
-                className="bg-transparent hover:bg-white/10 text-white font-semibold px-8 py-4 rounded-xl border border-white/20 flex items-center justify-center transition-all"
-              >
-                Email: info@globx.co.in
-              </a>
+
+            {/* Badges / Right Block */}
+            <div className="flex flex-wrap items-center justify-center gap-6">
+              {[
+                { img: certIso9001, title: "ISO 9001" },
+                { img: certIso20000, title: "ISO 20000" },
+                { img: certIso27001, title: "ISO 27001" }
+              ].map((cert, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ type: 'spring', stiffness: 100, damping: 15, delay: idx * 0.1 }}
+                  whileHover={{ 
+                    scale: 1.06, 
+                    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4)',
+                    borderColor: 'rgba(255, 255, 255, 0.3)'
+                  }}
+                  className="relative group bg-white border border-white/10 rounded-2xl p-2.5 flex items-center justify-center w-28 h-28 sm:w-32 sm:h-32 shadow-2xl overflow-hidden cursor-pointer"
+                >
+                  {/* Glaze sheen sweep */}
+                  <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl z-20">
+                    <div className="w-1/2 h-[220%] bg-white/20 absolute -top-12 left-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-glaze-loop"></div>
+                  </div>
+
+                  <img 
+                    src={cert.img} 
+                    alt={cert.title} 
+                    className="w-full h-full object-contain rounded-xl transition-all duration-300"
+                  />
+                </motion.div>
+              ))}
             </div>
 
           </div>
+        </div>
+      </section>
+
+      {/* 6. CALL TO ACTION SECTION */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <CTASection onNavigate={onNavigate} />
         </div>
       </section>
 
     </div>
   );
 }
+
+// ============================================================
+// Solution Card Component - Enterprise themed with micro-animations
+// ============================================================
+function SolutionCard({ icon, iconBg, iconColor, title, description, bgImage, onClick }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.div
+      onClick={onClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      whileHover={{ y: -6, borderColor: 'rgba(147, 197, 253, 0.8)', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      className="group relative bg-white border border-slate-200/50 rounded-2xl p-6 flex flex-col justify-between overflow-hidden cursor-pointer min-h-[260px] h-full"
+    >
+      {/* Background Watermark Icon - Low Opacity with Hover Animation */}
+      <div className={`absolute -bottom-8 -right-8 ${iconColor} opacity-[0.03] group-hover:opacity-[0.09] group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 pointer-events-none z-0`}>
+        {React.cloneElement(icon, { className: "w-40 h-40" })}
+      </div>
+
+      {/* Real Image Background with very low opacity & micro-animation */}
+      {bgImage && (
+        <motion.div
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{
+            backgroundImage: `url(${bgImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+          animate={{
+            scale: isHovered ? 1.1 : 1,
+            opacity: isHovered ? 0.04 : 0.015,
+          }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        />
+      )}
+
+      {/* Subtle hover gradient glow */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-blue-50/10 z-0 pointer-events-none" />
+
+      {/* Card content */}
+      <div className="relative z-10 space-y-4">
+        {/* Small Icon Badge */}
+        <div className={`w-12 h-12 rounded-xl ${iconBg} flex items-center justify-center ${iconColor} transition-transform duration-300 group-hover:scale-110`}>
+          {React.cloneElement(icon, { className: "w-6 h-6" })}
+        </div>
+
+        <div className="space-y-1.5">
+          <h3 className="text-base sm:text-lg font-bold text-[#091E42] group-hover:text-blue-600 transition-colors duration-300 font-display tracking-tight">
+            {title}
+          </h3>
+          <p className="text-xs text-slate-500 leading-relaxed font-light">
+            {description}
+          </p>
+        </div>
+      </div>
+
+      {/* CTA / Learn More Link */}
+      <div className="relative z-10 mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-blue-600 group-hover:text-blue-700">
+        <span>Learn More</span>
+        <motion.div
+          animate={{ x: isHovered ? 4 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <ArrowRight className="w-4 h-4" />
+        </motion.div>
+      </div>
+
+      {/* Bottom Accent line */}
+      <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-500 to-cyan-500 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />
+    </motion.div>
+  );
+}
+
+// ============================================================
+// CTA Section Component - CSS-animated background (zero JS overhead)
+// ============================================================
+function CTASection({ onNavigate }) {
+  const glowRef = useRef(null);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: false, margin: '0px' });
+
+  // Mouse glow: pure DOM mutation — no React state, no re-render
+  const handleMouseMove = (e) => {
+    if (!glowRef.current || !sectionRef.current) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left - 175;
+    const y = e.clientY - rect.top - 175;
+    glowRef.current.style.transform = `translate(${x}px, ${y}px)`;
+    glowRef.current.style.opacity = '0.65';
+  };
+
+  const handleMouseLeave = () => {
+    if (glowRef.current) glowRef.current.style.opacity = '0';
+  };
+
+  const springHover = { type: 'spring', stiffness: 400, damping: 30 };
+
+  return (
+    <div
+      ref={sectionRef}
+      className="relative rounded-3xl overflow-hidden border border-blue-100/80 bg-gradient-to-br from-white via-blue-50/80 to-[#C6DCFF]/75"
+      style={{ boxShadow: '0 45px 100px -25px rgba(0,82,204,0.22)' }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* ── Static base gradient ── */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white via-blue-50/90 to-[#B8D4FF]/55 z-0" />
+
+      {/* ── CSS-animated mesh orbs — compositor-only, zero JS ── */}
+      {isInView && (
+        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+          <div className="cta-orb cta-orb-1" />
+          <div className="cta-orb cta-orb-2" />
+          <div className="cta-orb cta-orb-3" />
+          {/* Subtle dot grid */}
+          <div
+            className="absolute inset-0 opacity-[0.04]"
+            style={{
+              backgroundImage: 'radial-gradient(circle, #0052CC 1px, transparent 1px)',
+              backgroundSize: '40px 40px',
+            }}
+          />
+        </div>
+      )}
+
+      {/* ── Mouse-following glow — ref-based, zero re-render ── */}
+      <div
+        ref={glowRef}
+        className="absolute pointer-events-none rounded-full z-0"
+        style={{
+          width: '350px',
+          height: '350px',
+          background: 'radial-gradient(circle, rgba(0,184,217,0.2) 0%, transparent 68%)',
+          top: 0,
+          left: 0,
+          opacity: 0,
+          transition: 'opacity 0.3s ease',
+          willChange: 'transform',
+          filter: 'blur(2px)',
+        }}
+      />
+
+      {/* ── Content ── */}
+      <div className="relative z-10 p-8 sm:p-16 text-center flex flex-col items-center justify-center space-y-6 min-h-[340px]">
+
+        {/* Badge + Heading + Body */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-2xl space-y-4"
+        >
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-600 uppercase tracking-wider">
+            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+            Enterprise Infrastructure Upgrade
+          </span>
+
+          <h2 className="text-3xl sm:text-5xl font-extrabold font-display text-[#091E42] tracking-tight leading-tight">
+            Ready to Upgrade Your Corporate{' '}
+            <span className="bg-gradient-to-r from-[#0052CC] via-[#00B8D9] to-[#0747A6] bg-clip-text text-transparent">
+              Infrastructure?
+            </span>
+          </h2>
+
+          <p className="text-slate-600 text-base sm:text-lg font-light leading-relaxed">
+            Consult with our systems engineers today. Let&apos;s build a secure, scalable network topology engineered for maximum performance and SLA compliance.
+          </p>
+        </motion.div>
+
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col sm:flex-row gap-4"
+        >
+          <motion.button
+            onClick={() => onNavigate('contact')}
+            whileHover={{ scale: 1.04, y: -2, boxShadow: '0 18px 40px rgba(0,82,204,0.3)' }}
+            whileTap={{ scale: 0.97 }}
+            transition={springHover}
+            className="bg-gradient-to-r from-[#0747A6] to-[#0052CC] text-white font-bold px-8 py-4 rounded-xl cursor-pointer font-sans flex items-center justify-center gap-2"
+            style={{ boxShadow: '0 8px 28px rgba(0,82,204,0.28)' }}
+          >
+            <span>Inquire Now / Contact Us</span>
+            <ArrowRight className="w-4 h-4" />
+          </motion.button>
+
+          <motion.a
+            href="mailto:business@globx.co.in"
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={springHover}
+            className="bg-white/85 text-[#091E42] font-semibold px-8 py-4 rounded-xl border border-blue-200/60 flex items-center justify-center gap-2 backdrop-blur-sm"
+          >
+            <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <span>business@globx.co.in</span>
+          </motion.a>
+        </motion.div>
+
+        {/* Trust Strip */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.28 }}
+          className="flex flex-wrap items-center justify-center gap-6 text-xs text-slate-500 font-medium pt-2 border-t border-blue-100/60 w-full max-w-lg"
+        >
+          <div className="flex items-center gap-1.5"><Shield className="w-4 h-4 text-blue-500" /><span>SLA-Backed</span></div>
+          <div className="flex items-center gap-1.5"><Lock className="w-4 h-4 text-blue-500" /><span>Zero-Trust</span></div>
+          <div className="flex items-center gap-1.5"><Zap className="w-4 h-4 text-blue-500" /><span>99.99% Uptime</span></div>
+          <div className="flex items-center gap-1.5"><Award className="w-4 h-4 text-blue-500" /><span>ISO Certified</span></div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
+export default Home;
