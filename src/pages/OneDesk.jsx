@@ -529,9 +529,9 @@ export default function OneDesk() {
                           
                           <div className="space-y-4 pt-2">
                             {[
-                              { label: "Hardware Dispatch (&lt;4h)", progress: 98 },
-                              { label: "Network Loop Ping (&lt;15m)", progress: 99 },
-                              { label: "Software Patch Check (&lt;2h)", progress: 95 }
+                              { label: "Hardware Dispatch (<4h)", progress: 98 },
+                              { label: "Network Loop Ping (<15m)", progress: 99 },
+                              { label: "Software Patch Check (<2h)", progress: 95 }
                             ].map((item, idx) => (
                               <div key={idx} className="space-y-1">
                                 <div className="flex justify-between text-xs">

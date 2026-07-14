@@ -8,6 +8,7 @@ import ITInfrastructure from './pages/ITInfrastructure';
 import NetworkingSolutions from './pages/NetworkingSolutions';
 import EducationAndRD from './pages/EducationAndRD';
 import OneDesk from './pages/OneDesk';
+import OneTrack from './pages/OneTrack';
 import Contact from './pages/Contact';
 import ServiceOrSolutionDetail from './pages/ServiceOrSolutionDetail';
 import Careers from './pages/Careers';
@@ -103,6 +104,7 @@ export default function App() {
       case 'education-rd':
         return <EducationAndRD />;
       case 'onetrack':
+        return <OneTrack />;
       case 'onedesk':
         return <OneDesk />;
       case 'contact':

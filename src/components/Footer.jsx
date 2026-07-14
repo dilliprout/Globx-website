@@ -135,12 +135,12 @@ export default function Footer({ onNavigate }) {
               <li className="flex gap-3">
                 <MapPin className="w-5 h-5 text-blue-500 shrink-0 mt-1" />
                 <span className="leading-relaxed text-slate-400">
-                  2nd Floor, 209, Sector A, Mancheswar Industrial Estate, Bhubaneswar, Odisha 751010
+                  Globx System and Network Pvt. Ltd., Room No-208 & 209, 2nd Floor, Odyssa Business Centre, Rasulgarh, Bhubaneswar-751010
                 </span>
               </li>
               <li className="flex gap-3 items-center">
                 <Phone className="w-5 h-5 text-blue-500 shrink-0" />
-                <span>0674-2546464</span>
+                <a href="tel:+919124668102" className="hover:text-white transition-colors">+91 91246 68102</a>
               </li>
               <li className="flex gap-3 items-center">
                 <Mail className="w-5 h-5 text-blue-500 shrink-0" />

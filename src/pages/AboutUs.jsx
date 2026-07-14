@@ -205,14 +205,14 @@ export default function AboutUs() {
                   key={idx} 
                   className="relative group"
                 >
-                  {/* Bullet */}
-                  <div className="absolute -left-[33px] top-1.5 w-4 h-4 rounded-full bg-white border-4 border-brand-primary group-hover:scale-125 transition-transform duration-300"></div>
-                  
                   <motion.div 
                     whileHover={{ y: -4, x: 2, backgroundColor: 'rgb(248, 250, 252)', borderColor: 'rgba(191, 219, 254, 1)', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}
                     transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                    className="bg-slate-50/50 border border-slate-100 rounded-2xl p-6 cursor-default"
+                    className="relative bg-slate-50/50 border border-slate-100 rounded-2xl p-6 cursor-default"
                   >
+                    {/* Bullet */}
+                    <div className="absolute -left-[33px] top-[30px] w-4 h-4 rounded-full bg-white border-4 border-brand-primary group-hover:scale-125 transition-transform duration-300"></div>
+
                     <span className="text-xs font-bold text-brand-primary bg-blue-50 px-2.5 py-1 rounded-md">{milestone.year}</span>
                     <h3 className="text-lg font-bold text-brand-dark font-display mt-3 group-hover:text-blue-600 transition-colors duration-300">{milestone.title}</h3>
                     <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light mt-2">{milestone.desc}</p>
@@ -338,7 +338,7 @@ export default function AboutUs() {
             {/* Text and Capabilities */}
             <div className="lg:col-span-8 space-y-6">
               <span className="text-xs uppercase font-extrabold tracking-wider text-blue-400">Software & System Systems Integration</span>
-              <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-white leading-tight">
+              <h2 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-white leading-tight py-2">
                 Expanding Capabilities in Software Systems & AI Integration
               </h2>
               
@@ -377,7 +377,7 @@ export default function AboutUs() {
                   <div>
                     <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Headquarters</span>
                     <span className="text-slate-200 text-xs sm:text-sm leading-normal block">
-                      2nd Floor, 209, Sector A, Mancheswar Industrial Estate, Bhubaneswar, Odisha 751010
+                      Globx System and Network Pvt. Ltd., Room No-208 & 209, 2nd Floor, Odyssa Business Centre, Rasulgarh, Bhubaneswar-751010
                     </span>
                   </div>
                 </div>

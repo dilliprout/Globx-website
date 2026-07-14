@@ -48,8 +48,14 @@ export default function Navbar({ onNavigate, currentPage }) {
   ];
 
   const products = [
-    { name: 'OneDesk Ticket Management', id: 'onedesk' }
+    { name: 'OneDesk Ticket Management', id: 'onedesk' },
+    { name: 'OneTrack Operations Management', id: 'onetrack' }
   ];
+
+  const isServicesActive = ['it-infrastructure', 'it-applications', 'business-process', 'digital-enterprise', 'service-detail'].includes(currentPage);
+  const isSolutionsActive = ['networking-solutions', 'security-solutions', 'wireless-solutions', 'mobility-solutions', 'surveillance-solutions', 'bms-solutions', 'pa-solutions', 'server-storage-solutions', 'cloud-solutions', 'solution-detail'].includes(currentPage);
+  const isIndustriesActive = ['education-rd', 'government', 'public-sector', 'corporates', 'industry-detail'].includes(currentPage);
+  const isProductsActive = ['onedesk', 'onetrack'].includes(currentPage);
 
   const toggleDropdown = (dropdown) => {
     if (activeDropdown === dropdown) {
@@ -128,8 +134,8 @@ export default function Navbar({ onNavigate, currentPage }) {
 
             {/* Services Dropdown */}
             <div className="relative group">
-              <button className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-slate-700 hover:text-brand-primary hover:bg-slate-50 cursor-pointer nav-link">
-                Services <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary transition-colors duration-150" />
+              <button className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md cursor-pointer nav-link active:scale-[0.97] ${isServicesActive ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}>
+                Services <ChevronDown className={`w-4 h-4 transition-colors duration-150 ${isServicesActive ? 'text-brand-primary' : 'text-slate-400 group-hover:text-brand-primary'}`} />
               </button>
               <div className="absolute left-0 top-full mt-1.5 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 ease-out z-50 p-2">
                 {services.map((item) => (
@@ -146,8 +152,8 @@ export default function Navbar({ onNavigate, currentPage }) {
 
             {/* Solutions Dropdown */}
             <div className="relative group">
-              <button className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-slate-700 hover:text-brand-primary hover:bg-slate-50 cursor-pointer nav-link">
-                Solutions <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary transition-colors duration-150" />
+              <button className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md cursor-pointer nav-link active:scale-[0.97] ${isSolutionsActive ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}>
+                Solutions <ChevronDown className={`w-4 h-4 transition-colors duration-150 ${isSolutionsActive ? 'text-brand-primary' : 'text-slate-400 group-hover:text-brand-primary'}`} />
               </button>
               <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1.5 w-80 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 ease-out z-50 p-2 grid grid-cols-1 gap-0.5">
                 {solutions.map((item) => (
@@ -164,8 +170,8 @@ export default function Navbar({ onNavigate, currentPage }) {
 
             {/* Industries Dropdown */}
             <div className="relative group">
-              <button className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-slate-700 hover:text-brand-primary hover:bg-slate-50 cursor-pointer nav-link">
-                Industries <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary transition-colors duration-150" />
+              <button className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md cursor-pointer nav-link active:scale-[0.97] ${isIndustriesActive ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}>
+                Industries <ChevronDown className={`w-4 h-4 transition-colors duration-150 ${isIndustriesActive ? 'text-brand-primary' : 'text-slate-400 group-hover:text-brand-primary'}`} />
               </button>
               <div className="absolute right-0 top-full mt-1.5 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 ease-out z-50 p-2">
                 {industries.map((item) => (
@@ -182,14 +188,14 @@ export default function Navbar({ onNavigate, currentPage }) {
 
             {/* Products Dropdown */}
             <div className="relative group">
-              <button className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md text-slate-700 hover:text-brand-primary hover:bg-slate-50 cursor-pointer nav-link">
-                Products <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-brand-primary transition-colors duration-150" />
+              <button className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md cursor-pointer nav-link active:scale-[0.97] ${isProductsActive ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}>
+                Products <ChevronDown className={`w-4 h-4 transition-colors duration-150 ${isProductsActive ? 'text-brand-primary' : 'text-slate-400 group-hover:text-brand-primary'}`} />
               </button>
               <div className="absolute right-0 top-full mt-1.5 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 ease-out z-50 p-2">
                 {products.map((item) => (
                   <button
                     key={item.id}
-                    onClick={() => handleLinkClick('onedesk')}
+                    onClick={() => handleLinkClick(item.id)}
                     className="w-full text-left px-3 py-2 text-sm rounded-lg text-slate-700 hover:text-brand-primary hover:bg-blue-50/70 transition-all duration-100 font-medium cursor-pointer"
                   >
                     {item.name}
@@ -394,7 +400,7 @@ export default function Navbar({ onNavigate, currentPage }) {
                         <motion.button
                           whileTap={{ scale: 0.98 }}
                           key={item.id}
-                          onClick={() => handleLinkClick('onedesk')}
+                          onClick={() => handleLinkClick(item.id)}
                           className="block w-full text-left px-4 py-2 text-sm text-slate-600 hover:text-brand-primary font-medium cursor-pointer"
                         >
                           {item.name}

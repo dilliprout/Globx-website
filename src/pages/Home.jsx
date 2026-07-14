@@ -654,6 +654,14 @@ function Home({ onNavigate }) {
                 </div>
               ))}
             </div>
+            {/* Third Set of original partner logos */}
+            <div className="flex items-center shrink-0" aria-hidden="true">
+              {partnerIds.map((partnerId, idx) => (
+                <div key={`p3-${idx}`} className="flex items-center justify-center mx-8 h-16 w-32 shrink-0">
+                  {renderPartnerLogo(partnerId)}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

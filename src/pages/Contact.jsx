@@ -67,7 +67,7 @@ export default function Contact() {
               <span className="text-xs uppercase font-extrabold tracking-wider text-blue-600">Offices & Support</span>
               <h2 className="text-3xl font-bold font-display text-brand-dark tracking-tight">GlobX Headquarters</h2>
               <p className="text-slate-500 font-light text-sm sm:text-base leading-relaxed">
-                Our main systems integration and client support center is located in Mancheswar Industrial Estate, Bhubaneswar. Feel free to contact us during standard business hours.
+                Our main systems integration and client support center is located at Odyssa Business Centre, Rasulgarh, Bhubaneswar. Feel free to contact us during standard business hours.
               </p>
             </div>
 
@@ -78,7 +78,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <span className="font-semibold text-brand-dark block text-xs uppercase tracking-wider text-slate-400">Headquarters Address</span>
-                  <span className="leading-relaxed text-sm">2nd Floor, 209, Sector A, Mancheswar Industrial Estate, Bhubaneswar, Odisha 751010</span>
+                  <span className="leading-relaxed text-sm">Globx System and Network Pvt. Ltd., Room No-208 & 209, 2nd Floor, Odyssa Business Centre, Rasulgarh, Bhubaneswar-751010</span>
                 </div>
               </li>
               <li className="flex gap-4 items-start">
@@ -86,8 +86,10 @@ export default function Contact() {
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="font-semibold text-brand-dark block text-xs uppercase tracking-wider text-slate-400">Corporate Landline</span>
-                  <span className="text-sm">0674-2546464</span>
+                  <span className="font-semibold text-brand-dark block text-xs uppercase tracking-wider text-slate-400">Corporate Contact</span>
+                  <span className="text-sm">
+                    <a href="tel:+919124668102" className="hover:text-blue-600 transition-colors">+91 91246 68102</a>
+                  </span>
                 </div>
               </li>
               <li className="flex gap-4 items-start">
@@ -130,7 +132,7 @@ export default function Contact() {
               ></iframe>
               <div className="absolute bottom-3 right-3 z-10">
                 <a
-                  href="https://maps.google.com/?q=Odyssa+Business+Centre,+Mancheswar+Industrial+Estate,+Bhubaneswar,+Odisha+751010"
+                  href="https://maps.google.com/?q=Odyssa+Business+Centre,+Rasulgarh,+Bhubaneswar,+Odisha+751010"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] uppercase tracking-wider px-3.5 py-1.5 rounded-lg inline-flex items-center gap-1 shadow-md hover:shadow-lg transition-all"
