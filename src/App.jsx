@@ -8,7 +8,6 @@ import ITInfrastructure from './pages/ITInfrastructure';
 import NetworkingSolutions from './pages/NetworkingSolutions';
 import EducationAndRD from './pages/EducationAndRD';
 import OneDesk from './pages/OneDesk';
-import OneTrack from './pages/OneTrack';
 import Contact from './pages/Contact';
 import ServiceOrSolutionDetail from './pages/ServiceOrSolutionDetail';
 import Careers from './pages/Careers';
@@ -57,7 +56,7 @@ export default function App() {
       const page = parts[0];
       const detailId = parts[1] || null;
 
-      if (['home', 'about', 'it-infrastructure', 'networking-solutions', 'education-rd', 'onetrack', 'onedesk', 'contact', 'careers'].includes(page)) {
+      if (['home', 'about', 'it-infrastructure', 'networking-solutions', 'education-rd', 'onedesk', 'contact', 'careers'].includes(page)) {
         return { page, detailId: null };
       } else if (['service-detail', 'solution-detail', 'industry-detail'].includes(page) && detailId) {
         return { page, detailId };
@@ -103,8 +102,6 @@ export default function App() {
         return <NetworkingSolutions />;
       case 'education-rd':
         return <EducationAndRD />;
-      case 'onetrack':
-        return <OneTrack />;
       case 'onedesk':
         return <OneDesk />;
       case 'contact':

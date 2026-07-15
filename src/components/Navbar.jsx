@@ -48,14 +48,13 @@ export default function Navbar({ onNavigate, currentPage }) {
   ];
 
   const products = [
-    { name: 'OneDesk Ticket Management', id: 'onedesk' },
-    { name: 'OneTrack Operations Management', id: 'onetrack' }
+    { name: 'OneDesk Ticket Management', id: 'onedesk' }
   ];
 
   const isServicesActive = ['it-infrastructure', 'it-applications', 'business-process', 'digital-enterprise', 'service-detail'].includes(currentPage);
   const isSolutionsActive = ['networking-solutions', 'security-solutions', 'wireless-solutions', 'mobility-solutions', 'surveillance-solutions', 'bms-solutions', 'pa-solutions', 'server-storage-solutions', 'cloud-solutions', 'solution-detail'].includes(currentPage);
   const isIndustriesActive = ['education-rd', 'government', 'public-sector', 'corporates', 'industry-detail'].includes(currentPage);
-  const isProductsActive = ['onedesk', 'onetrack'].includes(currentPage);
+  const isProductsActive = ['onedesk'].includes(currentPage);
 
   const toggleDropdown = (dropdown) => {
     if (activeDropdown === dropdown) {
