@@ -78,7 +78,7 @@ export default function EducationAndRD() {
             Empowering Modern Academic Environments
           </h2>
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-light">
-            GlobX bridges the gap between administrative requirements and scientific research computing. We configure the physical cabling, provision local switches, deploy student databases, and maintain high-performance HPC clusters under unified service agreements.
+            GLOBX bridges the gap between administrative requirements and scientific research computing. We configure the physical cabling, provision local switches, deploy student databases, and maintain high-performance HPC clusters under unified service agreements.
           </p>
         </div>
       </section>

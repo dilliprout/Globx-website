@@ -258,7 +258,7 @@ export default function ITInfrastructure() {
                     />
                     <div className="absolute bottom-4 left-4 right-4 z-20 text-white space-y-1">
                       <span className="inline-block text-[9px] bg-blue-500/35 border border-blue-400/40 text-blue-100 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider mb-1">
-                        GlobX Deployment
+                        GLOBX Deployment
                       </span>
                       <h4 className="text-sm font-bold text-white tracking-wide">{activeService.title}</h4>
                     </div>
@@ -283,7 +283,7 @@ export default function ITInfrastructure() {
                 Standard SLA Commitments
               </h3>
               <p className="text-slate-300 font-light text-sm sm:text-base leading-relaxed">
-                GlobX operates on highly structured maintenance contracts designed to match critical enterprise workloads. We outline exact response hours based on incident classification.
+                GLOBX operates on highly structured maintenance contracts designed to match critical enterprise workloads. We outline exact response hours based on incident classification.
               </p>
               
               <div className="grid grid-cols-2 gap-4">

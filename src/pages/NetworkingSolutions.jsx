@@ -103,7 +103,7 @@ export default function NetworkingSolutions() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <span className="text-xs uppercase font-extrabold tracking-wider text-blue-600">The GlobX Implementation Loop</span>
+            <span className="text-xs uppercase font-extrabold tracking-wider text-blue-600">The GLOBX Implementation Loop</span>
             <h2 className="text-3xl font-bold font-display text-brand-dark tracking-tight">Structured Deployment Lifecycle</h2>
             <p className="text-slate-500 font-light text-sm sm:text-base leading-relaxed">
               We follow a strict engineering pathway to ensure that every network we commission satisfies strict SLA metrics and structural checks.

@@ -129,7 +129,7 @@ export default function Careers({ onNavigate }) {
               <span className="text-brand-accent">Enterprise Technology</span>
             </h1>
             <p className="text-slate-300 text-base sm:text-lg font-light leading-relaxed max-w-2xl mb-8">
-              At GlobX, we architect the digital backbone of Odisha's most critical institutions —
+              At GLOBX, we architect the digital backbone of Odisha's most critical institutions —
               government bodies, public sector units, research labs, and Fortune-tier corporates.
               Come grow with engineers who are passionate about impact at scale.
             </p>
@@ -170,7 +170,7 @@ export default function Careers({ onNavigate }) {
               </h2>
               <p className="text-slate-500 text-base font-light leading-relaxed">
                 We believe great technology is built by great people. Our workplace is designed to inspire,
-                challenge, and support every member of the GlobX family.
+                challenge, and support every member of the GLOBX family.
               </p>
             </motion.div>
 

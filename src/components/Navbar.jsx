@@ -48,7 +48,7 @@ export default function Navbar({ onNavigate, currentPage }) {
   ];
 
   const products = [
-    { name: 'OneDesk Ticket Management', id: 'onedesk' }
+    { name: 'OneDesk', id: 'onedesk' }
   ];
 
   const isServicesActive = ['it-infrastructure', 'it-applications', 'business-process', 'digital-enterprise', 'service-detail'].includes(currentPage);
@@ -110,7 +110,7 @@ export default function Navbar({ onNavigate, currentPage }) {
             className="flex items-center cursor-pointer"
             onClick={() => handleLinkClick('home')}
           >
-            <img src={logo} alt="GlobX Logo" className="h-10 w-auto object-contain" />
+            <img src={logo} alt="GLOBX Logo" className="h-10 w-auto object-contain" />
           </motion.div>
 
           {/* Desktop Navigation — pure CSS hover for zero-latency interactions */}
@@ -136,7 +136,7 @@ export default function Navbar({ onNavigate, currentPage }) {
               <button className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md cursor-pointer nav-link active:scale-[0.97] ${isServicesActive ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}>
                 Services <ChevronDown className={`w-4 h-4 transition-colors duration-150 ${isServicesActive ? 'text-brand-primary' : 'text-slate-400 group-hover:text-brand-primary'}`} />
               </button>
-              <div className="absolute left-0 top-full mt-1.5 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 ease-out z-50 p-2">
+              <div className="absolute left-0 top-full mt-1.5 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 ease-out z-50 p-2 before:content-[''] before:absolute before:-top-4 before:left-0 before:right-0 before:h-4">
                 {services.map((item) => (
                   <button
                     key={item.id}
@@ -154,7 +154,7 @@ export default function Navbar({ onNavigate, currentPage }) {
               <button className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md cursor-pointer nav-link active:scale-[0.97] ${isSolutionsActive ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}>
                 Solutions <ChevronDown className={`w-4 h-4 transition-colors duration-150 ${isSolutionsActive ? 'text-brand-primary' : 'text-slate-400 group-hover:text-brand-primary'}`} />
               </button>
-              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1.5 w-80 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 ease-out z-50 p-2 grid grid-cols-1 gap-0.5">
+              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1.5 w-80 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 ease-out z-50 p-2 grid grid-cols-1 gap-0.5 before:content-[''] before:absolute before:-top-4 before:left-0 before:right-0 before:h-4">
                 {solutions.map((item) => (
                   <button
                     key={item.id}
@@ -172,7 +172,7 @@ export default function Navbar({ onNavigate, currentPage }) {
               <button className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md cursor-pointer nav-link active:scale-[0.97] ${isIndustriesActive ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}>
                 Industries <ChevronDown className={`w-4 h-4 transition-colors duration-150 ${isIndustriesActive ? 'text-brand-primary' : 'text-slate-400 group-hover:text-brand-primary'}`} />
               </button>
-              <div className="absolute right-0 top-full mt-1.5 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 ease-out z-50 p-2">
+              <div className="absolute right-0 top-full mt-1.5 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 ease-out z-50 p-2 before:content-[''] before:absolute before:-top-4 before:left-0 before:right-0 before:h-4">
                 {industries.map((item) => (
                   <button
                     key={item.id}
@@ -190,7 +190,7 @@ export default function Navbar({ onNavigate, currentPage }) {
               <button className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md cursor-pointer nav-link active:scale-[0.97] ${isProductsActive ? 'text-brand-primary bg-blue-50' : 'text-slate-700 hover:text-brand-primary hover:bg-slate-50'}`}>
                 Products <ChevronDown className={`w-4 h-4 transition-colors duration-150 ${isProductsActive ? 'text-brand-primary' : 'text-slate-400 group-hover:text-brand-primary'}`} />
               </button>
-              <div className="absolute right-0 top-full mt-1.5 w-64 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 ease-out z-50 p-2">
+              <div className="absolute right-0 top-full mt-1.5 w-36 rounded-xl bg-white border border-slate-100 shadow-xl opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150 ease-out z-50 p-2 before:content-[''] before:absolute before:-top-4 before:left-0 before:right-0 before:h-4">
                 {products.map((item) => (
                   <button
                     key={item.id}
@@ -220,18 +220,7 @@ export default function Navbar({ onNavigate, currentPage }) {
             </button>
           </nav>
 
-          {/* Action Button */}
-          <div className="hidden lg:flex items-center gap-4">
-            <motion.button
-              whileHover={{ scale: 1.03, y: -1, boxShadow: '0 6px 20px rgba(0, 82, 204, 0.25)' }}
-              whileTap={{ scale: 0.96 }}
-              transition={springConfig}
-              onClick={() => handleLinkClick('contact')}
-              className="bg-brand-primary hover:bg-brand-secondary text-white px-5 py-2 rounded-lg text-sm font-semibold shadow-sm transition-all cursor-pointer"
-            >
-              Get a Quote
-            </motion.button>
-          </div>
+
 
           {/* Mobile menu button */}
           <div className="flex items-center lg:hidden">
@@ -428,17 +417,7 @@ export default function Navbar({ onNavigate, currentPage }) {
                 Contact
               </motion.button>
 
-              <motion.div variants={mobileItemVariants} className="pt-4 px-4">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={springConfig}
-                  onClick={() => handleLinkClick('contact')}
-                  className="w-full bg-brand-primary hover:bg-brand-secondary text-white text-center py-3 rounded-xl font-semibold shadow-sm transition-all cursor-pointer"
-                >
-                  Get in Touch
-                </motion.button>
-              </motion.div>
+
             </div>
           </motion.div>
         )}

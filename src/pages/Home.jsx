@@ -293,7 +293,7 @@ function Home({ onNavigate }) {
       <img 
         src={src} 
         alt={alt} 
-        className="max-h-11 max-w-full object-contain"
+        className={`max-w-full object-contain ${id === 'google' ? 'max-h-14 scale-125' : 'max-h-11'}`}
       />
     );
   };
@@ -632,7 +632,7 @@ function Home({ onNavigate }) {
       {/* 2. INFINITE LOGO MARQUEE - HD ORIGINAL ICONS */}
       <section className="relative bg-white py-12 border-b border-slate-100 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 text-center mb-6">
-          <span className="text-xs uppercase font-bold tracking-wider text-slate-400">Our Strategic Hardware & Software Partnerships</span>
+          <span className="text-xs uppercase font-bold tracking-wider text-slate-400">Our Strategic OEM Alliances</span>
         </div>
         
         {/* Infinite scrolling wrapper */}
@@ -666,70 +666,6 @@ function Home({ onNavigate }) {
         </div>
       </section>
 
-      {/* 3. VALUE PROPOSITION STATS */}
-      <section className="py-16 bg-white border-y border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:divide-x divide-slate-100">
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="text-center px-4"
-            >
-              <div className="text-4xl lg:text-5xl font-extrabold font-display text-blue-600 mb-2">
-                <Counter target={15} suffix="+" />
-              </div>
-              <div className="text-sm font-semibold text-slate-700 uppercase tracking-wider">Years of Excellence</div>
-              <div className="text-xs text-slate-400 mt-2">Delivering certified SLA support since 2011.</div>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-              className="text-center px-4"
-            >
-              <div className="text-4xl lg:text-5xl font-extrabold font-display text-blue-600 mb-2">
-                <Counter target={200} suffix="+" />
-              </div>
-              <div className="text-sm font-semibold text-slate-700 uppercase tracking-wider">Enterprise Deployments</div>
-              <div className="text-xs text-slate-400 mt-2">Successfully serving PSU, Govt, and corporate environments.</div>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              className="text-center px-4"
-            >
-              <div className="text-4xl lg:text-5xl font-extrabold font-display text-blue-600 mb-2">
-                <Counter target={50} suffix="+" />
-              </div>
-              <div className="text-sm font-semibold text-slate-700 uppercase tracking-wider">Certified Engineers</div>
-              <div className="text-xs text-slate-400 mt-2">Certified across Cisco, Fortinet, VM & cloud systems.</div>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
-              className="text-center px-4"
-            >
-              <div className="text-4xl lg:text-5xl font-extrabold font-display text-blue-600 mb-2">
-                <Counter target={99.8} suffix="%" />
-              </div>
-              <div className="text-sm font-semibold text-slate-700 uppercase tracking-wider">SLA Compliance</div>
-              <div className="text-xs text-slate-400 mt-2">Continuous active surveillance & incident response.</div>
-            </motion.div>
-
-          </div>
-        </div>
-      </section>
 
       {/* 4. CORE COMPETENCIES GRID */}
       <section className="py-24 bg-white relative overflow-hidden">
@@ -754,7 +690,7 @@ function Home({ onNavigate }) {
               Enterprise Solutions Tailored for Digital Transformation
             </h2>
             <p className="text-slate-600 text-lg font-light leading-relaxed">
-              GlobX delivers high-performing integration across network hardware, custom business software, and secure cloud storage infrastructure.
+              GLOBX delivers high-performing integration across network hardware, custom business software, and secure cloud storage infrastructure.
             </p>
           </div>
 

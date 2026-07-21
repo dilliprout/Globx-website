@@ -48,7 +48,7 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
           <span className="text-xs uppercase font-extrabold tracking-wider text-blue-400">Get In Touch</span>
           <h1 className="text-3xl sm:text-5xl font-extrabold font-display tracking-tight text-white">
-            Contact GlobX
+            Contact GLOBX
           </h1>
           <p className="text-slate-300 text-base sm:text-lg max-w-2xl font-light leading-relaxed">
             Reach out to our Bhubaneswar operations office or submit a technical inquiry directly to our engineering team.
@@ -65,7 +65,7 @@ export default function Contact() {
             
             <div className="space-y-4">
               <span className="text-xs uppercase font-extrabold tracking-wider text-blue-600">Offices & Support</span>
-              <h2 className="text-3xl font-bold font-display text-brand-dark tracking-tight">GlobX Headquarters</h2>
+              <h2 className="text-3xl font-bold font-display text-brand-dark tracking-tight">GLOBX Headquarters</h2>
               <p className="text-slate-500 font-light text-sm sm:text-base leading-relaxed">
                 Our main systems integration and client support center is located at Odyssa Business Centre, Rasulgarh, Bhubaneswar. Feel free to contact us during standard business hours.
               </p>
@@ -78,7 +78,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <span className="font-semibold text-brand-dark block text-xs uppercase tracking-wider text-slate-400">Headquarters Address</span>
-                  <span className="leading-relaxed text-sm">Globx System and Network Pvt. Ltd., Room No-208 & 209, 2nd Floor, Odyssa Business Centre, Rasulgarh, Bhubaneswar-751010</span>
+                  <span className="leading-relaxed text-sm">GLOBX System & Network Pvt. Ltd., Room No-208 & 209, 2nd Floor, Odyssa Business Centre, Rasulgarh, Bhubaneswar-751010</span>
                 </div>
               </li>
               <li className="flex gap-4 items-start">
@@ -123,7 +123,7 @@ export default function Contact() {
               className="relative border border-slate-200/80 rounded-2xl overflow-hidden bg-slate-100 shadow-inner h-72 group cursor-default"
             >
               <iframe
-                title="GlobX Headquarters Location Map"
+                title="GLOBX Headquarters Location Map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59872.1085718906!2d85.80711909251602!3d20.29998625848554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a190bd65aa2ad1d%3A0xe69acb08745a4b10!2sOdyssa%20Business%20Centre!5e0!3m2!1sen!2sin!4v1782884757514!5m2!1sen!2sin"
                 className="w-full h-full border-0 transition-all duration-300"
                 allowFullScreen=""

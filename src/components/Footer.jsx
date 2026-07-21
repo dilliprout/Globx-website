@@ -35,14 +35,11 @@ export default function Footer({ onNavigate }) {
           <div className="space-y-6">
             {/* Logo only (no text) */}
             <div className="flex items-center cursor-pointer" onClick={() => handleLinkClick('home')}>
-              <div className="bg-white p-1.5 rounded-lg">
-                <img src={logo} alt="GlobX Logo" className="h-10 w-auto object-contain" />
+              <div className="bg-white p-1.5 rounded-lg w-[180px] flex items-center justify-center">
+                <img src={logo} alt="GLOBX Logo" className="h-10 w-auto object-contain" />
               </div>
             </div>
-            <p className="text-sm text-slate-400 leading-relaxed">
-              At GLOBX, we are committed to providing innovative and reliable IT services that empower businesses to thrive in today’s digital world. Your trusted partner for system integration, software applications, and IT consulting.
-            </p>
-            <div className="flex items-center gap-3 pt-2">
+            <div className="flex items-center justify-between w-[180px] pt-2">
               <a href="https://www.facebook.com/globxsystem" target="_blank" rel="noopener noreferrer" className="bg-slate-800 hover:bg-blue-600 text-white p-2.5 rounded-lg transition-all" aria-label="Facebook">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
@@ -135,7 +132,7 @@ export default function Footer({ onNavigate }) {
               <li className="flex gap-3">
                 <MapPin className="w-5 h-5 text-blue-500 shrink-0 mt-1" />
                 <span className="leading-relaxed text-slate-400">
-                  Globx System and Network Pvt. Ltd., Room No-208 & 209, 2nd Floor, Odyssa Business Centre, Rasulgarh, Bhubaneswar-751010
+                  GLOBX System & Network Pvt. Ltd., Room No-208 & 209, 2nd Floor, Odyssa Business Centre, Rasulgarh, Bhubaneswar-751010
                 </span>
               </li>
               <li className="flex gap-3 items-center">
@@ -165,7 +162,7 @@ export default function Footer({ onNavigate }) {
       <div className="bg-[#04142D] py-6 border-t border-slate-800/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div>
-            &copy; {new Date().getFullYear()} GlobX System and Network Pvt. Ltd. All Rights Reserved.
+            &copy; {new Date().getFullYear()} GLOBX System & Network Pvt. Ltd. All Rights Reserved.
           </div>
           <div className="flex gap-6">
             <button onClick={() => handleLinkClick('home')} className="hover:text-slate-300 cursor-pointer">Home</button>

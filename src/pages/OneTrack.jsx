@@ -104,7 +104,7 @@ export default function OneTrack() {
               </h1>
               
               <p className="text-slate-300 text-base sm:text-lg font-light leading-relaxed">
-                The unified, audit-ready operations portal driving GlobX systems engineering. By bridging physical hardware asset registries with real-time SLA thresholds, OneTrack guarantees end-to-end transparency and instant technician dispatch.
+                The unified, audit-ready operations portal driving GLOBX systems engineering. By bridging physical hardware asset registries with real-time SLA thresholds, OneTrack guarantees end-to-end transparency and instant technician dispatch.
               </p>
 
               <div className="flex flex-wrap gap-4 pt-2">
@@ -275,7 +275,7 @@ export default function OneTrack() {
                   <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Workspace</span>
                   <div className="text-sm font-bold text-white flex items-center gap-2">
                     <Monitor className="w-4 h-4 text-blue-500" />
-                    <span>GlobX NOC Portal</span>
+                    <span>GLOBX NOC Portal</span>
                   </div>
                 </div>
 

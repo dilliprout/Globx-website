@@ -17,12 +17,6 @@ import fiberNetwork from '../assets/fiber_network.png';
 import FloatingLines from '../components/FloatingLines';
 
 export default function AboutUs() {
-  const stats = [
-    { label: "Years of Operations", value: "15+" },
-    { label: "Active SLA Sites", value: "42+" },
-    { label: "Technical Uptime", value: "99.99%" },
-    { label: "Certified Engineers", value: "25+" }
-  ];
 
   const milestones = [
     {
@@ -38,7 +32,7 @@ export default function AboutUs() {
     {
       year: "2021",
       title: "Incorporation & Restructuring",
-      desc: "Restructured and incorporated as GlobX System & Network Pvt. Ltd., shifting focus to enterprise-tier datacenter orchestration and fiber networks."
+      desc: "Restructured and incorporated as GLOBX System & Network Pvt. Ltd., shifting focus to enterprise-tier datacenter orchestration and fiber networks."
     },
     {
       year: "2024",
@@ -114,23 +108,10 @@ export default function AboutUs() {
               </h1>
               
               <p className="text-slate-300 text-base sm:text-lg max-w-2xl font-light leading-relaxed">
-                From a regional hardware service provider to an incorporated systems engineering powerhouse, GlobX delivers robust IT infrastructures, custom software solutions, and automated service management to public sector and corporate leaders.
+                From a regional hardware service provider to an incorporated systems engineering powerhouse, GLOBX delivers robust IT infrastructures, custom software solutions, and automated service management to public sector and corporate leaders.
               </p>
 
-              {/* Stats Row */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-4 border-t border-slate-800">
-                {stats.map((stat, index) => (
-                  <motion.div 
-                    key={index} 
-                    className="space-y-1 cursor-default p-2 rounded-xl"
-                    whileHover={{ scale: 1.05, y: -2, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-                  >
-                    <span className="text-3xl font-extrabold text-white block">{stat.value}</span>
-                    <span className="text-[11px] text-slate-400 font-bold uppercase tracking-wider block">{stat.label}</span>
-                  </motion.div>
-                ))}
-              </div>
+
             </motion.div>
 
             {/* Hero Image / Visual Box */}
@@ -144,7 +125,7 @@ export default function AboutUs() {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60 z-10"></div>
                 <img 
                   src={teamCollaboration} 
-                  alt="GlobX Corporate Collaboration" 
+                  alt="GLOBX Corporate Collaboration" 
                   className="w-full h-[400px] object-cover object-center group-hover:scale-105 transition-transform duration-700" 
                 />
                 
@@ -170,7 +151,7 @@ export default function AboutUs() {
               </h2>
               
               <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-light">
-                GlobX System & Network Pvt. Ltd. represents the culmination of over a decade of hands-on engineering, constant training, and customer dedication.
+                GLOBX System & Network Pvt. Ltd. represents the culmination of over a decade of hands-on engineering, constant training, and customer dedication.
               </p>
               
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-100 flex items-start gap-4">
@@ -231,7 +212,7 @@ export default function AboutUs() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <span className="text-xs uppercase font-extrabold tracking-wider text-brand-primary">The GlobX Way</span>
+            <span className="text-xs uppercase font-extrabold tracking-wider text-brand-primary">The GLOBX Way</span>
             <h2 className="text-3xl font-bold font-display text-brand-dark tracking-tight">Core Values Driving Our Projects</h2>
             <p className="text-slate-500 font-light text-sm sm:text-base leading-relaxed">
               Every system we provision, cable we terminate, and application we code is bound by our fundamental operating principles.
@@ -369,7 +350,7 @@ export default function AboutUs() {
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               className="lg:col-span-4 bg-white/10 backdrop-blur-md border border-white/10 p-8 rounded-3xl space-y-6 cursor-default"
             >
-              <h3 className="text-xl font-bold font-display text-white border-b border-white/10 pb-4">GlobX Office Details</h3>
+              <h3 className="text-xl font-bold font-display text-white border-b border-white/10 pb-4">GLOBX Office Details</h3>
               
               <div className="space-y-4 text-sm font-light">
                 <div className="flex items-start gap-3">
@@ -377,7 +358,7 @@ export default function AboutUs() {
                   <div>
                     <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Headquarters</span>
                     <span className="text-slate-200 text-xs sm:text-sm leading-normal block">
-                      Globx System and Network Pvt. Ltd., Room No-208 & 209, 2nd Floor, Odyssa Business Centre, Rasulgarh, Bhubaneswar-751010
+                      GLOBX System & Network Pvt. Ltd., Room No-208 & 209, 2nd Floor, Odyssa Business Centre, Rasulgarh, Bhubaneswar-751010
                     </span>
                   </div>
                 </div>
