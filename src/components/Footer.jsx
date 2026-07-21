@@ -19,8 +19,8 @@ export default function Footer({ onNavigate }) {
   ];
 
   const services = [
+    { name: 'Software Development', id: 'it-applications' },
     { name: 'IT Infrastructure Led Services', id: 'it-infrastructure' },
-    { name: 'IT Applications', id: 'it-applications' },
     { name: 'Business Process Management', id: 'business-process' },
     { name: 'Digital Enterprise Application', id: 'digital-enterprise' }
   ];

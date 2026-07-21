@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Server, Shield, Cpu, Database, Network, Building, Landmark, Briefcase, CheckCircle, ArrowRight } from 'lucide-react';
+import { Server, Shield, Cpu, Database, Network, Building, Landmark, Briefcase, CheckCircle, ArrowRight, Globe, Smartphone, Sliders, Zap, Share2, RefreshCw } from 'lucide-react';
 import FloatingLines from '../components/FloatingLines';
 import highCourtOdisha from '../assets/Esteemsed_clients/highcourt-Odisha.png';
 
@@ -250,6 +250,295 @@ const detailsData = {
 
 export default function ServiceOrSolutionDetail({ detailId }) {
   const currentData = detailsData[detailId];
+
+  if (detailId === 'it-applications') {
+    return (
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="w-full bg-[#f8fafc] font-sans"
+      >
+        {/* 1. Header Banner */}
+        <section className="bg-gradient-to-r from-[#091E42] to-[#0c2957] text-white py-24 relative overflow-hidden">
+          <div className="absolute inset-0 z-0 pointer-events-none opacity-45">
+            <FloatingLines 
+              enabledWaves={['top', 'middle', 'bottom']}
+              lineCount={[12, 18, 24]}
+              lineDistance={[7, 5, 3]}
+              bendRadius={6.0}
+              bendStrength={-0.6}
+              interactive={true}
+              parallax={true}
+              linesGradient={['#4073b3', '#0f1c57', '#f54575']}
+            />
+          </div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-400/20 text-xs font-semibold text-blue-300 uppercase tracking-wider">
+              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+              Services & Specializations
+            </span>
+            <h1 className="text-4.5xl sm:text-6xl font-extrabold font-display tracking-tight text-white leading-tight">
+              Software Development
+            </h1>
+            <p className="text-slate-300 text-lg sm:text-xl max-w-4xl font-light leading-relaxed">
+              Crafting robust, scalable, and secure custom applications designed to streamline operations, automate business logic, and drive productivity.
+            </p>
+          </div>
+        </section>
+
+        {/* 2. Content & Grid */}
+        <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+          
+          {/* Introduction Card */}
+          <div className="bg-white border border-slate-100 rounded-3xl p-8 sm:p-12 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-7 space-y-6">
+              <h2 className="text-3xl font-bold font-display text-brand-dark tracking-tight">
+                Enterprise Application Lifecycle Management
+              </h2>
+              <p className="text-slate-600 text-base leading-relaxed font-light font-sans">
+                We design, build, and support enterprise-grade software applications tailored to resolve specific business operation delays. From single-page React web apps to automated database sync scripts and cloud modernizations, we manage the complete lifecycle.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <span className="bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-lg font-sans">React & Next.js</span>
+                <span className="bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-lg font-sans">Node.js & Python</span>
+                <span className="bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-lg font-sans">PostgreSQL & MongoDB</span>
+                <span className="bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-lg font-sans">AWS & Hybrid Cloud</span>
+              </div>
+            </div>
+            <div className="lg:col-span-5 relative rounded-2xl overflow-hidden border border-slate-200/50 shadow-md h-[260px] sm:h-[300px]">
+              <img
+                src={onedeskDashboard}
+                alt="OneDesk Ticket Management"
+                className="w-full h-full object-cover hover:scale-103 transition-transform duration-700 pointer-events-none"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-slate-900/10 to-transparent pointer-events-none" />
+              <div className="absolute bottom-4 left-4 z-10 text-white">
+                <span className="text-xs font-semibold bg-blue-600/80 px-3 py-1 rounded-full uppercase tracking-wider">
+                  OneDesk Integration Framework
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Specializations Section */}
+          <div className="space-y-8">
+            <div className="text-center max-w-3xl mx-auto space-y-3">
+              <h2 className="text-3xl font-bold font-display text-brand-dark tracking-tight">Our Core Specializations</h2>
+              <p className="text-slate-500 font-light text-base font-sans">We deliver state-of-the-art engineering across the entire software development spectrum.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              
+              {/* Card 1: Web Development */}
+              <motion.div 
+                whileHover={{ y: -5, borderColor: 'rgba(59, 130, 246, 0.3)' }}
+                className="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm space-y-4 hover:shadow-md transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
+                  <Globe className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-bold text-brand-dark font-display">Web Application Development</h3>
+                <p className="text-slate-600 text-sm leading-relaxed font-light font-sans">
+                  High-performance single page applications (SPA) and server-side rendered (SSR) web interfaces. Optimized for lightning-fast speeds and responsive mobile styling.
+                </p>
+                <ul className="space-y-1.5 text-xs text-slate-500 font-medium pt-2 border-t border-slate-50 font-sans">
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" /> React, Next.js, & Tailwind CSS
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" /> Single-Page Web Applications
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" /> Dynamic Dashboards & Visualization
+                  </li>
+                </ul>
+              </motion.div>
+
+              {/* Card 2: Mobile App Engineering */}
+              <motion.div 
+                whileHover={{ y: -5, borderColor: 'rgba(59, 130, 246, 0.3)' }}
+                className="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm space-y-4 hover:shadow-md transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-xl bg-cyan-50 border border-cyan-100 flex items-center justify-center text-cyan-600">
+                  <Smartphone className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-bold text-brand-dark font-display">Mobile Application Development</h3>
+                <p className="text-slate-600 text-sm leading-relaxed font-light font-sans">
+                  Cross-platform and native mobile apps that run natively on iOS and Android. Built with robust local storage engines and push notification queues.
+                </p>
+                <ul className="space-y-1.5 text-xs text-slate-500 font-medium pt-2 border-t border-slate-50 font-sans">
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" /> React Native & Flutter Frameworks
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" /> Offline Syncing & Storage (SQLite/Realm)
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" /> Native App Store Deployments
+                  </li>
+                </ul>
+              </motion.div>
+
+              {/* Card 3: Custom CRM & ERP */}
+              <motion.div 
+                whileHover={{ y: -5, borderColor: 'rgba(59, 130, 246, 0.3)' }}
+                className="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm space-y-4 hover:shadow-md transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
+                  <Sliders className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-bold text-brand-dark font-display">Custom CRM & ERP Portals</h3>
+                <p className="text-slate-600 text-sm leading-relaxed font-light font-sans">
+                  Tailored management software configured around your company's workflows. Consolidate client records, billing ledgers, and inventories under one dashboard.
+                </p>
+                <ul className="space-y-1.5 text-xs text-slate-500 font-medium pt-2 border-t border-slate-50 font-sans">
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" /> Custom Internal CRM Dashboards
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" /> Role-Based Access Control (RBAC)
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" /> Inventory & Order Syncing Modules
+                  </li>
+                </ul>
+              </motion.div>
+
+              {/* Card 4: Automations & Workflow Bots */}
+              <motion.div 
+                whileHover={{ y: -5, borderColor: 'rgba(59, 130, 246, 0.3)' }}
+                className="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm space-y-4 hover:shadow-md transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-xl bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-600">
+                  <Zap className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-bold text-brand-dark font-display">Process & Workflow Automation</h3>
+                <p className="text-slate-600 text-sm leading-relaxed font-light font-sans">
+                  Replace manual administrative entries with smart server scripts. Auto-dispatch email/SMS notification rules, timesheet reviews, and inventory thresholds.
+                </p>
+                <ul className="space-y-1.5 text-xs text-slate-500 font-medium pt-2 border-t border-slate-50 font-sans">
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-rose-500" /> Automated Cron Jobs & Sync Scripts
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-rose-500" /> Email, SMS & Chat Alerts Routing
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-rose-500" /> Robotic Process Automation (RPA)
+                  </li>
+                </ul>
+              </motion.div>
+
+              {/* Card 5: API Integrations */}
+              <motion.div 
+                whileHover={{ y: -5, borderColor: 'rgba(59, 130, 246, 0.3)' }}
+                className="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm space-y-4 hover:shadow-md transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600">
+                  <Share2 className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-bold text-brand-dark font-display">API Integrations & Custom Webhooks</h3>
+                <p className="text-slate-600 text-sm leading-relaxed font-light font-sans">
+                  Secure connectors linking proprietary portals with global payment gateways, SMS engines, and government databanks. Engineered with complete retry logic.
+                </p>
+                <ul className="space-y-1.5 text-xs text-slate-500 font-medium pt-2 border-t border-slate-50 font-sans">
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Restful API / GraphQL Gateways
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Multi-Platform Webhook Receivers
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Payment & SMS Gateway Sync
+                  </li>
+                </ul>
+              </motion.div>
+
+              {/* Card 6: Legacy Modernization */}
+              <motion.div 
+                whileHover={{ y: -5, borderColor: 'rgba(59, 130, 246, 0.3)' }}
+                className="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm space-y-4 hover:shadow-md transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600">
+                  <RefreshCw className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-bold text-brand-dark font-display">Legacy Code Modernization</h3>
+                <p className="text-slate-600 text-sm leading-relaxed font-light font-sans">
+                  Refactor complex server applications into modular, cloud-native microservices. Secure outdated databases and transition scripts to modern standard syntax.
+                </p>
+                <ul className="space-y-1.5 text-xs text-slate-500 font-medium pt-2 border-t border-slate-50 font-sans">
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500" /> Monolith to Microservice Splits
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500" /> Database Clustering & Upgrades
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500" /> Containerization with Docker & K8s
+                  </li>
+                </ul>
+              </motion.div>
+
+            </div>
+          </div>
+
+          {/* Tech Stack Tech-Map */}
+          <div className="bg-[#091E42] text-white rounded-3xl p-8 sm:p-12 shadow-lg relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="relative z-10 space-y-8">
+              <div className="border-b border-blue-950 pb-4">
+                <h2 className="text-2xl font-bold font-display tracking-tight">Software Technology Blueprint</h2>
+                <p className="text-slate-400 text-sm font-light mt-1 font-sans">Our standardized tech stack guarantees high availability, security compliance, and ease of future maintenance.</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <div className="space-y-2">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Front-End</span>
+                  <p className="text-sm font-semibold text-white font-sans">React, Next.js, Tailwind CSS, TypeScript, Redux Toolkit</p>
+                </div>
+
+                <div className="space-y-2">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Back-End</span>
+                  <p className="text-sm font-semibold text-white font-sans">Node.js, Express, Python (FastAPI / Django), GoLang</p>
+                </div>
+
+                <div className="space-y-2">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Database & Cache</span>
+                  <p className="text-sm font-semibold text-white font-sans">PostgreSQL, MongoDB, MySQL, Redis Cache, SQLite</p>
+                </div>
+
+                <div className="space-y-2">
+                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">DevOps & Cloud</span>
+                  <p className="text-sm font-semibold text-white font-sans">Docker, AWS, Microsoft Azure, CI/CD Actions, Vercel</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          {/* Call to Action Grid */}
+          <div className="bg-blue-50 border border-blue-100 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="space-y-2 text-center md:text-left">
+              <h3 className="text-lg font-bold text-brand-dark font-display font-sans">Looking to scale your software infrastructure?</h3>
+              <p className="text-sm text-slate-600 font-light leading-relaxed max-w-2xl font-sans">
+                Get in touch with our system architects today. We will evaluate your current technology stack and outline a modular delivery roadmap.
+              </p>
+            </div>
+            <a
+              href="mailto:business@globx.co.in"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider px-6 py-4 rounded-xl flex items-center gap-2 shadow-lg shadow-blue-500/20 transition-all shrink-0 cursor-pointer font-sans"
+            >
+              <span>Consult an Architect</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+
+        </section>
+      </motion.div>
+    );
+  }
 
   if (!currentData) {
     return (
