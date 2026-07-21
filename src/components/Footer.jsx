@@ -137,7 +137,7 @@ export default function Footer({ onNavigate }) {
               </li>
               <li className="flex gap-3 items-center">
                 <Phone className="w-5 h-5 text-blue-500 shrink-0" />
-                <a href="tel:+919124668102" className="hover:text-white transition-colors">+91 91246 68102</a>
+                <a href="tel:+919124668102" className="hover:text-white transition-colors">+91 0674 2546464</a>
               </li>
               <li className="flex gap-3 items-center">
                 <Mail className="w-5 h-5 text-blue-500 shrink-0" />

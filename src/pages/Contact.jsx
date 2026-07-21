@@ -88,7 +88,7 @@ export default function Contact() {
                 <div>
                   <span className="font-semibold text-brand-dark block text-xs uppercase tracking-wider text-slate-400">Corporate Contact</span>
                   <span className="text-sm">
-                    <a href="tel:+919124668102" className="hover:text-blue-600 transition-colors">+91 91246 68102</a>
+                    <a href="tel:+919124668102" className="hover:text-blue-600 transition-colors">+91 0674 2546464</a>
                   </span>
                 </div>
               </li>
