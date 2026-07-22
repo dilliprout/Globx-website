@@ -110,7 +110,7 @@ export default function Navbar({ onNavigate, currentPage }) {
             className="flex items-center cursor-pointer"
             onClick={() => handleLinkClick('home')}
           >
-            <img src={logo} alt="GLOBX Logo" className="h-10 w-auto object-contain" />
+            <img src={logo} alt="GLOBX Logo" className="h-12 sm:h-13 w-auto object-contain transition-all duration-300" />
           </motion.div>
 
           {/* Desktop Navigation — pure CSS hover for zero-latency interactions */}

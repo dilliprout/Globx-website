@@ -32,7 +32,7 @@ const detailsData = {
       "AI/ML pipeline integrations for automated text classification and processing"
     ],
     techStack: "React, Node.js, Next.js, Python, PostgreSQL, REST APIs",
-    image: onedeskDashboard
+    image: teamCollaboration
   },
   'business-process': {
     category: "Services",
@@ -308,14 +308,14 @@ export default function ServiceOrSolutionDetail({ detailId }) {
             </div>
             <div className="lg:col-span-5 relative rounded-2xl overflow-hidden border border-slate-200/50 shadow-md h-[260px] sm:h-[300px]">
               <img
-                src={onedeskDashboard}
-                alt="OneDesk Ticket Management"
+                src={currentData?.image || teamCollaboration}
+                alt={currentData?.title || "Enterprise Application Lifecycle Management"}
                 className="w-full h-full object-cover hover:scale-103 transition-transform duration-700 pointer-events-none"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-slate-900/10 to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-4 z-10 text-white">
                 <span className="text-xs font-semibold bg-blue-600/80 px-3 py-1 rounded-full uppercase tracking-wider">
-                  OneDesk Integration Framework
+                  Software Engineering & Lifecycle
                 </span>
               </div>
             </div>

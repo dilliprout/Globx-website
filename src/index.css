@@ -314,38 +314,3 @@ nav .group > div {
 .nav-link:active {
   transform: scale(0.97) translateZ(0);
 }
-
-/* ─── CTA Contact Banner: Connected Rib Wave Animations ─── */
-@keyframes rib-shift-1 {
-  0%, 100% { transform: translateX(0); }
-  50%       { transform: translateX(-18px); }
-}
-@keyframes rib-shift-2 {
-  0%, 100% { transform: translateX(0); }
-  50%       { transform: translateX(22px); }
-}
-@keyframes rib-shift-3 {
-  0%, 100% { transform: translateX(0); }
-  50%       { transform: translateX(-14px); }
-}
-@keyframes rib-shift-4 {
-  0%, 100% { transform: translateX(0); }
-  50%       { transform: translateX(16px); }
-}
-@keyframes rib-shift-5 {
-  0%, 100% { transform: translateX(0); }
-  50%       { transform: translateX(-10px); }
-}
-
-.rib-wave { transform-origin: center; }
-.rib-1 { animation: rib-shift-1 8s ease-in-out infinite; }
-.rib-2 { animation: rib-shift-2 10s ease-in-out infinite; }
-.rib-3 { animation: rib-shift-3 12s ease-in-out infinite; }
-.rib-4 { animation: rib-shift-4 9s ease-in-out infinite; }
-.rib-5 { animation: rib-shift-5 14s ease-in-out infinite; }
-
-/* Hover intensifies rib visibility */
-.cta-contact-banner:hover .rib-wave {
-  opacity: 1 !important;
-  transition: opacity 0.4s ease;
-}

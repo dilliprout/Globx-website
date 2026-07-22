@@ -602,7 +602,7 @@ function Home({ onNavigate }) {
                 onClick={() => onNavigate('contact')}
                 className="flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl font-semibold text-slate-700 cursor-pointer text-sm border border-slate-200 bg-white shadow-sm hover:border-[#DEEBFF] hover:bg-[#DEEBFF]/30 transition-colors"
               >
-                Schedule Consultation
+                Contact Us
               </motion.button>
             </motion.div>
 

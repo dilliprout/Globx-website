@@ -1,33 +1,216 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Layers, 
-  CheckCircle2, 
   Users, 
   Database, 
-  Clock, 
   ShieldCheck, 
-  ChevronRight, 
-  Monitor, 
+  Activity, 
+  MessageSquare, 
+  TrendingUp, 
   Plus, 
-  FileSpreadsheet,
-  Activity,
-  MessageSquare,
-  FileText,
-  TrendingUp,
-  AlertCircle,
+  ArrowRight, 
+  Send, 
+  Check, 
+  CheckSquare, 
+  Shield,
+  Search,
   Bell,
-  Mail,
-  Lock,
-  ArrowRight,
-  Sparkles,
-  Send,
-  Check,
-  CheckSquare,
-  Bookmark,
-  Shield
+  Clock,
+  Server,
+  Filter,
+  RefreshCw,
+  BarChart3,
+  AlertCircle
 } from 'lucide-react';
-import onedeskDashboard from '../assets/onedesk_dashboard.png';
+
+// White-Themed Demo Professional Enterprise Dashboard Viewport Component
+function WhiteThemeDashboardPreview() {
+  return (
+    <div className="w-full bg-[#f8fafc] text-slate-800 font-sans rounded-xl border border-slate-200 overflow-hidden shadow-inner text-left select-none">
+      
+      {/* 1. Top Navigation / Header Bar */}
+      <div className="bg-white border-b border-slate-200/80 px-4 py-2.5 flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-rose-400"></div>
+            <div className="w-2.5 h-2.5 rounded-full bg-amber-400"></div>
+            <div className="w-2.5 h-2.5 rounded-full bg-emerald-400"></div>
+          </div>
+          <div className="h-4 w-px bg-slate-200 hidden sm:block"></div>
+          <div className="hidden sm:flex items-center gap-2 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-lg text-[10px] text-slate-500 w-44">
+            <Search className="w-3 h-3 text-slate-400" />
+            <span>Search tickets, serials...</span>
+          </div>
+        </div>
+
+        {/* Status badges */}
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 bg-emerald-50 border border-emerald-200/80 px-2.5 py-0.5 rounded-full text-[10px] font-bold text-emerald-700">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span className="hidden md:inline">NOC STATUS:</span> ONLINE (99.98%)
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="relative">
+              <Bell className="w-3.5 h-3.5 text-slate-500" />
+              <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
+            </div>
+            <div className="w-6 h-6 rounded-full bg-[#0052CC] text-white flex items-center justify-center text-[10px] font-bold">
+              DP
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. Main Workspace Grid */}
+      <div className="flex min-h-[380px] sm:min-h-[420px]">
+        
+        {/* Left Mini Rail Navigation */}
+        <div className="w-12 bg-white border-r border-slate-200/80 py-3 flex flex-col items-center gap-4 text-slate-400 shrink-0">
+          <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+            <Activity className="w-4 h-4" />
+          </div>
+          <Layers className="w-4 h-4 hover:text-slate-700 cursor-pointer" />
+          <Database className="w-4 h-4 hover:text-slate-700 cursor-pointer" />
+          <Users className="w-4 h-4 hover:text-slate-700 cursor-pointer" />
+          <BarChart3 className="w-4 h-4 hover:text-slate-700 cursor-pointer" />
+          <ShieldCheck className="w-4 h-4 hover:text-slate-700 cursor-pointer mt-auto" />
+        </div>
+
+        {/* Right Dashboard Content */}
+        <div className="flex-1 p-4 space-y-4 bg-[#f8fafc] overflow-hidden">
+          
+          {/* Top Stat Counters */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="bg-white border border-slate-200/80 p-3 rounded-xl shadow-2xs space-y-1">
+              <div className="flex justify-between items-center text-[10px] text-slate-500 font-semibold">
+                <span>ACTIVE TICKETS</span>
+                <span className="text-emerald-600 font-bold">+12%</span>
+              </div>
+              <div className="text-lg font-extrabold text-slate-900 font-display">1,284</div>
+              <div className="w-full bg-slate-100 h-1 rounded-full overflow-hidden">
+                <div className="bg-blue-600 h-full w-[78%]"></div>
+              </div>
+            </div>
+
+            <div className="bg-white border border-slate-200/80 p-3 rounded-xl shadow-2xs space-y-1">
+              <div className="flex justify-between items-center text-[10px] text-slate-500 font-semibold">
+                <span>SLA RESPONSE</span>
+                <span className="text-blue-600 font-bold">99.8%</span>
+              </div>
+              <div className="text-lg font-extrabold text-slate-900 font-display">14.2m</div>
+              <div className="w-full bg-slate-100 h-1 rounded-full overflow-hidden">
+                <div className="bg-emerald-500 h-full w-[94%]"></div>
+              </div>
+            </div>
+
+            <div className="bg-white border border-slate-200/80 p-3 rounded-xl shadow-2xs space-y-1">
+              <div className="flex justify-between items-center text-[10px] text-slate-500 font-semibold">
+                <span>NODES TRACKED</span>
+                <span className="text-indigo-600 font-bold">4,850</span>
+              </div>
+              <div className="text-lg font-extrabold text-slate-900 font-display">99.9%</div>
+              <div className="w-full bg-slate-100 h-1 rounded-full overflow-hidden">
+                <div className="bg-indigo-600 h-full w-[98%]"></div>
+              </div>
+            </div>
+
+            <div className="bg-white border border-slate-200/80 p-3 rounded-xl shadow-2xs space-y-1">
+              <div className="flex justify-between items-center text-[10px] text-slate-500 font-semibold">
+                <span>CRITICAL ALERTS</span>
+                <span className="text-rose-600 font-bold">2 Active</span>
+              </div>
+              <div className="text-lg font-extrabold text-rose-600 font-display">0 Breaches</div>
+              <div className="w-full bg-slate-100 h-1 rounded-full overflow-hidden">
+                <div className="bg-rose-500 h-full w-[15%]"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Lower Split Layout: Live Ticket Table & Mini Analytics */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+            
+            {/* Live Queue Table */}
+            <div className="lg:col-span-8 bg-white border border-slate-200/80 rounded-xl p-3.5 shadow-2xs space-y-3">
+              <div className="flex justify-between items-center text-xs border-b border-slate-100 pb-2">
+                <div className="flex items-center gap-2 font-bold text-slate-900">
+                  <Activity className="w-3.5 h-3.5 text-blue-600" />
+                  <span>Real-Time Support Incident Stream</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-[10px] text-slate-400 font-mono">
+                  <Filter className="w-3 h-3" />
+                  <span>All Priority</span>
+                </div>
+              </div>
+
+              {/* Table Rows */}
+              <div className="space-y-2 text-[10px]">
+                {[
+                  { id: "TKT-904", title: "Bhubaneswar Datacenter Loop Latency", client: "NALCO", pri: "HIGH", status: "IN PROGRESS", time: "03:42m", color: "bg-amber-50 text-amber-700 border-amber-200" },
+                  { id: "TKT-903", title: "High Court Optical WAN Node Config", client: "Odisha HC", pri: "CRITICAL", status: "ASSIGNED", time: "11:15m", color: "bg-blue-50 text-blue-700 border-blue-200" },
+                  { id: "TKT-901", title: "OCAC Gateway Firewall Rule Update", client: "OCAC", pri: "MEDIUM", status: "RESOLVED", time: "Closed", color: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+                  { id: "TKT-899", title: "IndianOil Terminal Storage Sync", client: "IndianOil", pri: "LOW", status: "RESOLVED", time: "Closed", color: "bg-emerald-50 text-emerald-700 border-emerald-200" }
+                ].map((row) => (
+                  <div key={row.id} className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200/60 hover:bg-blue-50/40 transition-colors">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="font-mono font-bold text-slate-600 bg-white border border-slate-200 px-1.5 py-0.5 rounded shrink-0">{row.id}</span>
+                      <span className="font-semibold text-slate-800 truncate">{row.title}</span>
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0 ml-2">
+                      <span className="text-slate-400 hidden sm:inline">{row.client}</span>
+                      <span className={`px-2 py-0.5 rounded font-bold uppercase ${row.color}`}>{row.status}</span>
+                      <span className="font-mono text-slate-500 hidden md:inline">{row.time}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Mini SLA Velocity Graph & Log Feed */}
+            <div className="lg:col-span-4 bg-white border border-slate-200/80 rounded-xl p-3.5 shadow-2xs space-y-3 flex flex-col justify-between">
+              <div>
+                <div className="flex justify-between items-center text-xs font-bold text-slate-900 border-b border-slate-100 pb-2 mb-2">
+                  <span className="flex items-center gap-1.5">
+                    <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Resolution Velocity</span>
+                  </span>
+                  <span className="text-[10px] text-emerald-600 font-mono font-bold">+18.4%</span>
+                </div>
+
+                {/* SVG Mini Wave Chart */}
+                <div className="h-16 w-full pt-1">
+                  <svg className="w-full h-full" viewBox="0 0 200 50" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#0052CC" stopOpacity="0.3" />
+                        <stop offset="100%" stopColor="#0052CC" stopOpacity="0.0" />
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,35 Q30,15 60,30 T120,10 T180,25 T200,8 L200,50 L0,50 Z" fill="url(#chartGrad)" />
+                    <path d="M0,35 Q30,15 60,30 T120,10 T180,25 T200,8" fill="none" stroke="#0052CC" strokeWidth="2.5" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Real-time System Ping Footer */}
+              <div className="p-2 bg-slate-50 border border-slate-200/60 rounded-lg text-[9px] text-slate-500 font-mono space-y-1">
+                <div className="flex items-center justify-between text-slate-700 font-bold">
+                  <span>AUDIT DISPATCHER</span>
+                  <span className="text-blue-600">LIVE SYNC</span>
+                </div>
+                <div className="truncate text-slate-600">⚡ Auto-routed TKT-904 to Debasish P.</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  );
+}
 
 export default function OneDesk() {
   const [activeTab, setActiveTab] = useState('ticket');
@@ -172,7 +355,7 @@ export default function OneDesk() {
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-50 max-w-md bg-slate-900 text-white px-5 py-4 rounded-2xl shadow-2xl border border-blue-500/30 flex items-center gap-3.5"
+            className="fixed bottom-6 right-6 z-50 max-w-md bg-[#091E42] text-white px-5 py-4 rounded-2xl shadow-2xl border border-blue-400/30 flex items-center gap-3.5"
           >
             <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></div>
             <span className="text-xs font-mono tracking-tight leading-relaxed">{toast}</span>
@@ -180,15 +363,15 @@ export default function OneDesk() {
         )}
       </AnimatePresence>
 
-      {/* 1. HERO SECTION WITH MODERN SCREENSHOT VIEWPORT */}
-      <section className="relative bg-gradient-to-br from-[#091E42] via-[#0d2a5c] to-slate-950 text-white pt-20 pb-28 sm:pt-24 sm:pb-36 overflow-hidden">
-        {/* Decorative Grid Overlay & Ambient Glows */}
+      {/* 1. HERO SECTION WITH BLUISH ENTERPRISE THEME & SKEWED WHITE DEMO DASHBOARD */}
+      <section className="relative bg-gradient-to-br from-[#091E42] via-[#0d2a5c] to-[#04122c] text-white pt-20 pb-28 sm:pt-24 sm:pb-36 overflow-hidden">
+        {/* Decorative Ambient Grid & Soft Blue Radial Glows */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[150px] pointer-events-none"></div>
         <div className="absolute -bottom-20 -right-10 w-[500px] h-[500px] bg-[#00B8D9]/15 rounded-full blur-[130px] pointer-events-none"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             
             {/* Left Hero Description */}
             <motion.div 
@@ -197,15 +380,10 @@ export default function OneDesk() {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="lg:col-span-6 space-y-8"
             >
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-400/25 text-xs font-semibold text-blue-300 uppercase tracking-widest">
-                <Sparkles className="w-3.5 h-3.5 text-blue-400 animate-spin" />
-                <span>Next-Gen Enterprise Support Hub</span>
-              </div>
-              
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display tracking-tight leading-[1.08] text-white">
                 Transform Your <br />
                 Customer Support <br />
-                with <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">OneDesk</span>
+                with <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-300 bg-clip-text text-transparent">OneDesk</span>
               </h1>
               
               <p className="text-slate-300 text-lg font-light leading-relaxed max-w-xl">
@@ -214,10 +392,10 @@ export default function OneDesk() {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <motion.a
-                  whileHover={{ scale: 1.03, y: -2, boxShadow: '0 12px 30px rgba(59, 130, 246, 0.3)' }}
+                  whileHover={{ scale: 1.03, y: -2, boxShadow: '0 12px 30px rgba(0, 184, 217, 0.35)' }}
                   whileTap={{ scale: 0.98 }}
                   href="#onedesk-simulator"
-                  className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl font-semibold bg-blue-600 text-white cursor-pointer shadow-lg hover:bg-blue-500 transition-colors text-sm"
+                  className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl font-semibold bg-[#00B8D9] text-[#091E42] cursor-pointer shadow-lg hover:bg-[#00cbe9] transition-colors text-sm"
                 >
                   Launch Simulator
                   <ArrowRight className="w-4 h-4" />
@@ -226,67 +404,31 @@ export default function OneDesk() {
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                   href="#onedesk-capabilities"
-                  className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl font-semibold bg-white/5 border border-white/10 text-slate-200 cursor-pointer hover:bg-white/10 transition-all text-sm"
+                  className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl font-semibold bg-white/10 border border-white/20 text-white cursor-pointer hover:bg-white/15 transition-all text-sm backdrop-blur-sm"
                 >
                   Explore Capabilities
                 </motion.a>
               </div>
-
-              {/* Quick stats tags */}
-              <div className="flex flex-wrap gap-x-8 gap-y-4 pt-6 border-t border-white/10">
-                <div>
-                  <span className="text-2xl font-extrabold text-white block">99.8%</span>
-                  <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">SLA Compliance</span>
-                </div>
-                <div className="h-10 w-px bg-white/10 self-center hidden sm:block"></div>
-                <div>
-                  <span className="text-2xl font-extrabold text-white block">&lt; 15m</span>
-                  <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Avg Response Time</span>
-                </div>
-                <div className="h-10 w-px bg-white/10 self-center hidden sm:block"></div>
-                <div>
-                  <span className="text-2xl font-extrabold text-white block">100%</span>
-                  <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Auditable Trail</span>
-                </div>
-              </div>
             </motion.div>
             
-            {/* Right Hero Video/Image Viewport - Large Dashboard Mockup */}
+            {/* Right Hero Preview: 3D Skewed Perspective Container with Pure Code White-Themed Dashboard */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.96, rotateY: 8 }}
-              animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-6 relative perspective"
+              initial={{ opacity: 0, rotateY: -16, rotateX: 8, scale: 0.94 }}
+              animate={{ opacity: 1, rotateY: -10, rotateX: 5, scale: 1 }}
+              whileHover={{ rotateY: 0, rotateX: 0, scale: 1.02 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-6 relative [perspective:1200px]"
+              style={{ transformStyle: 'preserve-3d' }}
             >
-              {/* Outer glow ring */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-500 rounded-[28px] blur-xl opacity-35 animate-pulse"></div>
+              {/* Outer Cyan/Blue Glow Ring */}
+              <div className="absolute -inset-2 bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 rounded-[28px] blur-2xl opacity-35 animate-pulse"></div>
               
-              {/* Device Frame */}
-              <div className="relative bg-slate-900/90 rounded-[28px] p-2.5 border border-slate-700/60 shadow-2xl backdrop-blur-md">
-                {/* Browser bar */}
-                <div className="flex items-center justify-between px-4 py-2 border-b border-slate-800/80 mb-2">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-rose-500"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-amber-500"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
-                    <span className="text-[10px] text-slate-400 font-mono ml-4 select-none">onedesk.globx.systems/portal</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 text-slate-500">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></div>
-                    <span className="text-[9px] font-mono tracking-wider">LIVE DATA</span>
-                  </div>
-                </div>
+              {/* White Device Browser Frame with 3D Skew */}
+              <div className="relative bg-white rounded-[24px] p-2.5 sm:p-3 border border-slate-200/90 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)] backdrop-blur-md">
                 
-                {/* Image itself */}
-                <div className="overflow-hidden rounded-2xl border border-slate-800 shadow-inner group relative">
-                  <img 
-                    src={onedeskDashboard} 
-                    alt="OneDesk Enterprise Dashboard UI Overview" 
-                    className="w-full h-auto object-cover transform group-hover:scale-[1.02] transition-transform duration-700" 
-                  />
-                  {/* Subtle sheen layer on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                </div>
+                {/* Embedded White Theme Professional Live Dashboard */}
+                <WhiteThemeDashboardPreview />
+
               </div>
             </motion.div>
 
@@ -299,7 +441,7 @@ export default function OneDesk() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <span className="text-xs uppercase font-extrabold tracking-widest text-blue-600 bg-blue-50 border border-blue-100 px-3.5 py-1.5 rounded-full">Product Pillars</span>
+            <span className="text-xs uppercase font-extrabold tracking-widest text-[#0052CC] bg-blue-50 border border-blue-100 px-3.5 py-1.5 rounded-full">Product Pillars</span>
             <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-slate-900 tracking-tight">
               A Comprehensive Customer Support Ecosystem
             </h2>
@@ -309,14 +451,14 @@ export default function OneDesk() {
           </div>
 
           {/* Desktop/Tablet Horizontal Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
+          <div className="flex flex-wrap justify-center gap-2.5 mb-12">
             {Object.keys(tabs).map((tabKey) => (
               <button
                 key={tabKey}
                 onClick={() => setActiveTab(tabKey)}
                 className={`flex items-center gap-2.5 px-6 py-4 rounded-xl text-xs sm:text-sm font-semibold transition-all border cursor-pointer ${
                   activeTab === tabKey 
-                    ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-500/15' 
+                    ? 'bg-[#0052CC] text-white border-[#0052CC] shadow-md shadow-blue-500/20' 
                     : 'bg-slate-50 text-slate-600 border-slate-200/80 hover:bg-slate-100 hover:text-slate-900'
                 }`}
               >
@@ -327,7 +469,7 @@ export default function OneDesk() {
           </div>
 
           {/* Tab content panel */}
-          <div className="bg-[#f8fafc] border border-slate-200/60 rounded-3xl p-8 sm:p-12 shadow-sm max-w-6xl mx-auto">
+          <div className="bg-[#f8fafc] border border-slate-200/80 rounded-3xl p-8 sm:p-12 shadow-sm max-w-6xl mx-auto">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
@@ -340,13 +482,13 @@ export default function OneDesk() {
                 
                 {/* Left explanation text */}
                 <div className="lg:col-span-5 space-y-6">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200/50 text-[10px] font-bold text-blue-700 uppercase tracking-wider">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100 border border-blue-200 text-xs font-bold text-blue-800 uppercase tracking-wider">
                     {tabs[activeTab].badge}
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-extrabold font-display text-slate-900 tracking-tight leading-tight">
                     {tabs[activeTab].title}
                   </h3>
-                  <p className="text-slate-500 font-light text-sm leading-relaxed">
+                  <p className="text-slate-600 font-light text-sm leading-relaxed">
                     Designed to maintain deep historical visibility, improve response compliance margins, and empower cross-team collaboration for complex IT operations.
                   </p>
                   
@@ -359,7 +501,7 @@ export default function OneDesk() {
                     <div>
                       <span className="text-xs text-slate-400 block uppercase font-bold tracking-wider">Module Status</span>
                       <span className="text-xs font-semibold text-emerald-600 flex items-center gap-1.5 mt-0.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
                         Production Deployment Active
                       </span>
                     </div>
@@ -371,7 +513,7 @@ export default function OneDesk() {
                   {tabs[activeTab].features.map((feature, index) => (
                     <div 
                       key={index} 
-                      className="bg-white border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-slate-200 transition-all duration-300"
+                      className="bg-white border border-slate-200/80 p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300"
                     >
                       <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center mb-3">
                         <Check className="w-4 h-4 text-blue-600" />
@@ -394,11 +536,11 @@ export default function OneDesk() {
       </section>
 
       {/* 3. INTERACTIVE SIMULATOR (LIVE CLIENT PORTAL & TASKBOARD) */}
-      <section id="onedesk-simulator" className="py-24 sm:py-32 bg-[#f1f5f9] border-t border-b border-slate-200/50">
+      <section id="onedesk-simulator" className="py-24 sm:py-32 bg-[#f8fafc] border-t border-b border-slate-200/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <span className="text-xs uppercase font-extrabold tracking-widest text-indigo-600">Live Hands-on Simulator</span>
+            <span className="text-xs uppercase font-extrabold tracking-widest text-[#0052CC] bg-blue-50 border border-blue-100 px-3.5 py-1.5 rounded-full">Live Hands-on Simulator</span>
             <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-slate-900 tracking-tight">OneDesk System Role Simulator</h2>
             <p className="text-slate-500 font-light text-base leading-relaxed">
               Interact with our support simulator. Submit tickets as a customer, track updates as a manager, or close tickets as an engineer to see the platform in action.
@@ -417,8 +559,8 @@ export default function OneDesk() {
                 onClick={() => setActiveRole(role.key)}
                 className={`px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold transition-all border cursor-pointer ${
                   activeRole === role.key 
-                    ? 'bg-slate-900 text-white border-slate-900 shadow-lg' 
-                    : 'bg-white text-slate-600 border-slate-200/80 hover:bg-slate-50'
+                    ? 'bg-[#091E42] text-white border-[#091E42] shadow-md' 
+                    : 'bg-white text-slate-700 border-slate-200/80 hover:bg-slate-100'
                 }`}
               >
                 {role.label}
@@ -426,31 +568,31 @@ export default function OneDesk() {
             ))}
           </div>
 
-          {/* Console layout */}
-          <div className="bg-slate-950 text-white rounded-3xl shadow-2xl border border-slate-800 max-w-6xl mx-auto overflow-hidden">
+          {/* Console layout - White/Light Enterprise Theme */}
+          <div className="bg-white text-slate-900 rounded-3xl shadow-xl border border-slate-200 max-w-6xl mx-auto overflow-hidden">
             
             {/* Header controls bar */}
-            <div className="bg-slate-900 px-6 py-4.5 border-b border-slate-800 flex flex-wrap justify-between items-center gap-4">
+            <div className="bg-slate-50 px-6 py-4 border-b border-slate-200/80 flex flex-wrap justify-between items-center gap-4">
               <div className="flex items-center gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-rose-500"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-amber-500"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
-                <span className="text-xs text-slate-400 font-mono ml-4 hidden sm:inline select-none">OneDesk Client Console v3.1.2</span>
+                <div className="w-2.5 h-2.5 rounded-full bg-rose-400"></div>
+                <div className="w-2.5 h-2.5 rounded-full bg-amber-400"></div>
+                <div className="w-2.5 h-2.5 rounded-full bg-emerald-400"></div>
+                <span className="text-xs text-slate-500 font-mono ml-4 hidden sm:inline select-none">OneDesk Client Console v3.2</span>
               </div>
               
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-xl text-[10px] sm:text-xs">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                  <span className="text-slate-400 font-mono">WS_CONNECT_OK</span>
+                <div className="flex items-center gap-2 bg-white border border-slate-200 px-3 py-1.5 rounded-xl text-[10px] sm:text-xs shadow-xs">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                  <span className="text-slate-600 font-mono font-semibold">WS_CONNECT_OK</span>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-indigo-600 border border-indigo-500/20 flex items-center justify-center text-xs font-bold text-white uppercase select-none shadow">
+                <div className="w-8 h-8 rounded-full bg-[#0052CC] flex items-center justify-center text-xs font-bold text-white uppercase select-none shadow">
                   OD
                 </div>
               </div>
             </div>
 
             {/* Simulated workspaces */}
-            <div className="min-h-[520px] p-6 sm:p-8 bg-slate-950">
+            <div className="min-h-[520px] p-6 sm:p-8 bg-[#f8fafc]">
               
               <AnimatePresence mode="wait">
                 
@@ -467,15 +609,15 @@ export default function OneDesk() {
                     {/* Console stats grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                       {[
-                        { label: "Active Tickets", val: simTickets.filter(t => t.status !== "RESOLVED").length, color: "text-blue-400", sub: "Awaiting resolution" },
-                        { label: "SLA Compliance Rate", val: "99.8%", color: "text-emerald-400", sub: "Contract limits" },
-                        { label: "Total Handled Today", val: simTickets.length, color: "text-indigo-400", sub: "Updated in real-time" },
-                        { label: "High Priority Incidents", val: simTickets.filter(t => t.priority === "HIGH" && t.status !== "RESOLVED").length, color: "text-rose-400 animate-pulse", sub: "Action required" }
+                        { label: "Total Tickets", val: simTickets.length, color: "text-[#091E42]", sub: "Overall logged volume" },
+                        { label: "Open Tickets", val: simTickets.filter(t => t.status === "OPEN").length, color: "text-blue-600", sub: "Awaiting engineer triage" },
+                        { label: "In Progress", val: simTickets.filter(t => t.status === "IN PROGRESS" || t.status === "ASSIGNED").length, color: "text-amber-600", sub: "Active technical resolution" },
+                        { label: "Resolved", val: simTickets.filter(t => t.status === "RESOLVED").length, color: "text-emerald-600", sub: "Successfully completed" }
                       ].map((item, idx) => (
-                        <div key={idx} className="bg-slate-900 border border-slate-800/80 p-5 rounded-2xl space-y-2">
-                          <span className="text-[10px] text-slate-500 uppercase font-bold tracking-wider">{item.label}</span>
+                        <div key={idx} className="bg-white border border-slate-200/80 p-5 rounded-2xl shadow-sm space-y-1.5">
+                          <span className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">{item.label}</span>
                           <h4 className={`text-3xl font-extrabold ${item.color}`}>{item.val}</h4>
-                          <span className="text-[10px] text-slate-400 block">{item.sub}</span>
+                          <span className="text-[10px] text-slate-500 block">{item.sub}</span>
                         </div>
                       ))}
                     </div>
@@ -483,35 +625,35 @@ export default function OneDesk() {
                     {/* Active queues and charts mockup */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                       {/* Ticket Queue list */}
-                      <div className="lg:col-span-8 bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-                        <div className="flex justify-between items-center border-b border-slate-800 pb-4">
-                          <h4 className="text-sm font-bold tracking-wide flex items-center gap-2">
-                            <Activity className="w-4 h-4 text-blue-400" />
+                      <div className="lg:col-span-8 bg-white border border-slate-200/80 rounded-2xl p-6 shadow-sm space-y-4">
+                        <div className="flex justify-between items-center border-b border-slate-100 pb-4">
+                          <h4 className="text-sm font-bold text-slate-900 tracking-wide flex items-center gap-2">
+                            <Activity className="w-4 h-4 text-blue-600" />
                             <span>Global Support Incident Queue</span>
                           </h4>
-                          <span className="text-[10px] text-slate-500 uppercase font-mono">Sorted by Date</span>
+                          <span className="text-[10px] text-slate-400 uppercase font-mono">Sorted by Date</span>
                         </div>
 
                         <div className="space-y-3 max-h-[250px] overflow-y-auto pr-1">
                           {simTickets.map((t) => (
-                            <div key={t.id} className="bg-slate-950/60 border border-slate-800/60 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs hover:border-slate-700 transition-colors">
+                            <div key={t.id} className="bg-slate-50 border border-slate-200/60 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs hover:border-blue-300 transition-colors">
                               <div className="space-y-1">
                                 <div className="flex items-center gap-2 flex-wrap">
-                                  <span className="font-mono text-slate-500 bg-slate-900 border border-slate-800 px-2 py-0.5 rounded text-[10px]">{t.id}</span>
-                                  <span className="text-slate-200 font-semibold">{t.title}</span>
+                                  <span className="font-mono text-slate-600 bg-white border border-slate-200 px-2 py-0.5 rounded text-[10px] font-bold">{t.id}</span>
+                                  <span className="text-slate-900 font-semibold">{t.title}</span>
                                 </div>
-                                <div className="flex items-center gap-3 text-slate-400 text-[10px] pt-0.5">
-                                  <span>Client: <strong className="text-slate-300">{t.client}</strong></span>
+                                <div className="flex items-center gap-3 text-slate-500 text-[10px] pt-0.5">
+                                  <span>Client: <strong className="text-slate-700">{t.client}</strong></span>
                                   <span>•</span>
-                                  <span>Assignee: <strong className="text-blue-400">{t.assignedTo}</strong></span>
+                                  <span>Assignee: <strong className="text-blue-600 font-bold">{t.assignedTo}</strong></span>
                                 </div>
                               </div>
                               <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
-                                <span className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${
-                                  t.priority === 'HIGH' ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20' : 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                                <span className={`text-[9px] font-bold px-2.5 py-0.5 rounded uppercase tracking-wider ${
+                                  t.priority === 'HIGH' ? 'bg-rose-50 text-rose-700 border border-rose-200' : 'bg-blue-50 text-blue-700 border border-blue-200'
                                 }`}>{t.priority}</span>
-                                <span className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${
-                                  t.status === 'RESOLVED' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                                <span className={`text-[9px] font-bold px-2.5 py-0.5 rounded uppercase tracking-wider ${
+                                  t.status === 'RESOLVED' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-700 border border-amber-200'
                                 }`}>{t.status}</span>
                               </div>
                             </div>
@@ -520,10 +662,10 @@ export default function OneDesk() {
                       </div>
 
                       {/* Mock SLA Trends */}
-                      <div className="lg:col-span-4 bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between space-y-4">
+                      <div className="lg:col-span-4 bg-white border border-slate-200/80 rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
                         <div>
-                          <h4 className="text-sm font-bold tracking-wide flex items-center gap-2 mb-4">
-                            <TrendingUp className="w-4 h-4 text-indigo-400" />
+                          <h4 className="text-sm font-bold text-slate-900 tracking-wide flex items-center gap-2 mb-4">
+                            <TrendingUp className="w-4 h-4 text-indigo-600" />
                             <span>Monthly SLA Target Metrics</span>
                           </h4>
                           
@@ -535,19 +677,19 @@ export default function OneDesk() {
                             ].map((item, idx) => (
                               <div key={idx} className="space-y-1">
                                 <div className="flex justify-between text-xs">
-                                  <span className="text-slate-400">{item.label}</span>
-                                  <span className="text-emerald-400 font-mono">{item.progress}%</span>
+                                  <span className="text-slate-600">{item.label}</span>
+                                  <span className="text-emerald-600 font-mono font-bold">{item.progress}%</span>
                                 </div>
-                                <div className="w-full bg-slate-950 h-1.5 rounded-full overflow-hidden border border-slate-800">
-                                  <div className="h-full bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full" style={{ width: `${item.progress}%` }}></div>
+                                <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden border border-slate-200/60">
+                                  <div className="h-full bg-gradient-to-r from-blue-600 to-emerald-500 rounded-full" style={{ width: `${item.progress}%` }}></div>
                                 </div>
                               </div>
                             ))}
                           </div>
                         </div>
 
-                        <div className="p-3 bg-slate-950/60 rounded-xl border border-slate-800 text-[10px] text-slate-400 leading-normal">
-                          <span className="text-white font-bold block mb-1">💡 MANAGER PRO-TIP:</span>
+                        <div className="p-3.5 bg-blue-50/80 rounded-xl border border-blue-100 text-[10px] text-slate-600 leading-relaxed">
+                          <span className="text-[#091E42] font-bold block mb-1">💡 MANAGER PRO-TIP:</span>
                           Review the workload dispatch queue daily to balance active tickets between back-office and site field teams.
                         </div>
                       </div>
@@ -565,52 +707,52 @@ export default function OneDesk() {
                     transition={{ duration: 0.25 }}
                     className="space-y-6"
                   >
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-800 pb-4 gap-2">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200/80 pb-4 gap-2">
                       <div>
-                        <h4 className="text-sm font-bold tracking-wide">My Assigned Tasks Workspace</h4>
+                        <h4 className="text-sm font-bold text-slate-900 tracking-wide">My Assigned Tasks Workspace</h4>
                         <p className="text-xs text-slate-500 mt-0.5">Showing tickets routed directly to your profile queue.</p>
                       </div>
-                      <span className="text-[10px] text-slate-500 bg-slate-900 border border-slate-800 px-3 py-1 rounded-lg font-mono">Assigned Engineer: Debasish P.</span>
+                      <span className="text-[10px] text-slate-700 bg-white border border-slate-200 px-3 py-1 rounded-lg font-mono font-bold shadow-xs">Assigned Engineer: Debasish P.</span>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {simTickets.filter(t => t.assignedTo === "Debasish P.").map((t) => (
-                        <div key={t.id} className="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between space-y-4 hover:border-slate-700 transition-colors">
+                        <div key={t.id} className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm flex flex-col justify-between space-y-4 hover:border-blue-300 transition-colors">
                           <div className="space-y-3">
                             <div className="flex justify-between items-start gap-2">
-                              <span className="font-mono text-[10px] bg-slate-950 border border-slate-800 px-2 py-0.5 rounded text-slate-400">{t.id}</span>
+                              <span className="font-mono text-[10px] bg-slate-100 border border-slate-200 px-2 py-0.5 rounded text-slate-700 font-bold">{t.id}</span>
                               <span className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${
-                                t.status === 'RESOLVED' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                                t.status === 'RESOLVED' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-700 border border-amber-200'
                               }`}>{t.status}</span>
                             </div>
-                            <h5 className="font-bold text-white text-sm sm:text-base leading-snug">{t.title}</h5>
-                            <div className="flex gap-4 text-[10px] text-slate-400">
-                              <span>Client: <strong className="text-slate-300">{t.client}</strong></span>
-                              <span>Priority: <strong className={t.priority === 'HIGH' ? 'text-rose-400' : 'text-blue-400'}>{t.priority}</strong></span>
+                            <h5 className="font-bold text-slate-900 text-sm sm:text-base leading-snug">{t.title}</h5>
+                            <div className="flex gap-4 text-[10px] text-slate-500">
+                              <span>Client: <strong className="text-slate-800">{t.client}</strong></span>
+                              <span>Priority: <strong className={t.priority === 'HIGH' ? 'text-rose-600 font-bold' : 'text-blue-600 font-bold'}>{t.priority}</strong></span>
                             </div>
                           </div>
 
-                          <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-800">
+                          <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-100">
                             {t.status !== 'RESOLVED' ? (
                               <>
                                 <button 
                                   onClick={() => handleUpdateStatus(t.id, "IN PROGRESS")}
                                   className={`px-3 py-1.5 rounded-lg text-[10px] font-bold cursor-pointer transition-colors ${
-                                    t.status === 'IN PROGRESS' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                                    t.status === 'IN PROGRESS' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                                   }`}
                                 >
                                   In Progress
                                 </button>
                                 <button 
                                   onClick={() => handleUpdateStatus(t.id, "RESOLVED")}
-                                  className="px-3 py-1.5 rounded-lg text-[10px] font-bold bg-emerald-600/20 text-emerald-400 border border-emerald-500/25 cursor-pointer hover:bg-emerald-600 hover:text-white transition-all"
+                                  className="px-3 py-1.5 rounded-lg text-[10px] font-bold bg-emerald-600 text-white hover:bg-emerald-700 cursor-pointer transition-all shadow-xs"
                                 >
                                   Mark Resolved
                                 </button>
                               </>
                             ) : (
-                              <span className="text-[10px] text-slate-500 flex items-center gap-1.5 py-1">
-                                <Check className="w-3.5 h-3.5 text-emerald-400" />
+                              <span className="text-[10px] text-emerald-700 font-semibold flex items-center gap-1.5 py-1">
+                                <Check className="w-3.5 h-3.5 text-emerald-600" />
                                 Task Completed & Logged in Audit Trail
                               </span>
                             )}
@@ -632,31 +774,31 @@ export default function OneDesk() {
                     className="grid grid-cols-1 lg:grid-cols-12 gap-8"
                   >
                     {/* Submit Ticket Form */}
-                    <div className="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-                      <h4 className="text-sm font-bold tracking-wide flex items-center gap-2 border-b border-slate-800 pb-4">
-                        <Plus className="w-4 h-4 text-blue-400" />
+                    <div className="lg:col-span-5 bg-white border border-slate-200/80 rounded-2xl p-6 shadow-sm space-y-4">
+                      <h4 className="text-sm font-bold text-slate-900 tracking-wide flex items-center gap-2 border-b border-slate-100 pb-4">
+                        <Plus className="w-4 h-4 text-blue-600" />
                         <span>Submit New Support Ticket</span>
                       </h4>
 
                       <form onSubmit={handleCreateTicket} className="space-y-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] uppercase font-bold text-slate-400 block">Ticket Subject</label>
+                          <label className="text-[10px] uppercase font-bold text-slate-500 block">Ticket Subject</label>
                           <input 
                             type="text" 
                             value={newTicketTitle}
                             onChange={(e) => setNewTicketTitle(e.target.value)}
                             placeholder="Describe the issue briefly..." 
-                            className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-blue-500"
+                            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white"
                           />
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
                           <div className="space-y-1">
-                            <label className="text-[10px] uppercase font-bold text-slate-400 block">Organization</label>
+                            <label className="text-[10px] uppercase font-bold text-slate-500 block">Organization</label>
                             <select 
                               value={newTicketClient}
                               onChange={(e) => setNewTicketClient(e.target.value)}
-                              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500"
+                              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-blue-500 focus:bg-white"
                             >
                               <option value="NALCO">NALCO</option>
                               <option value="OCAC">OCAC</option>
@@ -667,11 +809,11 @@ export default function OneDesk() {
                           </div>
 
                           <div className="space-y-1">
-                            <label className="text-[10px] uppercase font-bold text-slate-400 block">Priority</label>
+                            <label className="text-[10px] uppercase font-bold text-slate-500 block">Priority</label>
                             <select 
                               value={newTicketPriority}
                               onChange={(e) => setNewTicketPriority(e.target.value)}
-                              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-blue-500"
+                              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-blue-500 focus:bg-white"
                             >
                               <option value="HIGH">High</option>
                               <option value="MEDIUM">Medium</option>
@@ -682,7 +824,7 @@ export default function OneDesk() {
 
                         <button 
                           type="submit"
-                          className="w-full py-3 rounded-xl bg-blue-600 text-xs font-bold text-white flex items-center justify-center gap-2 hover:bg-blue-500 cursor-pointer shadow-lg shadow-blue-500/10 transition-colors"
+                          className="w-full py-3 rounded-xl bg-[#0052CC] text-xs font-bold text-white flex items-center justify-center gap-2 hover:bg-[#0747A6] cursor-pointer shadow-md shadow-blue-600/15 transition-colors"
                         >
                           <Send className="w-3.5 h-3.5" />
                           Send Support Ticket
@@ -691,32 +833,32 @@ export default function OneDesk() {
                     </div>
 
                     {/* Customer Portal status feed */}
-                    <div className="lg:col-span-7 bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
-                      <div className="flex justify-between items-center border-b border-slate-800 pb-4">
-                        <h4 className="text-sm font-bold tracking-wide">
+                    <div className="lg:col-span-7 bg-white border border-slate-200/80 rounded-2xl p-6 shadow-sm space-y-4">
+                      <div className="flex justify-between items-center border-b border-slate-100 pb-4">
+                        <h4 className="text-sm font-bold text-slate-900 tracking-wide">
                           <span>My Tickets Live Status</span>
                         </h4>
-                        <span className="text-[10px] text-emerald-400 font-bold uppercase tracking-wider animate-pulse flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Live sync
+                        <span className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span> Live sync
                         </span>
                       </div>
 
                       <div className="space-y-3 max-h-[260px] overflow-y-auto pr-1">
                         {simTickets.map((t) => (
-                          <div key={t.id} className="bg-slate-950/60 border border-slate-800/60 p-4 rounded-xl flex justify-between items-center text-xs gap-3">
+                          <div key={t.id} className="bg-slate-50 border border-slate-200/60 p-4 rounded-xl flex justify-between items-center text-xs gap-3">
                             <div className="space-y-0.5">
                               <div className="flex items-center gap-2 flex-wrap">
-                                <span className="font-mono text-slate-400 text-[10px]">{t.id}</span>
-                                <span className="text-white font-medium">{t.title}</span>
+                                <span className="font-mono text-slate-600 bg-white border border-slate-200 px-2 py-0.5 rounded text-[10px] font-bold">{t.id}</span>
+                                <span className="text-slate-900 font-medium">{t.title}</span>
                               </div>
-                              <span className="text-[10px] text-slate-500 block">Assigned Engineer: <strong className="text-blue-400">{t.assignedTo}</strong></span>
+                              <span className="text-[10px] text-slate-500 block">Assigned Engineer: <strong className="text-blue-600">{t.assignedTo}</strong></span>
                             </div>
                             
                             <div className="flex items-center gap-2 shrink-0">
                               <span className={`text-[9px] font-bold px-2 py-0.5 rounded uppercase ${
-                                t.status === 'RESOLVED' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
-                                t.status === 'ASSIGNED' ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20' :
-                                'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                                t.status === 'RESOLVED' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' :
+                                t.status === 'ASSIGNED' ? 'bg-blue-50 text-blue-700 border border-blue-200' :
+                                'bg-amber-50 text-amber-700 border border-amber-200'
                               }`}>{t.status}</span>
                             </div>
                           </div>
@@ -741,7 +883,7 @@ export default function OneDesk() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
-            <span className="text-xs uppercase font-extrabold tracking-widest text-emerald-600 bg-emerald-50 border border-emerald-100 px-3.5 py-1.5 rounded-full">Value Proposition</span>
+            <span className="text-xs uppercase font-extrabold tracking-widest text-emerald-700 bg-emerald-50 border border-emerald-200 px-3.5 py-1.5 rounded-full">Value Proposition</span>
             <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-slate-900 tracking-tight">
               Actionable Benefits Built For Every Stakeholder
             </h2>
@@ -753,8 +895,8 @@ export default function OneDesk() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
             {/* Managers Card */}
-            <div className="bg-[#f8fafc] border border-slate-200/50 rounded-3xl p-8 space-y-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-              <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/10 flex items-center justify-center text-blue-600">
+            <div className="bg-[#f8fafc] border border-slate-200/80 rounded-3xl p-8 space-y-6 hover:shadow-xl hover:-translate-y-1 hover:border-blue-300 transition-all duration-300">
+              <div className="w-12 h-12 rounded-2xl bg-blue-100 border border-blue-200 flex items-center justify-center text-blue-700">
                 <TrendingUp className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 font-display">For Management</h3>
@@ -782,8 +924,8 @@ export default function OneDesk() {
             </div>
 
             {/* Engineers Card */}
-            <div className="bg-[#f8fafc] border border-slate-200/50 rounded-3xl p-8 space-y-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-              <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/10 flex items-center justify-center text-indigo-600">
+            <div className="bg-[#f8fafc] border border-slate-200/80 rounded-3xl p-8 space-y-6 hover:shadow-xl hover:-translate-y-1 hover:border-indigo-300 transition-all duration-300">
+              <div className="w-12 h-12 rounded-2xl bg-indigo-100 border border-indigo-200 flex items-center justify-center text-indigo-700">
                 <CheckSquare className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 font-display">For Engineers</h3>
@@ -811,8 +953,8 @@ export default function OneDesk() {
             </div>
 
             {/* Customers Card */}
-            <div className="bg-[#f8fafc] border border-slate-200/50 rounded-3xl p-8 space-y-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-              <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/10 flex items-center justify-center text-cyan-600">
+            <div className="bg-[#f8fafc] border border-slate-200/80 rounded-3xl p-8 space-y-6 hover:shadow-xl hover:-translate-y-1 hover:border-cyan-300 transition-all duration-300">
+              <div className="w-12 h-12 rounded-2xl bg-cyan-100 border border-cyan-200 flex items-center justify-center text-cyan-700">
                 <Users className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 font-display">For Customers</h3>
@@ -830,7 +972,7 @@ export default function OneDesk() {
                 </li>
                 <li className="flex gap-2.5 items-start">
                   <Check className="w-4 h-4 text-cyan-600 shrink-0 mt-0.5" />
-                  <span><span><strong>Automated Email Alerts</strong> – Stay in the loop with transactional alerts sent upon ticket progress updates.</span></span>
+                  <span><strong>Automated Email Alerts</strong> – Stay in the loop with transactional alerts sent upon ticket progress updates.</span>
                 </li>
                 <li className="flex gap-2.5 items-start">
                   <Check className="w-4 h-4 text-cyan-600 shrink-0 mt-0.5" />
@@ -844,26 +986,7 @@ export default function OneDesk() {
         </div>
       </section>
 
-      {/* 5. AUDIT COMPLIANCE STATEMENT */}
-      <section className="py-20 sm:py-24 bg-slate-950 text-white relative">
-        <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10">
-          <Shield className="w-12 h-12 text-blue-500 mx-auto animate-pulse" />
-          <h2 className="text-3xl font-bold font-display tracking-tight text-white">Compliance & Governance Guaranteed</h2>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto font-light">
-            OneDesk adheres strictly to ISO/IEC 27001 security parameters and local government auditing directives. Every ticket modification, technician dispatch log, and client message is permanently cataloged, ensuring absolute traceability for administrative compliance.
-          </p>
-          <div className="flex flex-wrap justify-center gap-6 pt-4 text-xs font-mono text-slate-500">
-            <span>ISO 27001 AUDITED</span>
-            <span>•</span>
-            <span>AES-256 ENCRYPTED</span>
-            <span>•</span>
-            <span>SLA BOUND CONTRACTS</span>
-            <span>•</span>
-            <span>REGULATORY ARCHIVE READY</span>
-          </div>
-        </div>
-      </section>
+
 
     </div>
   );
