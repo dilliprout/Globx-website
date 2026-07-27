@@ -164,6 +164,7 @@ import logoMicrosoft from '../assets/partners/Microsoft_logo_(2012).svg';
 import logoSchneider from '../assets/partners/Schinder_Electric.svg';
 import logoSophos from '../assets/partners/Sophos_logo.svg';
 import logoDlink from '../assets/partners/D-Link_wordmark.svg';
+import logoAdobe from '../assets/partners/Adobe_Corporate_logo.svg';
 
 // Clients - Government & PSUs
 import clientBbSmart from '../assets/Esteemsed_clients/BBSR-smart.png';
@@ -261,13 +262,18 @@ function Home({ onNavigate }) {
     'axure',
     'dell',
     'hpe',
-    'dlink'
+    'dlink',
+    'adobe'
   ];
 
   const renderPartnerLogo = (id) => {
     let src;
     let alt;
     switch(id) {
+      case 'adobe':
+        src = logoAdobe;
+        alt = "Adobe";
+        break;
       case 'ibm':
         src = logoIbm;
         alt = "IBM";
