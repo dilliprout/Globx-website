@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 100" width="100%" height="100%">
+  <g transform="translate(10, 10)">
+    <!-- Gear Emblem Outer Ring -->
+    <circle cx="40" cy="40" r="36" fill="#003366" stroke="#f0a500" stroke-width="2"/>
+    
+    <!-- Gear Teeth -->
+    <g fill="#f0a500">
+      <rect x="37" y="1" width="6" height="6" rx="1"/>
+      <rect x="37" y="73" width="6" height="6" rx="1"/>
+      <rect x="1" y="37" width="6" height="6" rx="1"/>
+      <rect x="73" y="37" width="6" height="6" rx="1"/>
+      <rect x="11" y="11" width="6" height="6" rx="1" transform="rotate(45 14 14)"/>
+      <rect x="59" y="59" width="6" height="6" rx="1" transform="rotate(45 62 62)"/>
+      <rect x="59" y="11" width="6" height="6" rx="1" transform="rotate(-45 62 14)"/>
+      <rect x="11" y="59" width="6" height="6" rx="1" transform="rotate(-45 14 62)"/>
+    </g>
+
+    <!-- Inner Circle -->
+    <circle cx="40" cy="40" r="26" fill="#001f3f" stroke="#ffffff" stroke-width="1.5"/>
+    
+    <!-- Torch / Flame of Knowledge -->
+    <path d="M40 22 Q44 28 40 34 Q36 28 40 22 Z" fill="#ff4500"/>
+    <path d="M40 25 Q42 29 40 33 Q38 29 40 25 Z" fill="#ffcc00"/>
+    <rect x="38" y="34" width="4" height="12" fill="#d4af37" rx="1"/>
+
+    <!-- Open Book -->
+    <path d="M26 48 Q40 44 40 49 Q40 44 54 48 L54 54 Q40 50 40 55 Q40 50 26 54 Z" fill="#ffffff"/>
+  </g>
+
+  <!-- Typography -->
+  <text x="100" y="44" font-family="'Inter', 'Roboto', sans-serif" font-weight="900" font-size="22" fill="#003366" letter-spacing="0.5">PMEC BERHAMPUR</text>
+  <text x="100" y="64" font-family="'Inter', 'Roboto', sans-serif" font-weight="700" font-size="11" fill="#001f3f" letter-spacing="0.5">PARALA MAHARAJA ENG. COLLEGE</text>
+  <text x="100" y="78" font-family="'Inter', 'Roboto', sans-serif" font-weight="600" font-size="9" fill="#d48800">Govt. College of Engineering, Odisha</text>
+</svg>

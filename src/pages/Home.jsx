@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useMotionValue, useTransform, animate, useInView, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Server, Shield, Network, Cpu, Terminal, Database, Cloud, Lock, Zap, Monitor, HardDrive, Compass, Check, Mail, Award } from 'lucide-react';
+import { ArrowRight, Server, Shield, Network, Cpu, Terminal, Database, Cloud, Lock, Zap, Monitor, HardDrive, Compass, Check, Mail, Award, Building2, Briefcase, Landmark } from 'lucide-react';
 
 function Counter({ target, suffix = "", duration = 2 }) {
   const ref = useRef(null);
@@ -165,17 +165,51 @@ import logoSchneider from '../assets/partners/Schinder_Electric.svg';
 import logoSophos from '../assets/partners/Sophos_logo.svg';
 import logoDlink from '../assets/partners/D-Link_wordmark.svg';
 
-// Clients
-import clientNalco from '../assets/Esteemsed_clients/Nalco.svg';
-import clientHighCourt from '../assets/Esteemsed_clients/highcourt-Odisha.png';
-import clientIndianOil from '../assets/Esteemsed_clients/Indian_Oil_Logo.svg';
-import clientTpcodl from '../assets/Esteemsed_clients/TPCODL.jpg';
-import clientOrsac from '../assets/Esteemsed_clients/orsac.jpg';
-import clientNiser from '../assets/Esteemsed_clients/Niser.png';
-import clientNitRourkela from '../assets/Esteemsed_clients/NIT_Rourkela.png';
-import clientIop from '../assets/Esteemsed_clients/Institute Of Physics.jpg';
+// Clients - Government & PSUs
+import clientBbSmart from '../assets/Esteemsed_clients/BBSR-smart.png';
+import clientCvpp from '../assets/Esteemsed_clients/CVPP.png';
+import clientDrdo from '../assets/Esteemsed_clients/DRDO.png';
+import clientEsc from '../assets/Esteemsed_clients/ESC.png';
+import clientIimCalcutta from '../assets/Esteemsed_clients/IIM calcuta.svg';
 import clientIitBhubaneswar from '../assets/Esteemsed_clients/IIT_Bhubaneswar.png';
+import clientIiserBerhampur from '../assets/Esteemsed_clients/IIser barhampur.png';
+import clientIndianOil from '../assets/Esteemsed_clients/Indian_Oil_Logo.svg';
+import clientIop from '../assets/Esteemsed_clients/Institute Of Physics.jpg';
+import clientBalmerLawrie from '../assets/Esteemsed_clients/LB.png';
+import clientNcc from '../assets/Esteemsed_clients/NCC.png';
+import clientNitRourkela from '../assets/Esteemsed_clients/NIT_Rourkela.png';
+import clientNsg from '../assets/Esteemsed_clients/NSG.png';
+import clientNsic from '../assets/Esteemsed_clients/NSIC.png';
+import clientNalco from '../assets/Esteemsed_clients/Nalco.svg';
+import clientNiser from '../assets/Esteemsed_clients/Niser.png';
+import clientOhpc from '../assets/Esteemsed_clients/OHPC.svg';
 import clientOcac from '../assets/Esteemsed_clients/Ocac.png';
+import clientOdishaPolice from '../assets/Esteemsed_clients/Odisha Police.webp';
+import clientRailtel from '../assets/Esteemsed_clients/Reltel.svg';
+import clientTpcodl from '../assets/Esteemsed_clients/TPCODL.jpg';
+import clientVecc from '../assets/Esteemsed_clients/VECC.png';
+import clientHighCourt from '../assets/Esteemsed_clients/highcourt-Odisha.png';
+import clientOrsac from '../assets/Esteemsed_clients/orsac.jpg';
+import clientOuat from '../assets/Esteemsed_clients/ouat-bhubaneswar-seeklogo.svg';
+
+// Custom SVGs for Government Clients without raster files
+import clientPmec from '../assets/Esteemsed_clients/PMEC.svg';
+import clientMlu from '../assets/Esteemsed_clients/MLU.svg';
+import clientBhu from '../assets/Esteemsed_clients/BHU.svg';
+import clientOpgc from '../assets/Esteemsed_clients/OPGC.png';
+import clientJnpa from '../assets/Esteemsed_clients/JNPA.svg';
+
+// Clients - Private Enterprises
+import clientTataSteelSez from '../assets/Esteemsed_clients/Tata steel sez.jpg';
+import clientBrpl from '../assets/Esteemsed_clients/BRPL.jpg';
+import clientDotKey from '../assets/Esteemsed_clients/Dot and key.png';
+import clientJetsmart from '../assets/Esteemsed_clients/jetsmart.jpeg';
+
+// Custom SVGs for Private Clients without raster files
+import clientBpsl from '../assets/Esteemsed_clients/BPSL.svg';
+import clientAssotech from '../assets/Esteemsed_clients/Assotech.jpg';
+import clientToughergo from '../assets/Esteemsed_clients/Toughergo.svg';
+import clientEls from '../assets/Esteemsed_clients/ELS.svg';
 
 // Certificates
 import certIso9001 from '../assets/certificates/iso_9001.jpg';
@@ -390,67 +424,80 @@ function Home({ onNavigate }) {
     }
   };
 
-  const esteemedClients = [
-    {
-      name: "NALCO",
-      fullName: "National Aluminium Company Limited",
-      logo: clientNalco,
-      sector: "Public Sector Unit"
+  const governmentClients = [
+    // 1. Education & R&D Institutions
+    { name: "IIT Bhubaneswar", fullName: "Indian Institute of Technology Bhubaneswar", logo: clientIitBhubaneswar, category: "Education & R&D" },
+    { name: "NISER", fullName: "National Institute of Science Education and Research", logo: clientNiser, category: "Education & R&D" },
+    { name: "IISER Berhampur", fullName: "Indian Institute of Science Education and Research", logo: clientIiserBerhampur, category: "Education & R&D" },
+    { name: "NIT Rourkela", fullName: "National Institute of Technology Rourkela", logo: clientNitRourkela, category: "Education & R&D" },
+    { name: "IIM Calcutta", fullName: "Indian Institute of Management Calcutta", logo: clientIimCalcutta, category: "Education & R&D" },
+    { name: "Banaras Hindu University", fullName: "Banaras Hindu University (BHU)", logo: clientBhu, category: "Education & R&D" },
+    { name: "OUAT Bhubaneswar", fullName: "Orissa University of Agriculture and Technology", logo: clientOuat, category: "Education & R&D" },
+    { name: "Institute of Physics", fullName: "Institute of Physics Bhubaneswar", logo: clientIop, category: "Education & R&D" },
+    { name: "PMEC Berhampur", fullName: "Parala Maharaja Engineering College", logo: clientPmec, category: "Education & R&D" },
+    { name: "Madhusudan Law Univ", fullName: "Madhusudan Law University Cuttack", logo: clientMlu, category: "Education & R&D" },
+    { name: "VECC Kolkata", fullName: "Variable Energy Cyclotron Centre", logo: clientVecc, category: "Education & R&D" },
+
+    // 2. Defence, Security & Law Enforcement
+    { name: "DRDO Balasore", fullName: "Defence Research & Development Organisation", logo: clientDrdo, category: "Defence & Research" },
+    { name: "National Security Guard", fullName: "National Security Guard (NSG)", logo: clientNsg, category: "Defence & Security" },
+    { name: "National Cadet Corps", fullName: "National Cadet Corps (NCC)", logo: clientNcc, category: "Defence & Security" },
+    { name: "Odisha Police", fullName: "Odisha State Police Department", logo: clientOdishaPolice, category: "Law Enforcement" },
+
+    // 3. PSUs, Power, Infrastructure & Government Orgs
+    { name: "NALCO", fullName: "National Aluminium Company Limited", logo: clientNalco, category: "Public Sector Unit" },
+    { name: "IndianOil", fullName: "Indian Oil Corporation Limited", logo: clientIndianOil, category: "Public Sector Unit" },
+    { name: "OHPC", fullName: "Odisha Hydro Power Corporation Limited", logo: clientOhpc, category: "Public Sector Unit" },
+    { name: "OPGC", fullName: "Odisha Power Generation Corporation", logo: clientOpgc, category: "Public Sector Unit" },
+    { name: "CVPP", fullName: "Chenab Valley Power Projects Limited", logo: clientCvpp, category: "Public Sector Unit" },
+    { name: "Balmer Lawrie & Co.", fullName: "Balmer Lawrie & Company Limited", logo: clientBalmerLawrie, category: "Public Sector Unit" },
+    { name: "ORSAC", fullName: "Odisha Space Applications Centre", logo: clientOrsac, category: "Space & Research" },
+    { name: "High Court of Odisha", fullName: "Orissa High Court Cuttack", logo: clientHighCourt, category: "Judiciary" },
+    { name: "Bhubaneswar Smart City", fullName: "Bhubaneswar Smart City Limited", logo: clientBbSmart, category: "Government Body" },
+    { name: "TPCODL", fullName: "TP Central Odisha Distribution Limited", logo: clientTpcodl, category: "Utility & Power" },
+    { name: "JNPA", fullName: "Jawaharlal Nehru Port Authority", logo: clientJnpa, category: "Port Authority" }
+  ];
+
+  const empanelmentClients = [
+    { 
+      name: "NSIC", 
+      fullName: "National Small Industries Corporation", 
+      logo: clientNsic, 
+      category: "Government of India Enterprise",
+      badge: "Empaneled"
     },
-    {
-      name: "OCAC",
-      fullName: "Odisha Computer Application Centre",
-      logo: clientOcac,
-      sector: "Government of Odisha"
+    { 
+      name: "ESC India", 
+      fullName: "Electronics & Computer Software Export Promotion Council", 
+      logo: clientEsc, 
+      category: "Export Promotion Council",
+      badge: "Member Org"
     },
-    {
-      name: "High Court of Odisha",
-      fullName: "Orissa High Court",
-      logo: clientHighCourt,
-      sector: "Judiciary"
+    { 
+      name: "RailTel", 
+      fullName: "RailTel Corporation of India Limited", 
+      logo: clientRailtel, 
+      category: "Telecom & IT Infrastructure",
+      badge: "Empaneled Integrator"
     },
-    {
-      name: "IndianOil",
-      fullName: "Indian Oil Corporation Limited",
-      logo: clientIndianOil,
-      sector: "Public Sector Unit"
-    },
-    {
-      name: "TPCODL",
-      fullName: "TP Central Odisha Distribution Limited",
-      logo: clientTpcodl,
-      sector: "Utility & Power"
-    },
-    {
-      name: "ORSAC",
-      fullName: "Odisha Space Applications Centre",
-      logo: clientOrsac,
-      sector: "Space & Research"
-    },
-    {
-      name: "Institute of Physics",
-      fullName: "Institute of Physics Bhubaneswar",
-      logo: clientIop,
-      sector: "Education & R&D"
-    },
-    {
-      name: "NISER",
-      fullName: "National Institute of Science Education and Research",
-      logo: clientNiser,
-      sector: "Education & R&D"
-    },
-    {
-      name: "NIT Rourkela",
-      fullName: "National Institute of Technology Rourkela",
-      logo: clientNitRourkela,
-      sector: "Education & R&D"
-    },
-    {
-      name: "IIT Bhubaneswar",
-      fullName: "Indian Institute of Technology Bhubaneswar",
-      logo: clientIitBhubaneswar,
-      sector: "Education & R&D"
+    { 
+      name: "OCAC", 
+      fullName: "Odisha Computer Application Centre", 
+      logo: clientOcac, 
+      category: "State Nodal IT Agency",
+      badge: "State Empanelment"
     }
+  ];
+
+  const privateClients = [
+    { name: "Tata Steel SEZ", fullName: "Tata Steel Special Economic Zone", logo: clientTataSteelSez, category: "Private Enterprise" },
+    { name: "Bhushan Power & Steel (JSW)", fullName: "Bhushan Power & Steel Limited (JSW)", logo: clientBpsl, category: "Private Enterprise" },
+    { name: "Assotech", fullName: "Assotech Realty Private Limited", logo: clientAssotech, category: "Real Estate & Infra" },
+    { name: "BRPL Odisha", fullName: "Brahmani River Pellets Limited", logo: clientBrpl, category: "Private Enterprise" },
+    { name: "Toughergo", fullName: "Toughergo Private Limited", logo: clientToughergo, category: "Private Enterprise" },
+    { name: "ELS Empowerment", fullName: "ELS Empowerment Private Limited", logo: clientEls, category: "Private Enterprise" },
+    { name: "JetSmart IT", fullName: "JetSmart IT Services LLP", logo: clientJetsmart, category: "IT & Technology" },
+    { name: "Dot & Key", fullName: "Dot & Key Skincare", logo: clientDotKey, category: "Consumer Enterprise" }
   ];
 
   const containerVariants = {
@@ -766,57 +813,142 @@ function Home({ onNavigate }) {
         </div>
       </section>
 
-      {/* 5. ESTEEMED CLIENTS SECTION */}
+      {/* 5. ESTEEMED CLIENTS SECTION — DUAL INFINITE MARQUEES */}
+      {/* 5. ESTEEMED CLIENTS SECTION — CLEAN DUAL MARQUEES (OEM STYLE) */}
       <section 
         id="esteemed-clients-section"
-        className="py-24 bg-slate-50 border-t border-slate-100 overflow-hidden relative"
+        className="py-16 bg-white border-t border-b border-slate-100 overflow-hidden relative"
       >
-        <div className="absolute top-1/2 -translate-y-1/2 right-0 w-96 h-96 rounded-full bg-blue-100/20 blur-[100px] pointer-events-none"></div>
-        <div className="absolute left-0 bottom-0 w-80 h-80 rounded-full bg-cyan-100/10 blur-[80px] pointer-events-none"></div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-12">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 text-xs font-semibold text-blue-700 uppercase tracking-wider">
-              <span>Trusted Partner</span>
+              <span>Trusted Partner Network</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-[#091E42] tracking-tight">
               Our Esteemed Clients
             </h2>
+            <p className="text-slate-600 text-sm sm:text-base font-light max-w-2xl mx-auto">
+              Empowering premier Government institutions, defence research bodies, state PSUs, and market-leading private enterprises across India.
+            </p>
           </div>
+        </div>
 
-          {/* Grid with stagger animations */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {esteemedClients.map((client, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{ type: 'spring', stiffness: 100, damping: 15, delay: idx * 0.05 }}
-                whileHover={{ y: -8, boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)', borderColor: 'rgba(147, 197, 253, 0.8)' }}
-                className="group relative bg-white border border-slate-200/60 rounded-2xl flex items-center justify-center h-44 shadow-sm overflow-hidden cursor-pointer p-2"
+        {/* Marquee Rows Wrapper */}
+        <div className="space-y-12 relative">
+
+          {/* ── ROW 1: GOVERNMENT & PUBLIC SECTOR CLIENTS ── */}
+          <div>
+            <div className="max-w-7xl mx-auto px-4 text-center mb-6">
+              <span className="text-xs uppercase font-bold tracking-wider text-slate-400">
+                Government, Academic &amp; Public Sector Enterprises
+              </span>
+            </div>
+
+            <div className="w-full overflow-hidden relative flex mask-horizontal-fades py-3 group">
+              <div 
+                className="flex animate-marquee-reverse whitespace-nowrap min-w-max group-hover:[animation-play-state:paused]"
+                style={{ animationDuration: '65s' }}
               >
-                 {/* Glaze reflection sheen sweep */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl z-20">
-                  <div className="w-1/2 h-[220%] bg-white/20 absolute -top-12 left-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-glaze-loop"></div>
-                </div>
-
-                {/* Card logo image or fallback badge */}
-                <div className="w-full h-full flex items-center justify-center transition-transform duration-300 transform group-hover:scale-105">
-                  {client.logo ? (
+                {[...governmentClients, ...governmentClients, ...governmentClients].map((client, idx) => (
+                  <div 
+                    key={`gov-${idx}`}
+                    className="flex items-center justify-center mx-8 sm:mx-10 h-24 w-44 sm:w-56 shrink-0 transition-transform duration-300 hover:scale-105"
+                    title={client.fullName}
+                  >
                     <img 
                       src={client.logo} 
                       alt={client.fullName} 
-                      className="w-full h-full object-contain transition-all duration-300"
+                      className="max-h-16 sm:max-h-20 w-auto max-w-full object-contain transition-all duration-300"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.style.display = 'none';
+                      }}
                     />
-                  ) : (
-                    renderClientLogo(client.name)
-                  )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* ── ROW 2: PRIVATE ENTERPRISES ── */}
+          <div>
+            <div className="max-w-7xl mx-auto px-4 text-center mb-6">
+              <span className="text-xs uppercase font-bold tracking-wider text-slate-400">
+                Private Enterprises &amp; Corporate Clients
+              </span>
+            </div>
+
+            <div className="w-full overflow-hidden relative flex mask-horizontal-fades py-3 group">
+              <div 
+                className="flex animate-marquee whitespace-nowrap min-w-max group-hover:[animation-play-state:paused]"
+                style={{ animationDuration: '45s' }}
+              >
+                {[...privateClients, ...privateClients, ...privateClients, ...privateClients].map((client, idx) => (
+                  <div 
+                    key={`pvt-${idx}`}
+                    className="flex items-center justify-center mx-8 sm:mx-10 h-24 w-44 sm:w-56 shrink-0 transition-transform duration-300 hover:scale-105"
+                    title={client.fullName}
+                  >
+                    <img 
+                      src={client.logo} 
+                      alt={client.fullName} 
+                      className="max-h-16 sm:max-h-20 w-auto max-w-full object-contain transition-all duration-300"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.style.display = 'none';
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* ── STANDALONE EMPANELMENT SECTION (NO SCROLL, LOGO + NAME + GLARE) ── */}
+        <div className="mt-14 pt-10 border-t border-slate-100 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto px-4 text-center mb-8">
+            <span className="text-xs uppercase font-bold tracking-wider text-slate-400">
+              Our Empanellments
+            </span>
+          </div>
+
+          {/* Static Row: Logo + Short Name with Glare Effect */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
+            {empanelmentClients.map((client, idx) => (
+              <div 
+                key={`emp-${idx}`}
+                className="group relative flex flex-col items-center justify-center p-4 transition-transform duration-300 hover:scale-105"
+                title={client.fullName}
+              >
+                {/* Glare effect sweep overlay */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-xl">
+                  <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/70 to-transparent -translate-x-full animate-glare-loop" />
                 </div>
-              </motion.div>
+
+                {/* Logo */}
+                <div className="h-24 w-44 sm:w-56 flex items-center justify-center">
+                  <img 
+                    src={client.logo} 
+                    alt={client.name} 
+                    className="max-h-16 sm:max-h-20 w-auto max-w-full object-contain transition-all duration-300"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                </div>
+
+                {/* Short Name */}
+                <span className="text-sm font-bold text-slate-600 mt-2 tracking-wide">
+                  {client.name}
+                </span>
+              </div>
             ))}
           </div>
         </div>
+
       </section>
 
       {/* 5.5 CERTIFICATIONS SECTION */}
