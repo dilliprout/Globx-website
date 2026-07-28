@@ -194,8 +194,8 @@ import clientOrsac from '../assets/Esteemsed_clients/orsac.jpg';
 import clientOuat from '../assets/Esteemsed_clients/ouat-bhubaneswar-seeklogo.svg';
 
 // Custom SVGs for Government Clients without raster files
-import clientPmec from '../assets/Esteemsed_clients/PMEC.svg';
-import clientMlu from '../assets/Esteemsed_clients/MLU.svg';
+import clientPmec from '../assets/Esteemsed_clients/PMEC.png';
+import clientMlu from '../assets/Esteemsed_clients/MLU.png';
 import clientBhu from '../assets/Esteemsed_clients/BHU.svg';
 import clientOpgc from '../assets/Esteemsed_clients/OPGC.png';
 import clientJnpa from '../assets/Esteemsed_clients/JNPA.svg';
@@ -208,7 +208,7 @@ import clientJetsmart from '../assets/Esteemsed_clients/jetsmart.jpeg';
 
 // Custom SVGs for Private Clients without raster files
 import clientBpsl from '../assets/Esteemsed_clients/BPSL.svg';
-import clientAssotech from '../assets/Esteemsed_clients/Assotech.jpg';
+import clientAssotech from '../assets/Esteemsed_clients/Assotech.png';
 import clientToughergo from '../assets/Esteemsed_clients/Toughergo.svg';
 import clientEls from '../assets/Esteemsed_clients/ELS.svg';
 
@@ -440,8 +440,8 @@ function Home({ onNavigate }) {
     { name: "Banaras Hindu University", fullName: "Banaras Hindu University (BHU)", logo: clientBhu, category: "Education & R&D" },
     { name: "OUAT Bhubaneswar", fullName: "Orissa University of Agriculture and Technology", logo: clientOuat, category: "Education & R&D" },
     { name: "Institute of Physics", fullName: "Institute of Physics Bhubaneswar", logo: clientIop, category: "Education & R&D" },
-    { name: "PMEC Berhampur", fullName: "Parala Maharaja Engineering College", logo: clientPmec, category: "Education & R&D" },
-    { name: "Madhusudan Law Univ", fullName: "Madhusudan Law University Cuttack", logo: clientMlu, category: "Education & R&D" },
+    { name: "PMEC Berhampur", fullName: "Parala Maharaja Engineering College", logo: clientPmec, category: "Education & R&D", imgClass: "scale-[1.8] sm:scale-[1.4]" },
+    { name: "Madhusudan Law Univ", fullName: "Madhusudan Law University Cuttack", logo: clientMlu, category: "Education & R&D", imgClass: "scale-[1.8] sm:scale-[1.4]" },
     { name: "VECC Kolkata", fullName: "Variable Energy Cyclotron Centre", logo: clientVecc, category: "Education & R&D" },
 
     // 2. Defence, Security & Law Enforcement
@@ -451,9 +451,9 @@ function Home({ onNavigate }) {
     { name: "Odisha Police", fullName: "Odisha State Police Department", logo: clientOdishaPolice, category: "Law Enforcement" },
 
     // 3. PSUs, Power, Infrastructure & Government Orgs
-    { name: "NALCO", fullName: "National Aluminium Company Limited", logo: clientNalco, category: "Public Sector Unit" },
+    { name: "NALCO", fullName: "National Aluminium Company Limited", logo: clientNalco, category: "Public Sector Unit", imgClass: "scale-[1.8] sm:scale-[1.8]" },
     { name: "IndianOil", fullName: "Indian Oil Corporation Limited", logo: clientIndianOil, category: "Public Sector Unit" },
-    { name: "OHPC", fullName: "Odisha Hydro Power Corporation Limited", logo: clientOhpc, category: "Public Sector Unit" },
+    { name: "OHPC", fullName: "Odisha Hydro Power Corporation Limited", logo: clientOhpc, category: "Public Sector Unit", imgClass: "scale-[1.5] sm:scale-[1.5]" },
     { name: "OPGC", fullName: "Odisha Power Generation Corporation", logo: clientOpgc, category: "Public Sector Unit" },
     { name: "CVPP", fullName: "Chenab Valley Power Projects Limited", logo: clientCvpp, category: "Public Sector Unit" },
     { name: "Balmer Lawrie & Co.", fullName: "Balmer Lawrie & Company Limited", logo: clientBalmerLawrie, category: "Public Sector Unit" },
@@ -470,35 +470,39 @@ function Home({ onNavigate }) {
       fullName: "National Small Industries Corporation", 
       logo: clientNsic, 
       category: "Government of India Enterprise",
-      badge: "Empaneled"
+      badge: "Empaneled",
+      imgClass: "max-h-14 sm:max-h-16 max-w-[85%]"
     },
     { 
       name: "ESC India", 
       fullName: "Electronics & Computer Software Export Promotion Council", 
       logo: clientEsc, 
       category: "Export Promotion Council",
-      badge: "Member Org"
+      badge: "Member Org",
+      imgClass: "max-h-16 sm:max-h-18 max-w-[90%] scale-115"
     },
     { 
       name: "RailTel", 
       fullName: "RailTel Corporation of India Limited", 
       logo: clientRailtel, 
       category: "Telecom & IT Infrastructure",
-      badge: "Empaneled Integrator"
+      badge: "Empaneled Integrator",
+      imgClass: "max-h-18 sm:max-h-20 max-w-[90%] scale-125"
     },
     { 
       name: "OCAC", 
       fullName: "Odisha Computer Application Centre", 
       logo: clientOcac, 
       category: "State Nodal IT Agency",
-      badge: "State Empanelment"
+      badge: "State Empanelment",
+      imgClass: "max-h-20 sm:max-h-24 max-w-[95%] scale-[1.75]"
     }
   ];
 
   const privateClients = [
     { name: "Tata Steel SEZ", fullName: "Tata Steel Special Economic Zone", logo: clientTataSteelSez, category: "Private Enterprise" },
     { name: "Bhushan Power & Steel (JSW)", fullName: "Bhushan Power & Steel Limited (JSW)", logo: clientBpsl, category: "Private Enterprise" },
-    { name: "Assotech", fullName: "Assotech Realty Private Limited", logo: clientAssotech, category: "Real Estate & Infra" },
+    { name: "Assotech", fullName: "Assotech Realty Private Limited", logo: clientAssotech, category: "Real Estate & Infra", imgClass: "scale-[1.9] sm:scale-[2.2]" },
     { name: "BRPL Odisha", fullName: "Brahmani River Pellets Limited", logo: clientBrpl, category: "Private Enterprise" },
     { name: "Toughergo", fullName: "Toughergo Private Limited", logo: clientToughergo, category: "Private Enterprise" },
     { name: "ELS Empowerment", fullName: "ELS Empowerment Private Limited", logo: clientEls, category: "Private Enterprise" },
@@ -864,7 +868,7 @@ function Home({ onNavigate }) {
                     <img 
                       src={client.logo} 
                       alt={client.fullName} 
-                      className="max-h-16 sm:max-h-20 w-auto max-w-full object-contain transition-all duration-300"
+                      className={`max-h-16 sm:max-h-20 w-auto max-w-full object-contain transition-all duration-300 ${client.imgClass || ''}`}
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.style.display = 'none';
@@ -898,7 +902,7 @@ function Home({ onNavigate }) {
                     <img 
                       src={client.logo} 
                       alt={client.fullName} 
-                      className="max-h-16 sm:max-h-20 w-auto max-w-full object-contain transition-all duration-300"
+                      className={`max-h-16 sm:max-h-20 w-auto max-w-full object-contain transition-all duration-300 ${client.imgClass || ''}`}
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.style.display = 'none';
@@ -912,7 +916,7 @@ function Home({ onNavigate }) {
 
         </div>
 
-        {/* ── STANDALONE EMPANELMENT SECTION (NO SCROLL, LOGO + NAME + GLARE) ── */}
+        {/* ── STANDALONE EMPANELMENT SECTION (NO SCROLL, UNIFORM LOGOS, NO TEXT LABELS) ── */}
         <div className="mt-14 pt-10 border-t border-slate-100 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto px-4 text-center mb-8">
             <span className="text-xs uppercase font-bold tracking-wider text-slate-400">
@@ -920,36 +924,31 @@ function Home({ onNavigate }) {
             </span>
           </div>
 
-          {/* Static Row: Logo + Short Name with Glare Effect */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
+          {/* Static Uniform Logo Cards Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 items-center justify-items-center max-w-5xl mx-auto">
             {empanelmentClients.map((client, idx) => (
               <div 
                 key={`emp-${idx}`}
-                className="group relative flex flex-col items-center justify-center p-4 transition-transform duration-300 hover:scale-105"
+                className="group relative w-full max-w-[240px] h-28 sm:h-32 bg-white border border-slate-200/80 rounded-2xl p-4 flex items-center justify-center overflow-hidden shadow-sm transition-all duration-300 hover:border-blue-400 hover:shadow-md hover:-translate-y-1"
                 title={client.fullName}
               >
                 {/* Glare effect sweep overlay */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-xl">
-                  <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/70 to-transparent -translate-x-full animate-glare-loop" />
+                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl z-10">
+                  <div className="w-1/2 h-[220%] bg-gradient-to-r from-transparent via-white/60 to-transparent absolute -top-12 left-0 animate-glaze-loop" />
                 </div>
 
-                {/* Logo */}
-                <div className="h-24 w-44 sm:w-56 flex items-center justify-center">
+                {/* Logo Container - Equal bounding box & alignment for all logos */}
+                <div className="h-20 w-full flex items-center justify-center px-2 z-0 transition-transform duration-300 group-hover:scale-105">
                   <img 
                     src={client.logo} 
                     alt={client.name} 
-                    className="max-h-16 sm:max-h-20 w-auto max-w-full object-contain transition-all duration-300"
+                    className={`w-auto h-auto object-contain ${client.imgClass || 'max-h-14 sm:max-h-16 max-w-[82%]'}`}
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.style.display = 'none';
                     }}
                   />
                 </div>
-
-                {/* Short Name */}
-                <span className="text-sm font-bold text-slate-600 mt-2 tracking-wide">
-                  {client.name}
-                </span>
               </div>
             ))}
           </div>
